@@ -15,7 +15,13 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
       <mat-list-item>
-        <a matLine href="/settings">Impostazioni</a>
+        <a matLine [routerLink]="['/home']" [routerLinkActive]="'active'">Sala</a>
+        <button mat-icon-button>
+          <mat-icon>home</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <a matLine [routerLink]="['/settings']" [routerLinkActive]="'active'">Impostazioni</a>
         <button mat-icon-button>
           <mat-icon>settings_applications</mat-icon>
         </button>

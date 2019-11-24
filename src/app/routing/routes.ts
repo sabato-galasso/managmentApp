@@ -3,15 +3,15 @@ import {LoginComponent} from '../login/login.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {SettingsComponent} from '../settings/settings.component';
 import {LoginLayoutComponent} from '../layouts/login-layout/login-layout.component';
-import {AppComponent} from '../app.component';
 import {HomeComponent} from '../home/home.component';
-
+import {AuthGuardService} from '../services/auth-guard.service';
 
 export const routes: Routes = [
 
   {
     path: '',
-    component: DashboardComponent, // {4}
+    component: DashboardComponent,
+    canActivate: [AuthGuardService],
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'settings', component: SettingsComponent},
@@ -19,14 +19,14 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: LoginLayoutComponent, // {4}
+    component: LoginLayoutComponent,
     children: [
       {
         path: 'login',
-        component: LoginComponent   // {5}
+        component: LoginComponent
       },
     ]
   },
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-
+  { path: '**', redirectTo: '' }
 ];
+

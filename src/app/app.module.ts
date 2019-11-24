@@ -34,6 +34,7 @@ import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './home/home.component';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
   ],
   entryComponents: [LoginComponent],
-  providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}],
+  providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
