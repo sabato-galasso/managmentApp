@@ -1,15 +1,13 @@
 <mat-toolbar color="primary">
   <button mat-button (click)="drawer.toggle()">
     <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
-
   </button>
-
   <span>Application Title</span>
-
   <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space"></span>
-
-  <span>Right Aligned Text</span>
+  <button mat-button (click)="logout()" label="aaa">
+    <mat-icon aria-hidden="false" aria-label="Logout">power_settings_new</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">

@@ -1,5 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {AddItemsComponent} from '../add-items/add-items.component';
 
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 @Component({
   selector: 'app-stop-watch',
   templateUrl: './stop-watch.component.html',
@@ -14,8 +21,8 @@ export class StopWatchComponent implements OnDestroy {
   seconds = '00';
   minutes = '00';
   hours = '00';
-  price: string;
-  pphValue = '0.00';
+  price = '00.00';
+  pphValue = '10.00';
   timerOn: boolean;
 
   counter: number;
@@ -23,8 +30,32 @@ export class StopWatchComponent implements OnDestroy {
   running = false;
   startText = 'Start';
 
+
+  animal: string;
+  name: string;
+
   @Input() keyEl: string;
-  constructor() {}
+
+  constructor(public dialog: MatDialog) {}
+
+  public openMenu = false;
+  isOver = false;
+
+  clickMenu() {
+    this.openMenu = !this.openMenu;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddItemsComponent, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
   startTimer() {
     this.running = !this.running;

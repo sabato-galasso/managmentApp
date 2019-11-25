@@ -35,6 +35,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './home/home.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { AddItemsComponent } from './add-items/add-items.component';
+import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     SettingsComponent,
     LoginLayoutComponent,
     HomeComponent,
+    AddItemsComponent,
+    SpinnerInProgressComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     MatSidenavModule,
     MatIconModule,
   ],
-  entryComponents: [LoginComponent],
+  entryComponents: [LoginComponent, AddItemsComponent],
   providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService],
   bootstrap: [AppComponent]
