@@ -18,11 +18,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatExpansionModule,
   MatGridListModule,
   MatIconModule,
   MatListModule,
-  MatSidenavModule,
+  MatSidenavModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {LoginService} from './services/login.service';
@@ -73,6 +73,8 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
     HttpClientModule,
     MatSidenavModule,
     MatIconModule,
+    MatExpansionModule,
+    MatTableModule,
   ],
   entryComponents: [LoginComponent, AddItemsComponent],
   providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

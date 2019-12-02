@@ -7,6 +7,7 @@ export interface DialogData {
   animal: string;
   name: string;
 }
+
 @Component({
   selector: 'app-stop-watch',
   templateUrl: './stop-watch.component.html',
@@ -45,10 +46,17 @@ export class StopWatchComponent implements OnDestroy {
     this.openMenu = !this.openMenu;
   }
 
+
+
+  /** Gets the total cost of all transactions. */
+ // getTotalCost() {
+   // return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+  //}
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddItemsComponent, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
+      width: '500px',
+      data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1}
     });
 
     dialogRef.afterClosed().subscribe(result => {

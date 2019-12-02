@@ -10,20 +10,17 @@
   </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
-      <mat-list-item>
-        <a matLine [routerLink]="['/home']" [routerLinkActive]="'active'">Sala</a>
-        <button mat-icon-button>
-          <mat-icon>home</mat-icon>
-        </button>
-      </mat-list-item>
-      <mat-list-item>
-        <a matLine [routerLink]="['/settings']" [routerLinkActive]="'active'">Impostazioni</a>
-        <button mat-icon-button>
-          <mat-icon>settings_applications</mat-icon>
-        </button>
-      </mat-list-item>
+      <a mat-list-item
+         routerLinkActive="list-item-active" [routerLink]="['/home']">Sala
+        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
+      </a>
+        <a mat-list-item [routerLink]="['/settings']" routerLinkActive="list-item-active">Impostazioni
+          <mat-icon matListIcon class="nav-list-icon">settings_applications</mat-icon>
+
+        </a>
+
     </mat-nav-list>
   </mat-drawer>
 

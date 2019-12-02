@@ -9,6 +9,7 @@ import {DialogData} from '../stop-watch/stop-watch.component';
   styleUrls: ['./add-items.component.scss']
 })
 export class AddItemsComponent  {
+  typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
 
   constructor(
     public dialogRef: MatDialogRef<AddItemsComponent>,
@@ -17,5 +18,7 @@ export class AddItemsComponent  {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+
 
 }

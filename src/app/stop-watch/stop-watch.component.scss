@@ -1,3 +1,6 @@
+.mat-card{
+  width: 400px;
+}
 .active-card{
  //background-color: green;
 }
@@ -15,9 +18,10 @@
 
 .custom-pos{
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: -90px;
   color: #ffffff;
+  z-index: 1;
 }
 
 .display-4{
@@ -25,8 +29,8 @@
 }
 
 .price{
-  display: inline-block;
-  align-items: flex-end;
+ // display: inline-block;
+ // align-items: flex-end;
 }
 
 .bounceIn {
@@ -199,7 +203,50 @@
   height: 100%;
 }
 
-.image-opacity:after{
-  content: 'Here is some text..';
-  color: #fff;
+
+@mixin dark-overlay{
+  &:after{
+    content: "";
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: -1;  // Take note of this negative z-index and compare to each article's positive z-index. This helps your content to show up over the overlay.
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.full-overlay{
+  position: relative;
+  z-index: 1;
+  height:200px;
+  text-align: center;
+  background:url("../../assets/img/table.jpg") no-repeat;
+  background-size: cover;
+  margin: 0 -16px;
+  @include dark-overlay;
+  &.active-overlay{
+    &:after{
+      background:rgba(0, 0, 0, 0.50);
+    }
+  }
+}
+
+.example-container {
+  height: 270px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
 }
