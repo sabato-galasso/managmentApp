@@ -1,20 +1,27 @@
 <h2>Tavolo: {{data.n_table}}</h2>
-<div>
-  <button mat-fab	color="primary">X1</button>
-  <button mat-fab	color="primary">X2</button>
-  <button mat-fab	color="primary">X3</button>
-  <mat-form-field>
-    <input matInput placeholder="N°"  type="number">
-  </mat-form-field>
-</div>
-<mat-selection-list #shoes >
-  <mat-list-option *ngFor="let shoe of typesOfShoes">
-    <span matLine>{{shoe}}</span><span> <b>1€</b></span>
-  </mat-list-option>
-</mat-selection-list>
-<p>
-  Options selected: {{shoes.selectedOptions.selected.length}}
-</p>
+<mat-tab-group>
+  <mat-tab label="Bevande">
+    <div>
+      <button mat-fab	color="primary">X1</button>
+      <button mat-fab	color="primary">X2</button>
+      <button mat-fab	color="primary">X3</button>
+      <mat-form-field>
+        <input matInput placeholder="N°"  type="number">
+      </mat-form-field>
+    </div>
+    <mat-selection-list #shoes >
+      <mat-list-option *ngFor="let shoe of typesOfShoes">
+        <span matLine>{{shoe}}</span><span> <b>1€</b></span>
+      </mat-list-option>
+    </mat-selection-list>
+    <p>
+      Options selected: {{shoes.selectedOptions.selected.length}}
+    </p>
+  </mat-tab>
+  <mat-tab label="Second"> Caffè </mat-tab>
+  <mat-tab label="Third"> Drink </mat-tab>
+</mat-tab-group>
+
 <mat-divider></mat-divider>
 
 <div class="d-flex justify-content-between my-4">

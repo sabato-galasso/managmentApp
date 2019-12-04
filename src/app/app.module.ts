@@ -22,7 +22,7 @@ import {
   MatGridListModule,
   MatIconModule,
   MatListModule,
-  MatSidenavModule, MatTableModule,
+  MatSidenavModule, MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {LoginService} from './services/login.service';
@@ -75,6 +75,7 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
     MatIconModule,
     MatExpansionModule,
     MatTableModule,
+    MatTabsModule,
   ],
   entryComponents: [LoginComponent, AddItemsComponent],
   providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

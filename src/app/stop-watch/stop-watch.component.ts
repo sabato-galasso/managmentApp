@@ -6,6 +6,7 @@ import {AddItemsComponent} from '../add-items/add-items.component';
 export interface DialogData {
   animal: string;
   name: string;
+  n_table: string;
 }
 
 @Component({
@@ -55,7 +56,7 @@ export class StopWatchComponent implements OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddItemsComponent, {
-      width: '500px',
+      width: '800px',
       data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1}
     });
 
