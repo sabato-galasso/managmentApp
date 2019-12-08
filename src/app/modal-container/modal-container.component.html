@@ -6,59 +6,44 @@
         <mat-tab label="Bevande">
           <div class="row">
             <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
-<app-menu-items></app-menu-items>
+              <app-menu-items></app-menu-items>
             </div>
           </div>
         </mat-tab>
-
         <mat-tab label="Second">
           <div class="row">
-            <div class="col-3 my-3" *ngFor="let shoe of typesOfShoes">
+            <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
+              <app-menu-items></app-menu-items>
 
-              <div class="ripple-container mat-elevation-z4 border-left p-3"
-                   matRipple
-                   [matRippleCentered]="centered"
-                   [matRippleDisabled]="disabled"
-                   [matRippleUnbounded]="unbounded"
-                   [matRippleRadius]="radius"
-                   [matRippleColor]="color">
-                <span>2€</span>
-                <p><b>Caffè</b></p>
-              </div>
-            </div>
-          </div> </mat-tab>
-        <mat-tab label="Drink">
-          <div class="row">
-          <div class="col-3 my-3" *ngFor="let shoe of typesOfShoes">
-
-            <div class="ripple-container mat-elevation-z4 border-left p-3"
-                 matRipple
-                 [matRippleCentered]="centered"
-                 [matRippleDisabled]="disabled"
-                 [matRippleUnbounded]="unbounded"
-                 [matRippleRadius]="radius"
-                 [matRippleColor]="color">
-              <span>2€</span>
-              <p><b>Caffè</b></p>
             </div>
           </div>
-        </div> </mat-tab>
+        </mat-tab>
+        <mat-tab label="Drink">
+          <div class="row">
+            <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
+              <app-menu-items></app-menu-items>
+
+            </div>
+          </div>
+        </mat-tab>
       </mat-tab-group>
 
     </div>
-    <div class="col-1">      <mat-divider vertical style="height: 100vh"></mat-divider>
+    <div class="col-1">
+      <mat-divider vertical style="height: 100vh"></mat-divider>
     </div>
     <div class="col-3">
       <mat-list role="list">
-        <mat-list-item role="listitem">
-          <h3 matLine> Totale </h3>
-          <div mat-line>{{data.price}}</div>
+        <mat-list-item role="listitem">Tavolo 2</mat-list-item>
+        <mat-list-item role="listitem" class="position-relative"><span class="position-absolute" >Apertura (durata)</span>
+          <span class="position-absolute" style="right: 0">000</span></mat-list-item>
+        <mat-divider></mat-divider>
 
-        </mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
+        <mat-list-item role="listitem">Servizi </mat-list-item>
+        <mat-list-item role="listitem">Tavolo </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">Totale </mat-list-item>
       </mat-list>
-      <mat-divider></mat-divider>
 
     </div>
   </div>

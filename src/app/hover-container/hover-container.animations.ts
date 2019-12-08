@@ -18,29 +18,12 @@ const styleLeft = { transform: 'translate3d(-100%, 0, 0)' };
 export const HoverContainerAnimations = [
   trigger('hover', [
     state('*', style(styleIdle)),
-    transition('* => in-left', [
-      style(styleLeft), animate(animateIn)
-    ]),
-    transition('* => in-right', [
-      style(styleRight), animate(animateIn)
-    ]),
+
     transition('* => in-top', [
       style(styleTop), animate(animateIn)
     ]),
-    transition('* => in-bottom', [
-      style(styleBottom), animate(animateIn)
-    ]),
-    transition('* => out-right', [
-      animate(animateOut, style(styleRight))
-    ]),
-    transition('* => out-left', [
-      animate(animateOut, style(styleLeft))
-    ]),
     transition('* => out-top', [
       animate(animateOut, style(styleTop))
-    ]),
-    transition('* => out-bottom', [
-      animate(animateOut, style(styleBottom))
     ]),
   ])
 ];

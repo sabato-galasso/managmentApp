@@ -11,9 +11,9 @@ import { HoverContainerAnimations } from './hover-container.animations';
            *ngIf="state"
            [@hover]="state"
            (@hover.done)="onDone($event)">
-          <button mat-fab color="primary" (click)=test()>X1</button>
-          <button mat-fab color="primary">X2</button>
-          <button mat-fab color="primary">X3</button>
+          <button mat-mini-fab color="primary" (click)=test()>X1</button>
+          <button mat-mini-fab color="primary">X2</button>
+          <button mat-mini-fab color="primary">X3</button>
           <ng-content select="[overlay]"></ng-content>
       </div>`,
   styleUrls: ['./hover-container.component.scss'],
