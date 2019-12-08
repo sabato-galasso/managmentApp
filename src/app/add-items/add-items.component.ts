@@ -21,9 +21,18 @@ export class AddItemsComponent  {
 
   radius: number;
   color: string;
+  enabled: boolean;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  test() {
+    //alert('hi');
+    this.enabled = false;
+  }
+
+  show() {
+    this.enabled = true;
+  }
 }
