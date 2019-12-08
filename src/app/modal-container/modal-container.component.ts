@@ -4,14 +4,14 @@ import {DialogData} from '../stop-watch/stop-watch.component';
 
 
 @Component({
-  selector: 'app-add-items',
-  templateUrl: './add-items.component.html',
-  styleUrls: ['./add-items.component.scss']
+  selector: 'app-modal-container',
+  templateUrl: './modal-container.component.html',
+  styleUrls: ['./modal-container.component.scss']
 })
-export class AddItemsComponent  {
+export class ModalContainerComponent  {
 
   constructor(
-    public dialogRef: MatDialogRef<AddItemsComponent>,
+    public dialogRef: MatDialogRef<ModalContainerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
 

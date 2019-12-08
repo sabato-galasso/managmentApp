@@ -35,8 +35,10 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './home/home.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
-import { AddItemsComponent } from './add-items/add-items.component';
+import { ModalContainerComponent } from './modal-container/modal-container.component';
 import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
+import { MenuItemsComponent } from './menu-items/menu-items.component';
+import {HoverContainerComponent} from './hover-container/hover-container.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +50,10 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
     SettingsComponent,
     LoginLayoutComponent,
     HomeComponent,
-    AddItemsComponent,
+    ModalContainerComponent,
     SpinnerInProgressComponent,
+    MenuItemsComponent,
+    HoverContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +82,7 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
     MatTabsModule,
     MatRippleModule,
   ],
-  entryComponents: [LoginComponent, AddItemsComponent],
+  entryComponents: [LoginComponent, ModalContainerComponent],
   providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService],
   bootstrap: [AppComponent]

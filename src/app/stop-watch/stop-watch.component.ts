@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {AddItemsComponent} from '../add-items/add-items.component';
+import {ModalContainerComponent} from '../modal-container/modal-container.component';
 
 
 export interface DialogData {
@@ -56,8 +56,9 @@ export class StopWatchComponent implements OnDestroy {
   //}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddItemsComponent, {
+    const dialogRef = this.dialog.open(ModalContainerComponent, {
       width: '1200px',
+      height: '800px',
       data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1, price: this.price}
     });
 

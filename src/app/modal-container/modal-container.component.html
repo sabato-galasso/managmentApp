@@ -6,28 +6,10 @@
         <mat-tab label="Bevande">
           <div class="row">
             <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
-
-              <div class="ripple-container mat-elevation-z4 border-left p-3"
-                   matRipple
-                   (click)="show()"
-                   [matRippleCentered]="centered"
-                   [matRippleDisabled]="disabled"
-                   [matRippleUnbounded]="unbounded"
-                   [matRippleRadius]="radius"
-                   [matRippleColor]="color">
-                <span>2€</span>
-                <p><b>Caffè</b></p>
-                <div *ngIf="enabled">
-                  <button mat-fab	color="primary" (click)=test()>X1</button>
-                  <button mat-fab	color="primary">X2</button>
-                  <button mat-fab	color="primary">X3</button>
-                  <mat-form-field>
-                    <input matInput placeholder="N°"  type="number">
-                  </mat-form-field>
-                </div>
-              </div>
+<app-menu-items></app-menu-items>
             </div>
-          </div> </mat-tab>
+          </div>
+        </mat-tab>
 
         <mat-tab label="Second">
           <div class="row">
@@ -64,7 +46,9 @@
       </mat-tab-group>
 
     </div>
-    <div class="col-4">
+    <div class="col-1">      <mat-divider vertical style="height: 100vh"></mat-divider>
+    </div>
+    <div class="col-3">
       <mat-list role="list">
         <mat-list-item role="listitem">
           <h3 matLine> Totale </h3>
