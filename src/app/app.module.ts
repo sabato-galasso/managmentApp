@@ -21,7 +21,7 @@ import {
   MatCardModule, MatExpansionModule,
   MatGridListModule,
   MatIconModule,
-  MatListModule,
+  MatListModule, MatRippleModule,
   MatSidenavModule, MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -76,6 +76,7 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
     MatExpansionModule,
     MatTableModule,
     MatTabsModule,
+    MatRippleModule,
   ],
   entryComponents: [LoginComponent, AddItemsComponent],
   providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

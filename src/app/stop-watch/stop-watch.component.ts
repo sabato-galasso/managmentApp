@@ -7,6 +7,7 @@ export interface DialogData {
   animal: string;
   name: string;
   n_table: string;
+  price: string;
 }
 
 @Component({
@@ -56,8 +57,8 @@ export class StopWatchComponent implements OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddItemsComponent, {
-      width: '800px',
-      data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1}
+      width: '80%',
+      data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1, price: this.price}
     });
 
     dialogRef.afterClosed().subscribe(result => {

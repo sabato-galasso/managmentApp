@@ -1,35 +1,82 @@
-<h2>Tavolo: {{data.n_table}}</h2>
-<mat-tab-group>
-  <mat-tab label="Bevande">
-    <div>
-      <button mat-fab	color="primary">X1</button>
-      <button mat-fab	color="primary">X2</button>
-      <button mat-fab	color="primary">X3</button>
-      <mat-form-field>
-        <input matInput placeholder="N°"  type="number">
-      </mat-form-field>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h2>Tavolo: {{data.n_table}}</h2>
+      <mat-tab-group>
+        <mat-tab label="Bevande">
+          <div>
+            <button mat-fab	color="primary">X1</button>
+            <button mat-fab	color="primary">X2</button>
+            <button mat-fab	color="primary">X3</button>
+            <mat-form-field>
+              <input matInput placeholder="N°"  type="number">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-3 my-3" *ngFor="let shoe of typesOfShoes">
+
+              <div class="ripple-container mat-elevation-z4 border-left p-3"
+                   matRipple
+                   [matRippleCentered]="centered"
+                   [matRippleDisabled]="disabled"
+                   [matRippleUnbounded]="unbounded"
+                   [matRippleRadius]="radius"
+                   [matRippleColor]="color">
+                <span>2€</span>
+                <p><b>Caffè</b></p>
+              </div>
+            </div>
+          </div> </mat-tab>
+
+        <mat-tab label="Second">
+          <div class="row">
+            <div class="col-3 my-3" *ngFor="let shoe of typesOfShoes">
+
+              <div class="ripple-container mat-elevation-z4 border-left p-3"
+                   matRipple
+                   [matRippleCentered]="centered"
+                   [matRippleDisabled]="disabled"
+                   [matRippleUnbounded]="unbounded"
+                   [matRippleRadius]="radius"
+                   [matRippleColor]="color">
+                <span>2€</span>
+                <p><b>Caffè</b></p>
+              </div>
+            </div>
+          </div> </mat-tab>
+        <mat-tab label="Drink">
+          <div class="row">
+          <div class="col-3 my-3" *ngFor="let shoe of typesOfShoes">
+
+            <div class="ripple-container mat-elevation-z4 border-left p-3"
+                 matRipple
+                 [matRippleCentered]="centered"
+                 [matRippleDisabled]="disabled"
+                 [matRippleUnbounded]="unbounded"
+                 [matRippleRadius]="radius"
+                 [matRippleColor]="color">
+              <span>2€</span>
+              <p><b>Caffè</b></p>
+            </div>
+          </div>
+        </div> </mat-tab>
+      </mat-tab-group>
+
     </div>
-    <mat-selection-list #shoes >
-      <mat-list-option *ngFor="let shoe of typesOfShoes">
-        <span matLine>{{shoe}}</span><span> <b>1€</b></span>
-      </mat-list-option>
-    </mat-selection-list>
-    <p>
-      Options selected: {{shoes.selectedOptions.selected.length}}
-    </p>
-  </mat-tab>
-  <mat-tab label="Second"> Caffè </mat-tab>
-  <mat-tab label="Third"> Drink </mat-tab>
-</mat-tab-group>
+    <div class="col-4">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <h3 matLine> Totale </h3>
+          <div mat-line>{{data.price}}</div>
 
-<mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item role="listitem">Item 2</mat-list-item>
+        <mat-list-item role="listitem">Item 3</mat-list-item>
+      </mat-list>
+      <mat-divider></mat-divider>
 
-<div class="d-flex justify-content-between my-4">
-  <div class="">
-    <button mat-raised-button color="accent">Annulla</button>
-  </div>
-  <div class="">
-    <button mat-raised-button color="primary">Conferma</button>
+    </div>
   </div>
 </div>
+
 

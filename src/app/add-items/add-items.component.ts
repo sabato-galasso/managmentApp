@@ -9,16 +9,21 @@ import {DialogData} from '../stop-watch/stop-watch.component';
   styleUrls: ['./add-items.component.scss']
 })
 export class AddItemsComponent  {
-  typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
 
   constructor(
     public dialogRef: MatDialogRef<AddItemsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
+
+  centered = false;
+  disabled = false;
+  unbounded = false;
+
+  radius: number;
+  color: string;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-
 
 }

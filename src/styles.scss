@@ -34,3 +34,8 @@ body, html{
   color: mat-color($primary, darker) !important;
   background: rgba(0, 0, 0, 0.04);
 }
+
+.border-left{
+  border-left: 4px solid mat-color($primary, darker) !important;
+}
+
