@@ -15,17 +15,8 @@ export class MenuItemsComponent implements OnInit {
 
   radius: number;
   color: string;
-  enabled: boolean;
 
 
-  test() {
-    //alert('hi');
-    this.enabled = false;
-  }
-
-  show() {
-    this.enabled = true;
-  }
   ngOnInit() {
   }
 

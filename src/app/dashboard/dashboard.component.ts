@@ -11,8 +11,6 @@ export class DashboardComponent implements OnInit {
   constructor(private auth: AuthService) {
   }
 
-  showFiller = false;
-
   ngOnInit() {
   }
 

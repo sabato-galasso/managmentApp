@@ -39,6 +39,7 @@ import { ModalContainerComponent } from './modal-container/modal-container.compo
 import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import {HoverContainerComponent} from './hover-container/hover-container.component';
+import {DataService} from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -83,8 +84,13 @@ import {HoverContainerComponent} from './hover-container/hover-container.compone
     MatRippleModule,
   ],
   entryComponents: [LoginComponent, ModalContainerComponent],
-  providers: [LoginService, ProcessHttpmsgService, {provide: 'BaseURL', useValue: baseURL}, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService],
+  providers: [LoginService,
+    ProcessHttpmsgService,
+    {provide: 'BaseURL', useValue: baseURL},
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

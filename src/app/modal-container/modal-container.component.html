@@ -34,17 +34,29 @@
     </div>
     <div class="col-3">
       <mat-list role="list">
-        <mat-list-item role="listitem">Tavolo 2</mat-list-item>
-        <mat-list-item role="listitem" class="position-relative"><span class="position-absolute" >Apertura (durata)</span>
-          <span class="position-absolute" style="right: 0">000</span></mat-list-item>
+        <mat-list-item role="listitem">
+          <h3 mat-line> Tavolo: </h3>
+          <div><b>{{data.n_table}}</b></div>
+          </mat-list-item>
+        <mat-list-item role="listitem">
+          <h3 mat-line> Apertura (durata) </h3>
+          <div><b>000</b></div>
+        </mat-list-item>
         <mat-divider></mat-divider>
 
-        <mat-list-item role="listitem">Servizi </mat-list-item>
-        <mat-list-item role="listitem">Tavolo </mat-list-item>
+        <mat-list-item role="listitem">
+          <h3 mat-line> Servizi </h3>
+          <div><b>000</b></div>
+        </mat-list-item>
+        <mat-list-item role="listitem">  <h3 mat-line> Tavolo </h3>
+          <div><b>000</b></div> </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item role="listitem">Totale </mat-list-item>
+        <mat-list-item role="listitem">
+          <h3 mat-line> Totale </h3>
+          <div><b>000</b></div>
+           </mat-list-item>
       </mat-list>
-
+{{datas.currentMessage}}
     </div>
   </div>
 </div>

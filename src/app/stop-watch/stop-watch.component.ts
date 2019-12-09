@@ -44,8 +44,7 @@ export class StopWatchComponent implements OnDestroy {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalContainerComponent, {
-      width: '1200px',
-      height: '600px',
+      height: '800px',
       data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1, price: this.price}
     });
 

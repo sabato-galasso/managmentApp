@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 import { HoverContainerAnimations } from './hover-container.animations';
+import {DataService} from '../services/data.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -14,13 +15,23 @@ import { HoverContainerAnimations } from './hover-container.animations';
           <button mat-mini-fab color="primary" (click)=test()>X1</button>
           <button mat-mini-fab color="primary">X2</button>
           <button mat-mini-fab color="primary">X3</button>
+          <mat-form-field class="w-30">
+              <input matInput placeholder="N°" type="number">
+          </mat-form-field>
           <ng-content select="[overlay]"></ng-content>
       </div>`,
   styleUrls: ['./hover-container.component.scss'],
   animations: HoverContainerAnimations,
 })
-export class HoverContainerComponent {
+export class HoverContainerComponent implements OnInit{
   state;
+  message: string;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message);
+  }
 
   @HostListener('mouseenter', ['$event'])
   @HostListener('mouseleave', ['$event'])
@@ -41,7 +52,9 @@ export class HoverContainerComponent {
     this.state = event.toState.startsWith('out-') ? null : this.state;
   }
 
+
+
   test() {
-    alert('hi');
+    this.data.currentMessage.subscribe(message => this.message = message);
   }
 }
