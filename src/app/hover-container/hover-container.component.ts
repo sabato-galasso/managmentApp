@@ -27,7 +27,7 @@ export class HoverContainerComponent implements OnInit{
   state;
   message: string;
 
-  constructor(private data: DataService) { }
+  constructor(public data: DataService) { }
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => this.message = message);

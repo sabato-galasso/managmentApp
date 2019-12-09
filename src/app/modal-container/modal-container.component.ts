@@ -17,7 +17,7 @@ export class ModalContainerComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ModalContainerComponent>,
-    private datas: DataService,
+    public datas: DataService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
    ) {}
   typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
