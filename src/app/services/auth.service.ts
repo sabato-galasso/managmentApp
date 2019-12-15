@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
   constructor(public jwtHelper: JwtHelperService, public router: Router) {}
+
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     // Check whether the token is expired and return

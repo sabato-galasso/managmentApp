@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {LoginService} from '../services/login.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Login} from '../models/Login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,9 +16,10 @@ export class LoginComponent implements OnInit {
     private router: Router,
     ) { }
 
-  user = {username: '', password: ''};
+  user: Login = {email : '', password: '', token: ''};
   errMess: string;
   returnUrl: Params | string;
+  showSpinner = false;
 
 
   ngOnInit() {
@@ -30,17 +32,21 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.submitLogin(this.user).subscribe(
       user => {
+        this.showSpinner = true;
+
         // login successful so redirect to return url
         if (user) {
           this.user = user;
-          localStorage.setItem('token', JSON.stringify(user));
           this.router.navigateByUrl('/home');
         }
       },
         errmess => {
         console.log(errmess);
         return this.errMess = errmess as any;
-    });
+    },
+      () => {
+             this.showSpinner = false;
+      });
 
     setTimeout(() => {
       this.errMess = null;

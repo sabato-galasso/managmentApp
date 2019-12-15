@@ -1,16 +1,16 @@
 {
   "name": "manager-app-frontend",
   "version": "0.0.0",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "env-cmd -f ./.env nodemon app.js",
     "startDev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
@@ -25,14 +25,21 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "latest",
+    "bcryptjs": "^2.4.3",
     "bootstrap-4-grid": "^3.2.0",
+    "env-cmd": "^10.0.1",
     "express": "^4.17.1",
     "hammerjs": "^2.0.8",
+    "jsonwebtoken": "^8.5.1",
     "material-design-icons": "^3.0.1",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.8.0",
     "ngx-currency": "^2.0.1",
+    "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "validator": "^12.1.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -44,6 +51,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "dotenv": "^8.2.0",
     "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",

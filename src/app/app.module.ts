@@ -34,7 +34,7 @@ import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './home/home.component';
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import {JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { ModalContainerComponent } from './modal-container/modal-container.component';
 import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
@@ -82,6 +82,15 @@ import {DataService} from './services/data.service';
     MatTableModule,
     MatTabsModule,
     MatRippleModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+          return localStorage.getItem('access_token');
+          },
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['http://localhost:3000/auth/login']
+      }
+    })
   ],
   entryComponents: [LoginComponent, ModalContainerComponent],
   providers: [LoginService,
