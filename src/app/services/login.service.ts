@@ -20,9 +20,11 @@ export class LoginService {
         'Content-Type':  'application/json'
       })
     };
-    return this.http.post<Login>(baseURL + 'users/login', login, httpOptions)
+    return this.http.post<Login>(baseURL + 'api/users/login', login, httpOptions)
       .pipe(tap(res => {
-      localStorage.setItem('token', res.token);
+        console.log(res.user)
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('user', res.user.name);
       },
         () => catchError(this.processHTTPMsgService.handleError)
         ));

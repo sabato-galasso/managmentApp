@@ -4,8 +4,8 @@
   </button>
   <span>Application Title</span>
   <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space"></span>
-  <button mat-button (click)="logout()" label="aaa">
+  <span class="example-fill-remaining-space">{{userName}}</span>
+  <button mat-button (click)="logout()" label="logout">
     <mat-icon aria-hidden="false" aria-label="Logout">power_settings_new</mat-icon>
   </button>
 </mat-toolbar>

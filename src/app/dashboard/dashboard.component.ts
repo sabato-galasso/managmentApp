@@ -11,7 +11,10 @@ export class DashboardComponent implements OnInit {
   constructor(private auth: AuthService) {
   }
 
+  userName: string;
+
   ngOnInit() {
+    this.userName = localStorage.getItem('user');
   }
 
   logout() {

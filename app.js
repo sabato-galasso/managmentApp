@@ -1,5 +1,6 @@
 const express = require("express");
 const userRouter = require("./routers/user");
+const settingsRouter = require("./routers/settingsTable");
 const path = require('path');
 const port = process.env.PORT;
 
@@ -15,8 +16,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+
 app.use(express.json());
 app.use(userRouter);
+app.use(settingsRouter);
 
 // Serve only the static files form the dist directory
 //app.use(express.static(__dirname + '/dist/managerAppFrontend'));
