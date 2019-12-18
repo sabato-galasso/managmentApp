@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {baseURL} from '../shared/baseUrl';
-import {catchError} from 'rxjs/operators';
+import {catchError, delay} from 'rxjs/operators';
 import {ProcessHttpmsgService} from './process-httpmsg.service';
 import {SettingsTable} from '../models/SettingsTable';
 
@@ -24,7 +24,7 @@ export class SettingsTableService {
       })
     };
     return this.http.put<SettingsTable>(baseURL + 'api/settings-table', settings, httpOptions)
-      .pipe(catchError(this.processHTTPMsgService.handleError));
+      .pipe(delay( 5000 ), catchError(this.processHTTPMsgService.handleError));
 
   }
 

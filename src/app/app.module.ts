@@ -40,6 +40,7 @@ import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-pro
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import {HoverContainerComponent} from './hover-container/hover-container.component';
 import {DataService} from './services/data.service';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {DataService} from './services/data.service';
     ModalContainerComponent,
     SpinnerInProgressComponent,
     MenuItemsComponent,
-    HoverContainerComponent
+    HoverContainerComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,7 @@ import {DataService} from './services/data.service';
       }
     })
   ],
-  entryComponents: [LoginComponent, ModalContainerComponent],
+  entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],
   providers: [LoginService,
     ProcessHttpmsgService,
     {provide: 'BaseURL', useValue: baseURL},

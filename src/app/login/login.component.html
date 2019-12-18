@@ -1,17 +1,19 @@
 <div class="container h100">
     <div class="row align-items-center h-100">
-      <div class="col-4 my-auto mx-auto">
+      <div class="col-12 col-md-4 my-auto mx-auto">
         <div class="text-center">
           <mat-card>
-            <form novalidate  #loginForm="ngForm" (ngSubmit)="onSubmit()">
               <mat-card-title>
                 Login
               </mat-card-title>
-              <mat-form-field>
+            <form novalidate  #loginForm="ngForm" (ngSubmit)="onSubmit()" class="m-3">
+            <mat-form-field class="d-block">
+                <mat-label>Email</mat-label>
                 <input matInput placeholder="Email" #email="ngModel"  required type="text" [(ngModel)]="user.email" name="username">
                 <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
               </mat-form-field>
-              <mat-form-field>
+              <mat-form-field class="d-block">
+                <mat-label>Password</mat-label>
                 <input matInput placeholder="Password" #password="ngModel" required type="password" [(ngModel)]="user.password" name="password">
                 <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
               </mat-form-field>

@@ -2,7 +2,23 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SettingsTable} from '../models/SettingsTable';
 import {SettingsTableService} from '../services/settings-table.service';
+import {MatDialog, MatTable} from '@angular/material';
+import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 
+
+
+export interface UsersData {
+  name: string;
+  category: string;
+  id: number;
+}
+
+const ELEMENT_DATA: UsersData[] = [
+  {id: 1560608769632, category: 'Artificial Intelligence', name: 'Artificial Intelligence'},
+  {id: 1560608796014,  category: 'Artificial Intelligence', name: 'Machine Learning'},
+  {id: 1560608787815,  category: 'Artificial Intelligence', name: 'Robotic Process Automation'},
+  {id: 1560608805101,  category: 'Artificial Intelligence', name: 'Blockchain'}
+];
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -10,7 +26,11 @@ import {SettingsTableService} from '../services/settings-table.service';
 })
 export class SettingsComponent implements OnInit {
 
-  @ViewChild('fform', {static: false}) feedbackFormDirective;
+  constructor(private fb: FormBuilder, private settingsTableService: SettingsTableService, public dialog: MatDialog) {
+    this.createForm();
+  }
+
+  @ViewChild('fform', {static: true}) feedbackFormDirective;
 
   tablesForm: FormGroup;
   setTable: SettingsTable;
@@ -20,9 +40,12 @@ export class SettingsComponent implements OnInit {
 
   gettedSetting: SettingsTable;
 
-  constructor(private fb: FormBuilder, private settingsTableService: SettingsTableService) {
-    this.createForm();
-  }
+
+  // Table
+  displayedColumns: string[] = ['id', 'category', 'name', 'action'];
+  dataSource = ELEMENT_DATA;
+
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
 
   formErrors = {
@@ -32,13 +55,14 @@ export class SettingsComponent implements OnInit {
 
   validationMessages = {
     quantity: {
-      required:      'Quantity is required.',
-      minlength:     'Numero minimo di tavoli - 1'
+      required: 'Quantity is required.',
+      minlength: 'Numero minimo di tavoli - 1'
     },
     price: {
-      required:      'Price is required.',
+      required: 'Price is required.',
     }
   };
+
 
   createForm(): void {
     this.tablesForm = this.fb.group(
@@ -100,8 +124,54 @@ getSetting() {
     }
   }
 
-  ngOnInit(): void {
+
+  openDialog(action, obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '350px',
+      data: obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event === 'Add') {
+        this.addRowData(result.data);
+      } else if (result.event === 'Update') {
+        this.updateRowData(result.data);
+      } else if (result.event === 'Delete') {
+        this.deleteRowData(result.data);
+      }
+    });
+  }
+
+  addRowData(row_obj) {
+    const d = new Date();
+    this.dataSource.push({
+      id: d.getTime(),
+      name: row_obj.name
+    });
+    this.table.renderRows();
+
+  }
+  updateRowData(row_obj) {
+    this.dataSource = this.dataSource.filter((value, key) => {
+      if (value.id === row_obj.id) {
+        value.name = row_obj.name;
+      }
+      return true;
+    });
+  }
+  deleteRowData(row_obj) {
+    this.dataSource = this.dataSource.filter((value, key) => {
+      return value.id !== row_obj.id;
+    });
+  }
+
+
+ngOnInit(): void {
     this.getSetting();
   }
+
+
+
 
 }
