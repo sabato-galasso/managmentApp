@@ -4,14 +4,10 @@ const settingTableSchema = mongoose.Schema({
   quantity: {
     type: Number,
     required: true,
-    unique: true,
-
   },
   price: {
     type: Number,
     required: true,
-    unique: true,
-
   },
 });
 

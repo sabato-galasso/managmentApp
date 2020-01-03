@@ -41,6 +41,8 @@ import { MenuItemsComponent } from './menu-items/menu-items.component';
 import {HoverContainerComponent} from './hover-container/hover-container.component';
 import {DataService} from './services/data.service';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,8 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
         whitelistedDomains: ['localhost:3000'],
         blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],
   providers: [LoginService,

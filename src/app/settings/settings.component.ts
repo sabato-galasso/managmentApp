@@ -1,34 +1,25 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SettingsTable} from '../models/SettingsTable';
 import {SettingsTableService} from '../services/settings-table.service';
 import {MatDialog, MatTable} from '@angular/material';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import {ItemMenu} from '../models/ItemMenu';
+import {Subscription} from 'rxjs';
 
 
-
-export interface UsersData {
-  name: string;
-  category: string;
-  id: number;
-}
-
-const ELEMENT_DATA: UsersData[] = [
-  {id: 1560608769632, category: 'Artificial Intelligence', name: 'Artificial Intelligence'},
-  {id: 1560608796014,  category: 'Artificial Intelligence', name: 'Machine Learning'},
-  {id: 1560608787815,  category: 'Artificial Intelligence', name: 'Robotic Process Automation'},
-  {id: 1560608805101,  category: 'Artificial Intelligence', name: 'Blockchain'}
-];
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, private settingsTableService: SettingsTableService, public dialog: MatDialog) {
     this.createForm();
   }
+
+  private subscription: Subscription;
 
   @ViewChild('fform', {static: true}) feedbackFormDirective;
 
@@ -39,11 +30,13 @@ export class SettingsComponent implements OnInit {
   showSpinner = false;
 
   gettedSetting: SettingsTable;
+  gettedItemsMenu: ItemMenu[];
 
 
   // Table
-  displayedColumns: string[] = ['id', 'category', 'name', 'action'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'category', 'name', 'price', 'action'];
+  dataSource: ItemMenu[] = [];
+  dataRow: ItemMenu;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
@@ -79,7 +72,7 @@ export class SettingsComponent implements OnInit {
   }
 
 getSetting() {
-  this.settingsTableService.getSettingsTable().subscribe(tables => {
+ this.settingsTableService.getSettingsTable().subscribe(tables => {
       this.gettedSetting = tables;
       this.setTableCopy = tables;
       this.tablesForm.controls.quantity.setValue(this.gettedSetting.quantity);
@@ -90,6 +83,34 @@ getSetting() {
     () => {console.log('Observable finished', this.gettedSetting);  this.showSpinner = false; }
   );
 }
+
+  getItemsMenu() {
+    this.subscription =  this.settingsTableService.getItemsMenu().subscribe(items => {
+        this.dataSource = items;
+      },
+      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
+      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+    );
+  }
+
+  updateRowDataSource(rowData: ItemMenu) {
+    this.settingsTableService.updateRowData(rowData).subscribe(items => {
+      console.log('items', items);
+      this.dataRow = items;
+      },
+      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
+      () => {console.log('Observable finished', this.dataRow);  this.showSpinner = false; }
+    );
+  }
+
+  createNewData(rowData: ItemMenu) {
+    this.settingsTableService.createRowData(rowData).subscribe(items => {
+        this.dataRow = items;
+      },
+      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
+      () => {console.log('Observable finished', this.dataRow);  this.showSpinner = false; }
+    );
+  }
 
   onSubmit() {
     this.setTable = this.tablesForm.value;
@@ -147,10 +168,16 @@ getSetting() {
     const d = new Date();
     this.dataSource.push({
       id: d.getTime(),
-      name: row_obj.name
+      name: row_obj.name,
+      price: parseFloat(row_obj.price),
+      category: row_obj.category
     });
     this.table.renderRows();
-
+    row_obj = {
+      ...row_obj,
+      id: d.getTime()
+    };
+    this.createNewData(row_obj);
   }
   updateRowData(row_obj) {
     this.dataSource = this.dataSource.filter((value, key) => {
@@ -159,6 +186,10 @@ getSetting() {
       }
       return true;
     });
+    if (this.dataSource.length > 0) {
+      this.updateRowDataSource(this.dataSource[0]);
+    }
+
   }
   deleteRowData(row_obj) {
     this.dataSource = this.dataSource.filter((value, key) => {
@@ -169,9 +200,13 @@ getSetting() {
 
 ngOnInit(): void {
     this.getSetting();
+    this.getItemsMenu();
   }
 
-
+ngOnDestroy(): void {
+    console.log('destroy');
+    this.subscription.unsubscribe();
+}
 
 
 }

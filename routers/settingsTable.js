@@ -31,7 +31,7 @@ router.put("/api/settings-table", auth, async (req, res) => {
 });
 
 router.get("/api/settings-table", auth, async (req, res) => {
-  // Create a new settings
+  // Get settings
   try {
     const settings = await setTable.findLastOne();
     res.status(200).send(settings);

@@ -5,6 +5,7 @@ import {baseURL} from '../shared/baseUrl';
 import {catchError, delay} from 'rxjs/operators';
 import {ProcessHttpmsgService} from './process-httpmsg.service';
 import {SettingsTable} from '../models/SettingsTable';
+import {ItemMenu} from '../models/ItemMenu';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class SettingsTableService {
       })
     };
     return this.http.put<SettingsTable>(baseURL + 'api/settings-table', settings, httpOptions)
-      .pipe(delay( 5000 ), catchError(this.processHTTPMsgService.handleError));
+      .pipe(delay( 100 ), catchError(this.processHTTPMsgService.handleError));
 
   }
 
@@ -40,4 +41,45 @@ export class SettingsTableService {
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }
+
+
+  getItemsMenu(): Observable<ItemMenu[]> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<ItemMenu[]>(baseURL + 'api/items-menu', httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  updateRowData(dataRow: ItemMenu): Observable<ItemMenu> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.put<ItemMenu>(baseURL + 'api/items-menu', dataRow, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  createRowData(dataRow: ItemMenu): Observable<ItemMenu> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.post<ItemMenu>(baseURL + 'api/items-menu', dataRow, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
 }

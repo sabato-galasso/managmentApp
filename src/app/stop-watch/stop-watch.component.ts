@@ -1,6 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ModalContainerComponent} from '../modal-container/modal-container.component';
+import {SettingsTableService} from '../services/settings-table.service';
+import {SettingsTable} from '../models/SettingsTable';
 
 
 export interface DialogData {
@@ -15,14 +17,14 @@ export interface DialogData {
   templateUrl: './stop-watch.component.html',
   styleUrls: ['./stop-watch.component.scss']
 })
-export class StopWatchComponent implements OnDestroy {
+export class StopWatchComponent implements OnInit, OnDestroy {
 
 
   seconds = '00';
   minutes = '00';
   hours = '00';
   price = '0.00';
-  pphValue = '10.00';
+  pphValue = 10.00;
 
   counter: number;
   timerRef;
@@ -33,14 +35,15 @@ export class StopWatchComponent implements OnDestroy {
   animal: string;
   name: string;
 
+  showSpinner = false;
+  gettedSetting: SettingsTable;
+  errMessFeed: string;
+
+
   @Input() keyEl: string;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private settingsTableService: SettingsTableService) {}
 
-  /** Gets the total cost of all transactions. */
- // getTotalCost() {
-   // return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
-  //}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalContainerComponent, {
@@ -103,6 +106,20 @@ export class StopWatchComponent implements OnDestroy {
       const copyPriceToString = this.pphValue.toString();
       return parseFloat(copyPriceToString.replace(',', '.'));
     }
+  }
+
+  getSettingsTable() {
+    this.settingsTableService.getSettingsTable().subscribe(tables => {
+        this.gettedSetting = tables;
+        this.pphValue = this.gettedSetting.price;
+      },
+      errmess => { this.gettedSetting = null; this.errMessFeed = errmess as any; },
+      () => {console.log('Observable finished', this.gettedSetting);  this.showSpinner = false; }
+    );
+  }
+
+  ngOnInit(): void {
+    this.getSettingsTable();
   }
 }
 

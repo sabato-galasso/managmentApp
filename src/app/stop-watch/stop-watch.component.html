@@ -1,5 +1,5 @@
 <div class="col-3 m-3">
-  <mat-card [ngClass]="{'active-card': running,  'pause-card' : !running }">
+  <mat-card [ngClass]="{'active-card': running,  'pause-card' : !running }" [tabIndex]="keyEl + 1">
     <mat-card-header>
       <mat-card-title>Tavolo {{(keyEl + 1)| number}}
       </mat-card-title>
@@ -11,18 +11,10 @@
       <div class="position-relative">
         <h1 class="custom-pos" [ngClass]="{'bounceIn': running}">{{hours}} : {{minutes}} : {{seconds}}</h1>
       </div>
-      <mat-form-field>
-        <mat-label class="display-4">Prezzo / 1h</mat-label>
-        <input
-          matInput
-          #refPrice="ngModel"
-          name="price"
-          placeholder="Prezzo"
-          type="number" step="0.50"
-          [(ngModel)]="pphValue"
-        >
-        <span matPrefix>€&nbsp;</span>
-      </mat-form-field>
+      <div>
+        <h2 class="display-4">Prezzo / 1h</h2>
+        <span>{{pphValue}}€&nbsp;</span>
+      </div>
     </mat-card-content>
     <table>
       <tr>
