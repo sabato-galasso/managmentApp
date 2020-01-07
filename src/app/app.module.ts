@@ -21,8 +21,8 @@ import {
   MatCardModule, MatExpansionModule,
   MatGridListModule,
   MatIconModule,
-  MatListModule, MatRippleModule,
-  MatSidenavModule, MatTableModule, MatTabsModule,
+  MatListModule, MatPaginatorModule, MatRippleModule,
+  MatSidenavModule, MatSortModule, MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {LoginService} from './services/login.service';
@@ -43,6 +43,7 @@ import {DataService} from './services/data.service';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { environment } from '../environments/environment';
     SpinnerInProgressComponent,
     MenuItemsComponent,
     HoverContainerComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    WarehouseComponent
   ],
   imports: [
     BrowserModule,
@@ -86,16 +88,18 @@ import { environment } from '../environments/environment';
     MatTableModule,
     MatTabsModule,
     MatRippleModule,
+    MatSortModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function  tokenGetter() {
+        tokenGetter: function tokenGetter() {
           return localStorage.getItem('access_token');
-          },
+        },
         whitelistedDomains: ['localhost:3000'],
         blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatPaginatorModule
   ],
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],
   providers: [LoginService,

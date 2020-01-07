@@ -5,6 +5,7 @@ import {SettingsComponent} from '../settings/settings.component';
 import {LoginLayoutComponent} from '../layouts/login-layout/login-layout.component';
 import {HomeComponent} from '../home/home.component';
 import {AuthGuardService} from '../services/auth-guard.service';
+import {WarehouseComponent} from '../warehouse/warehouse.component';
 
 export const routes: Routes = [
 
@@ -15,6 +16,7 @@ export const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'settings', component: SettingsComponent},
+      {path: 'warehouse', component: WarehouseComponent},
     ]
   },
   {
