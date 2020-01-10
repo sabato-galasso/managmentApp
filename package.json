@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "env-cmd -f ./.env nodemon app.js",
-    "startDev": "ng serve",
+    "startDev": "npm run  appDev",
+    "appDev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
