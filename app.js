@@ -4,7 +4,7 @@ const settingsRouter = require("./routers/settingsTable");
 const itemsMenuRouter = require("./routers/itemsMenu");
 const warehouseRouter = require("./routers/warehouse");
 const path = require('path');
-const port = process.env.PORT;
+const port = process.env.PORT || "3000";
 
 require("./db/db");
 

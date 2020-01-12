@@ -4,8 +4,8 @@
   "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "start": "env-cmd -f ./.env nodemon app.js",
-    "startDev": "npm run  appDev",
+    "start": "node app",
+    "startDev": "env-cmd -f ./.env nodemon app.js",
     "appDev": "ng serve",
     "build": "ng build",
     "test": "ng test",
