@@ -15,6 +15,19 @@ router.get("/api/warehouse", auth, async (req, res) => {
   }
 });
 
+router.put("/api/warehouse", auth, async (req, res) => {
+  // Create a new settings
+  try {
+    const settings = new warehouseModel(req.body);
+    const filter = { _id: req.body._id };
+    //const update = settings.quantity
+    const doc = await warehouseModel.findOneAndUpdate(filter,settings);
+    res.status(201).send(doc._doc);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 
 
 module.exports = router;

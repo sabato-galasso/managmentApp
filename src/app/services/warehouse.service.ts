@@ -26,4 +26,17 @@ export class WarehouseService {
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }
+
+  updateWareHouse(data): Observable<WareHouse> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.put<WareHouse>(baseURL + 'api/warehouse', data , httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
 }

@@ -13,6 +13,10 @@ const warehouseSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
 });
 
 warehouseSchema.static('findAll', function() {

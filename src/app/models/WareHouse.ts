@@ -1,7 +1,7 @@
 export class WareHouse {
   price: number;
   quantity: number;
-  category?: string;
+  category: string;
   name: string;
   _id?: string;
 }
