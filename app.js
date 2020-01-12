@@ -4,9 +4,10 @@ const settingsRouter = require("./routers/settingsTable");
 const itemsMenuRouter = require("./routers/itemsMenu");
 const warehouseRouter = require("./routers/warehouse");
 const path = require('path');
-const port = process.env.PORT || "3000";
-
+require('dotenv').config({path: __dirname + '/.env'});
 require("./db/db");
+
+const port = process.env.PORT || 3000;
 
 const app = express();
 //CORS Middleware
@@ -26,11 +27,13 @@ app.use(itemsMenuRouter);
 app.use(warehouseRouter);
 
 // Serve only the static files form the dist directory
+
 app.use(express.static(__dirname + '/dist/managerAppFrontend'));
 
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname+'/dist/managerAppFrontend/index.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

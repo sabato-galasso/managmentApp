@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "start": "node app",
+    "start": "node -r dotenv/config app",
     "startDev": "env-cmd -f ./.env nodemon app.js",
     "appDev": "ng serve",
     "build": "ng build",
