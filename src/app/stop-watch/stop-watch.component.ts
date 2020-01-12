@@ -27,7 +27,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   pphValue = 10.00;
 
   counter: number;
-  timerRef;
+  timerRef: any;
   running = false;
   startText = 'Start';
 

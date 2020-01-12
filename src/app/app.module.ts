@@ -91,9 +91,7 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     MatSortModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function tokenGetter() {
-          return localStorage.getItem('access_token');
-        },
+        tokenGetter: funcTokenGetter,
         whitelistedDomains: ['localhost:3000'],
         blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
@@ -112,3 +110,5 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function funcTokenGetter() { return localStorage.getItem('access_token'); }
+
