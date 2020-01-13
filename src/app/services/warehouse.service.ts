@@ -14,7 +14,7 @@ export class WarehouseService {
 
   constructor(private http: HttpClient, private processHTTPMsgService: ProcessHttpmsgService) { }
 
-  getWareHouse(): Observable<WareHouse> {
+  getWareHouse(): Observable<WareHouse[]> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,7 +22,7 @@ export class WarehouseService {
         Authorization: 'Bearer ' + token,
       })
     };
-    return this.http.get<WareHouse>(baseURL + 'api/warehouse', httpOptions)
+    return this.http.get<WareHouse[]>(baseURL + 'api/warehouse', httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }

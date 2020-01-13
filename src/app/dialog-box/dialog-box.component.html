@@ -1,21 +1,19 @@
 <!-- dialog-box.component.html -->
-<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<h1 mat-dialog-title> <strong>{{action}}</strong> elemento </h1>
 <div mat-dialog-content>
-  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+  <mat-form-field *ngIf="action != 'Delete';">
     <input placeholder="{{action}} Nome" matInput [(ngModel)]="local_data.name">
   </mat-form-field>
-  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+  <mat-form-field *ngIf="action != 'Delete';">
     <input placeholder="{{action}} Categoria" matInput [(ngModel)]="local_data.category">
   </mat-form-field>
-  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+  <mat-form-field *ngIf="action != 'Delete';">
     <input placeholder="{{action}} Prezzo" matInput [(ngModel)]="local_data.price" type="number" step="0.50"
     >
   </mat-form-field>
-  <ng-template #elseTemplate>
-    Sure to delete <b>{{local_data.name}}</b>?
-  </ng-template>
+    <div  *ngIf="action == 'Delete';">Sicuro di eliminare <b>{{local_data.name}}</b>?</div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="doAction()">{{action}}</button>
-  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
 </div>

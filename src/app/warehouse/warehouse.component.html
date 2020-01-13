@@ -1,16 +1,33 @@
 <div class="container">
-  <div class="row ">
-    <div class="col-12">
+  <div class="row">
+    <div class="col-12 my-3">
       <h2>Magazzino</h2>
-      <mat-tab-group>
-  <mat-tab label="Super Alcolici">
-    <div class="col-4 my-3">
+    <div class="row my-3">
+    <div class="col-4">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca">
+        <mat-label>Filtra per Nome</mat-label>
+        <input matInput  [formControl]="nameFilter" >
       </mat-form-field>
     </div>
+    <div class="col-4">
+      <mat-form-field >
+        <mat-label>Filtra per categoria</mat-label>
+        <mat-select  [formControl]="positionFilter" >
+          <mat-option *ngFor="let category of catogories" [value]="category.value">
+            {{category.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>Filtra per Quantità</mat-label>
+          <input matInput  [formControl]="quantityFilter" >
+        </mat-form-field>
+      </div>
+    </div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table #table  mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
         <ng-container matColumnDef="_id">
@@ -22,7 +39,7 @@
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo </th>
           <td mat-cell *matCellDef="let row">
-            <mat-form-field (input)="changeCategory({price: $event.target.value,_id:row._id})" style="max-width: 50px">
+            <mat-form-field (input)="changeDataTableValue({price: $event.target.value,_id:row._id}, $event)" style="max-width: 150px">
               <input matInput [value]="row.price" type="number" step="0.5">
               <span matSuffix>€</span>
             </mat-form-field>
@@ -33,7 +50,7 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
           <td mat-cell *matCellDef="let row">
-            <mat-form-field (input)="changeCategory({name: $event.target.value,_id:row._id})" style="max-width: 200px">
+            <mat-form-field (input)="changeDataTableValue({name: $event.target.value,_id:row._id}, $event)" style="max-width: 200px">
               <input matInput [value]="row.name">
             </mat-form-field>
              </td>
@@ -43,7 +60,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
           <td mat-cell *matCellDef="let row">
             <mat-form-field style="max-width: 200px">
-            <mat-select [(ngModel)]="row.category" (selectionChange)="changeCategory({category: $event.value, _id:row._id})">
+            <mat-select [(ngModel)]="row.category" (selectionChange)="changeDataTableValue({category: $event.value, _id:row._id},$event)">
                <mat-option *ngFor="let category of catogories" [value]="category.value">
                 {{category.viewValue}}
               </mat-option>
@@ -56,10 +73,19 @@
         <ng-container matColumnDef="quantity">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantità </th>
           <td mat-cell *matCellDef="let row">
-            <mat-form-field (input)="changeCategory({quantity: $event.target.value,_id:row._id})" style="max-width: 50px">
+            <mat-form-field (input)="changeDataTableValue({quantity: $event.target.value,_id:row._id},$event)" style="max-width: 150px">
               <input matInput [value]="row.quantity" type="number">
             </mat-form-field>
              </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Azioni </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="openDialog('Delete',row)"><i class="material-icons">
+              delete
+            </i></button>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -69,33 +95,6 @@
 
       <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
     </div>
-
-  </mat-tab>
-  <mat-tab label="Bevande">
-    <div class="row">
-      <div class="col-4 my-3" >
-        test
-
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab label="Birra">
-    <div class="row">
-      <div class="col-4 my-3" >
-        test
-
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab label="Cibi">
-    <div class="row">
-      <div class="col-4 my-3" >
-       test
-
-      </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
     </div>
   </div>
   <div class="centered" *ngIf="showSpinner">
