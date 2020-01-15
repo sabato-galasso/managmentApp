@@ -1,17 +1,25 @@
 <!-- dialog-box.component.html -->
 <h1 mat-dialog-title> <strong>{{action}}</strong> elemento </h1>
 <div mat-dialog-content>
-  <mat-form-field *ngIf="action != 'Delete';">
-    <input placeholder="{{action}} Nome" matInput [(ngModel)]="local_data.name">
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="{{action}} Nome" matInput [(ngModel)]="localData.name">
   </mat-form-field>
-  <mat-form-field *ngIf="action != 'Delete';">
-    <input placeholder="{{action}} Categoria" matInput [(ngModel)]="local_data.category">
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <mat-select placeholder="Categoria" [(ngModel)]="localData.category">
+      <mat-option *ngFor="let category of catogories" [value]="category.value">
+        {{category.viewValue}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field *ngIf="action != 'Delete';">
-    <input placeholder="{{action}} Prezzo" matInput [(ngModel)]="local_data.price" type="number" step="0.50"
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="{{action}} Prezzo" matInput [(ngModel)]="localData.price" type="number" step="0.50"
     >
   </mat-form-field>
-    <div  *ngIf="action == 'Delete';">Sicuro di eliminare <b>{{local_data.name}}</b>?</div>
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="{{action}} Quantità" matInput [(ngModel)]="localData.quantity" type="number" step="1"
+    >
+  </mat-form-field>
+    <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{localData.name}}</b>?</div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="doAction()">{{action}}</button>

@@ -17,11 +17,9 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 export class WarehouseComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'delete'];
-  dataSource = new MatTableDataSource([]);
   errMessFeed: string;
   showSpinner = false;
 
-  @ViewChild(MatTable, {static: false}) table: MatTable<any>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -42,20 +40,36 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     category: '', name: '' , price: '', _id: '', quantity: ''
   };
 
-  // Filter Subsciption
-  private componetDestroyed: Subject<any> = new Subject();
+  // Subsciptions
+  private _componetDestroyed = new Subject();
    subscriptionFilterName: Subscription;
    subscriptionFilterCategory: Subscription;
    subscriptionFilterQuantity: Subscription;
-   subscriptionFilterItems: Subscription;
+  subscriptionGetItems: Subscription;
    subscriptionFilterUpdateItems: Subscription;
+   subscriptionDeleteItems: Subscription;
+   subscriptionAddtems: Subscription;
 
+  dataSource = new MatTableDataSource([]);
 
-  constructor(private warehouseService: WarehouseService, private changeDetectorRefs: ChangeDetectorRef, public dialog: MatDialog) {
+  constructor(private warehouseService: WarehouseService, public dialog: MatDialog) {
+
   }
 
-  ngOnInit() {
-    // this.refresh();
+  ngOnInit(): void {
+    this.showSpinner = true;
+
+    this.subscriptionGetItems = this.warehouseService.getWareHouse()
+      .subscribe(items => {
+        this.showSpinner = true;
+        this.dataSource.data = items;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      errmess => { this.errMessFeed = errmess as any; },
+      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+    );
+
     this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe((categoryFilterValue) => {
       this.filteredValues.category = categoryFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
@@ -71,21 +85,12 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
 
-    this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(items => {
-        this.showSpinner = true;
-        this.dataSource.data = items;
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      errmess => { this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-    );
 
     this.dataSource.filterPredicate = this.customFilterPredicate();
   }
 
   customFilterPredicate() {
-    return (data: WareHouse, filter: string): boolean => {
+    const myFilterPredicate = (data: WareHouse, filter: string): boolean => {
       let globalMatch = !this.globalFilter;
 
       if (this.globalFilter) {
@@ -102,14 +107,10 @@ export class WarehouseComponent implements OnInit, OnDestroy {
         data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
         data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
     };
+    return myFilterPredicate;
   }
 
-  applyFilter(filter) {
-    this.globalFilter = filter;
-    this.dataSource.filter = JSON.stringify(this.filteredValues);
-  }
-
-  getItemsWarehouse() {
+  /*getItemsWarehouse() {
     this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(items => {
          this.showSpinner = true;
          this.dataSource.data = items;
@@ -117,7 +118,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       errmess => { this.errMessFeed = errmess as any; },
       () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
     );
-  }
+  }*/
 
   changeDataTableValue(data, el) {
     this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
@@ -129,9 +130,8 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       );
   }
 
-  refresh(): void {
+  /*refresh(): void {
     this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(resources => {
-      debugger;
       this.showSpinner = true;
       this.dataSource.data = resources;
       this.dataSource.sort = this.sort;
@@ -141,7 +141,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
     );
     this.changeDetectorRefs.detectChanges();
-  }
+  }*/
 
   openDialog(action, obj) {
     obj.action = action;
@@ -151,32 +151,47 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === 'Add') {
+      if (result.event === 'Aggiungi') {
         this.addRowData(result.data);
-      } else if (result.event === 'Delete') {
+      } else if (result.event === 'Elimina') {
         this.deleteRowData(result.data);
       }
     });
   }
 
-  addRowData(row_obj: WareHouse) {
-    const d = new Date();
-    this.dataSource.data.push({
-      id: d.getTime(),
-      name: row_obj.name
-    });
-    this.table.renderRows();
+  addRowData(rowObj: WareHouse) {
 
+    this.subscriptionAddtems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
+        this.showSpinner = true;
+      },
+      errmess => { this.errMessFeed = errmess as any; },
+      () => {
+        this.dataSource.data.unshift({
+          name: rowObj.name,
+          category: rowObj.category,
+          quantity: rowObj.quantity,
+          price: rowObj.price
+        });
+        this.showSpinner = false; }
+    );
   }
 
   deleteRowData(rowObj: WareHouse) {
-    this.dataSource.data = this.dataSource.data.filter((value, key) => {
-      return value._id !== rowObj._id;
-    });
+    this.subscriptionDeleteItems = this.warehouseService.deleteWareHouseRow(rowObj).subscribe(items => {
+        this.showSpinner = true;
+      },
+      errmess => { this.errMessFeed = errmess as any; },
+      () => {
+        this.dataSource.data = this.dataSource.data.filter((value, key) => {
+          return value._id !== rowObj._id;
+        });
+        this.showSpinner = false; }
+    );
+
   }
 
   ngOnDestroy() {
-    this.componetDestroyed.next();
-    this.componetDestroyed.unsubscribe();
+    this._componetDestroyed.next();
+    this._componetDestroyed.unsubscribe();
   }
 }

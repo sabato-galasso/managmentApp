@@ -24,7 +24,7 @@ warehouseSchema.static('findAll', function() {
     console.log(err)
     console.log(docs)
     }
-  );
+  ).sort({"_id":"desc"});
 });
 
 const Warehouse = mongoose.model("Warehouse", warehouseSchema);

@@ -96,7 +96,7 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
         blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     MatPaginatorModule
   ],
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],

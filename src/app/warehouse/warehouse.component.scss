@@ -10,3 +10,11 @@ table {
 td, th {
   width: 25%;
 }
+.table-container{
+  position: relative;
+
+  .add-button{
+    position: absolute;
+    right: -4rem;
+  }
+}

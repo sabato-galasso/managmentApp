@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {SettingsTable} from '../models/SettingsTable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {baseURL} from '../shared/baseUrl';
 import {catchError} from 'rxjs/operators';
@@ -36,6 +35,33 @@ export class WarehouseService {
       })
     };
     return this.http.put<WareHouse>(baseURL + 'api/warehouse', data , httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  addWareHouse(data): Observable<WareHouse> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.post<WareHouse>(baseURL + 'api/warehouse', data , httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  deleteWareHouseRow(data): Observable<WareHouse> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+
+    return this.http.delete<WareHouse>(baseURL + 'api/warehouse/?_id=' + data._id, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }

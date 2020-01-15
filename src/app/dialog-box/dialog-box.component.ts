@@ -3,10 +3,6 @@ import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {WareHouse} from '../models/WareHouse';
 
-export interface UsersData {
-  name: string;
-  id: number;
-}
 
 
 @Component({
@@ -17,19 +13,27 @@ export interface UsersData {
 export class DialogBoxComponent {
 
   action: string;
-  local_data: any;
+  localData: any;
+
+  catogories: any[] = [
+    {value: 'super-alcolici', viewValue: 'Super Alcolici'},
+    {value: 'bevande', viewValue: 'Bevande'},
+    {value: 'birra', viewValue: 'Birra'},
+    {value: 'cibi', viewValue: 'Cibi'}
+  ];
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: WareHouse) {
     console.log(data);
-    this.local_data = {...data};
-    this.action = this.local_data.action;
+    this.localData = {...data};
+    this.action = this.localData.action;
   }
 
   doAction() {
-    this.dialogRef.close({event: this.action, data: this.local_data});
+    this.dialogRef.close({event: this.action, data: this.localData});
   }
 
   closeDialog() {
