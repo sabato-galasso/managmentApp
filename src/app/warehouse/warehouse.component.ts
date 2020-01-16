@@ -5,7 +5,7 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {WarehouseService} from '../services/warehouse.service';
 import {FormControl} from '@angular/forms';
 import {WareHouse} from '../models/WareHouse';
-import {Subject, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 
@@ -51,6 +51,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
    subscriptionAddtems: Subscription;
 
   dataSource = new MatTableDataSource([]);
+  data ;
 
   constructor(private warehouseService: WarehouseService, public dialog: MatDialog) {
 
@@ -129,6 +130,14 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
       );
   }
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<WareHouse[]> {
+    return this.subscriptionGetItems.asObservable();
+
+  }
+
+  disconnect() {}
 
   /*refresh(): void {
     this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(resources => {
