@@ -132,7 +132,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  
+
 
   disconnect() {}
 
