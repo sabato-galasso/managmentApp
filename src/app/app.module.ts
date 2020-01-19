@@ -48,6 +48,7 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ToastComponent } from './toast/toast.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthInterceptor} from './services/auth-interceptor.service';
+import { InputSpinnerComponent } from './input-spinner/input-spinner.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {AuthInterceptor} from './services/auth-interceptor.service';
     HoverContainerComponent,
     DialogBoxComponent,
     WarehouseComponent,
-    ToastComponent
+    ToastComponent,
+    InputSpinnerComponent
   ],
   imports: [
     BrowserModule,

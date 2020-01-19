@@ -75,18 +75,7 @@
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantità</th>
             <td mat-cell *matCellDef="let row">
-              <mat-form-field class="quantity"
-               style="max-width: 180px; text-align: center">
-                <button mat-button color="primary" matPrefix class="d-inline-block" (click)="decrementQuantity({quantity: row.quantity,_id:row._id})">
-                  <mat-icon>remove</mat-icon>
-                </button>
-                <input matInput [value]="row.quantity" type="number" style="max-width: 150px" (keydown)="disableIt($event)" (change)="updateDataTableValue({quantity: $event.target.value,_id:row._id})">
-                <button  mat-button color="primary" matSuffix class="d-inline-block"
-                        (click)="incrementQuantity({quantity: row.quantity,_id:row._id})">
-                  <mat-icon >add</mat-icon>
-                </button>
-              </mat-form-field>
-
+              <app-input-spinner [data]="{quantity: row.quantity,_id:row._id}" [rowValue]="row.quantity" (valueChange)="updateDataTableValue($event)"></app-input-spinner>
             </td>
           </ng-container>
 

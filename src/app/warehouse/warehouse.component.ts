@@ -122,6 +122,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   updateDataTableValue(data) {
+
     this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
         this.showSpinner = true;
       },
@@ -140,12 +141,13 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   incrementQuantity(data) {
+    debugger
     if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
       data.quantity = 0;
     } else {
       data.quantity++;
     }
-    this.updateDataTableValue(data);
+    //this.updateDataTableValue(data);
   }
   decrementQuantity(data) {
     if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
@@ -153,7 +155,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     } else {
       data.quantity--;
     }
-    this.updateDataTableValue(data);
+    //this.updateDataTableValue(data);
   }
 
   openDialog(action, obj) {

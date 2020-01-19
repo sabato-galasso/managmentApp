@@ -1,0 +1,11 @@
+<mat-form-field class="quantity"
+                style="max-width: 180px; text-align: center">
+  <button mat-button color="primary" matPrefix class="d-inline-block" (click)="decrementQuantity({quantity: data.quantity,_id:data._id})">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <input matInput  [value]="rowValue" type="number" style="max-width: 150px" (keydown)="disableIt($event)" (change)="onChange($event.target.valueAsNumber)" >
+  <button  mat-button color="primary" matSuffix class="d-inline-block"
+           (click)="incrementQuantity({quantity: data.quantity,_id:data._id})">
+    <mat-icon >add</mat-icon>
+  </button>
+</mat-form-field>
