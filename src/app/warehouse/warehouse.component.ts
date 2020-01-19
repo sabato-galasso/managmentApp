@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
@@ -8,6 +8,7 @@ import {WareHouse} from '../models/WareHouse';
 import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-warehouse',
@@ -16,7 +17,7 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 })
 export class WarehouseComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'delete'];
+  displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'actions'];
   errMessFeed: string;
   showSpinner = false;
 
@@ -53,24 +54,13 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource([]);
   data ;
 
-  constructor(private warehouseService: WarehouseService, public dialog: MatDialog) {
-
-  }
+  constructor(private warehouseService: WarehouseService,
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar
+              ) {}
 
   ngOnInit(): void {
-    this.showSpinner = true;
-
-    this.subscriptionGetItems = this.warehouseService.getWareHouse()
-      .subscribe(items => {
-        this.showSpinner = true;
-        this.dataSource.data = items;
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      errmess => { this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-    );
-
+    this.loadData();
     this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe((categoryFilterValue) => {
       this.filteredValues.category = categoryFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
@@ -85,10 +75,27 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       this.filteredValues.quantity = quantityFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
-
-
     this.dataSource.filterPredicate = this.customFilterPredicate();
   }
+
+  public loadData() {
+        this.showSpinner = true;
+        this.subscriptionGetItems = this.warehouseService.getWareHouse()
+      .subscribe(items => {
+          this.showSpinner = true;
+          this.dataSource.data = items;
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        },
+        errmess => { this.errMessFeed = errmess as any;
+                     this.openSnackBar(this.errMessFeed, 'Undo'); },
+        () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+      );
+}
+
+  refresh() {
+    this.loadData();
+}
 
   customFilterPredicate() {
     const myFilterPredicate = (data: WareHouse, filter: string): boolean => {
@@ -111,48 +118,25 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     return myFilterPredicate;
   }
 
-  /*getItemsWarehouse() {
-    this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(items => {
-         this.showSpinner = true;
-         this.dataSource.data = items;
-      },
-      errmess => { this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-    );
-  }*/
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 
-  changeDataTableValue(data, el) {
+  updateDataTableValue(data) {
     this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
         this.showSpinner = true;
-        console.log('Observableww finished', items);
       },
-      errmess => { this.errMessFeed = errmess as any; },
+      errmess => {
+      this.errMessFeed = errmess as any;
+      this.openSnackBar(this.errMessFeed, 'Undo'); },
       () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
       );
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-
-
-  disconnect() {}
-
-  /*refresh(): void {
-    this.subscriptionFilterItems = this.warehouseService.getWareHouse().subscribe(resources => {
-      this.showSpinner = true;
-      this.dataSource.data = resources;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    },
-      errmess => { this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-    );
-    this.changeDetectorRefs.detectChanges();
-  }*/
-
   openDialog(action, obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '450px',
+      width: '500px',
       data: obj
     });
 
@@ -170,14 +154,12 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     this.subscriptionAddtems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
         this.showSpinner = true;
       },
-      errmess => { this.errMessFeed = errmess as any; },
+      errmess => {
+      this.errMessFeed = errmess as any;
+      this.openSnackBar(this.errMessFeed, 'Undo');
+      },
       () => {
-        this.dataSource.data.unshift({
-          name: rowObj.name,
-          category: rowObj.category,
-          quantity: rowObj.quantity,
-          price: rowObj.price
-        });
+        this.refresh();
         this.showSpinner = false; }
     );
   }
@@ -186,11 +168,11 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     this.subscriptionDeleteItems = this.warehouseService.deleteWareHouseRow(rowObj).subscribe(items => {
         this.showSpinner = true;
       },
-      errmess => { this.errMessFeed = errmess as any; },
+      errmess => { this.errMessFeed = errmess as any;
+                   this.openSnackBar(this.errMessFeed, 'Undo');
+      },
       () => {
-        this.dataSource.data = this.dataSource.data.filter((value, key) => {
-          return value._id !== rowObj._id;
-        });
+        this.refresh();
         this.showSpinner = false; }
     );
 

@@ -22,7 +22,6 @@ export class LoginService {
     };
     return this.http.post<Login>(baseURL + 'api/users/login', login, httpOptions)
       .pipe(tap(res => {
-        console.log(res.user)
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', res.user.name);
       },

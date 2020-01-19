@@ -17,6 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
 import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule, MatExpansionModule,
   MatGridListModule,
@@ -44,6 +45,8 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { WarehouseComponent } from './warehouse/warehouse.component';
+import { ToastComponent } from './toast/toast.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,8 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     MenuItemsComponent,
     HoverContainerComponent,
     DialogBoxComponent,
-    WarehouseComponent
+    WarehouseComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +93,7 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     MatTabsModule,
     MatRippleModule,
     MatSortModule,
+    MatSnackBarModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: funcTokenGetter,
@@ -105,7 +110,8 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     {provide: 'BaseURL', useValue: baseURL},
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    DataService
+    DataService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]
 })

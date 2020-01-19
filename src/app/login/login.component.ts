@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   errMess: string;
   returnUrl: Params | string;
   showSpinner = false;
-
+  hide = true;
 
   ngOnInit() {
     // reset login status
