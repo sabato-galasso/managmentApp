@@ -47,6 +47,7 @@ import { environment } from '../environments/environment';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ToastComponent } from './toast/toast.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {AuthInterceptor} from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],
   providers: [LoginService,
     ProcessHttpmsgService,
+    {provide: AuthInterceptor},
     {provide: 'BaseURL', useValue: baseURL},
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,

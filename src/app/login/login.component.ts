@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
         }
       },
         errmess => {
-        console.log(errmess);
         return this.errMess = errmess as any;
     },
       () => {

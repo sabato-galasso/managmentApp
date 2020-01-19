@@ -42,7 +42,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   };
 
   // Subsciptions
-  private _componetDestroyed = new Subject();
+  private componetDestroyed = new Subject();
    subscriptionFilterName: Subscription;
    subscriptionFilterCategory: Subscription;
    subscriptionFilterQuantity: Subscription;
@@ -52,11 +52,10 @@ export class WarehouseComponent implements OnInit, OnDestroy {
    subscriptionAddtems: Subscription;
 
   dataSource = new MatTableDataSource([]);
-  data ;
 
   constructor(private warehouseService: WarehouseService,
               public dialog: MatDialog,
-              private _snackBar: MatSnackBar
+              private snackBar: MatSnackBar
               ) {}
 
   ngOnInit(): void {
@@ -119,7 +118,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this.snackBar.open(message, action);
   }
 
   updateDataTableValue(data) {
@@ -129,8 +128,32 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       errmess => {
       this.errMessFeed = errmess as any;
       this.openSnackBar(this.errMessFeed, 'Undo'); },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+      () => {console.log('Observable finished', this.dataSource); this.refresh(); this.showSpinner = false; }
       );
+  }
+
+   disableIt(event) {
+    const which = event.which;
+    if (which === 38 || which === 40) {
+      event.preventDefault();
+    }
+  }
+
+  incrementQuantity(data) {
+    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
+      data.quantity = 0;
+    } else {
+      data.quantity++;
+    }
+    this.updateDataTableValue(data);
+  }
+  decrementQuantity(data) {
+    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
+      data.quantity = 0;
+    } else {
+      data.quantity--;
+    }
+    this.updateDataTableValue(data);
   }
 
   openDialog(action, obj) {
@@ -179,7 +202,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._componetDestroyed.next();
-    this._componetDestroyed.unsubscribe();
+    this.componetDestroyed.next();
+    this.componetDestroyed.unsubscribe();
   }
 }

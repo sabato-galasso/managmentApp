@@ -2,115 +2,120 @@
   <div class="row">
     <div class="col-12 my-3">
       <h2>Magazzino</h2>
-    <div class="row my-3">
-    <div class="col-4">
-      <mat-form-field>
-        <mat-label>Filtra per Nome</mat-label>
-        <input matInput  [formControl]="nameFilter" >
-      </mat-form-field>
-    </div>
-    <div class="col-4">
-      <mat-form-field >
-        <mat-label>Filtra per categoria</mat-label>
-        <mat-select  [formControl]="positionFilter" >
-          <mat-option *ngFor="let category of catogories" [value]="category.value">
-            {{category.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-      <div class="col-4">
-        <mat-form-field>
-          <mat-label>Filtra per Quantità</mat-label>
-          <input matInput  [formControl]="quantityFilter" >
-        </mat-form-field>
-      </div>
-    </div>
-      <div class="table-container mat-elevation-z8">
-        <table  mat-table [dataSource]="dataSource" matSort>
-
-        <!-- ID Column -->
-        <ng-container matColumnDef="_id" sticky>
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let row"> {{row._id}} </td>
-        </ng-container>
-
-        <!-- Price Column -->
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-form-field (input)="updateDataTableValue({price: $event.target.value,_id:row._id})" style="max-width: 150px">
-              <input matInput [value]="row.price" type="number" step="0.5">
-              <span matSuffix>€</span>
-            </mat-form-field>
-             </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-form-field (input)="updateDataTableValue({name: $event.target.value,_id:row._id})" style="max-width: 200px">
-              <input matInput [value]="row.name">
-            </mat-form-field>
-             </td>
-        </ng-container>
-
-          <!-- Category Column -->
-        <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-form-field style="max-width: 200px">
-            <mat-select [(ngModel)]="row.category" (selectionChange)="updateDataTableValue({category: $event.value, _id:row._id})">
-               <mat-option *ngFor="let category of catogories | slice:1:catogories.length" [value]="category.value">
+      <div class="row my-3">
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Filtra per Nome</mat-label>
+            <input matInput [formControl]="nameFilter">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Filtra per categoria</mat-label>
+            <mat-select [formControl]="positionFilter">
+              <mat-option *ngFor="let category of catogories" [value]="category.value">
                 {{category.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Filtra per Quantità</mat-label>
+            <input matInput [formControl]="quantityFilter">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="_id" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+            <td mat-cell *matCellDef="let row"> {{row._id}} </td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-form-field (focusout)="updateDataTableValue({price: $event.target.value,_id:row._id})" style="max-width: 100px">
+                <input matInput [value]="row.price" type="number" step="0.5">
+                <span matSuffix>€</span>
+              </mat-form-field>
             </td>
-        </ng-container>
+          </ng-container>
 
-        <!-- Quantity Column -->
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantità </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-form-field
-                            (input)="updateDataTableValue({quantity: $event.target.value,_id:row._id})"
-                            style="max-width: 200px; text-align: center">
-              <button mat-flat-button color="primary" matPrefix><mat-icon>remove</mat-icon></button>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-form-field (focusout)="updateDataTableValue({name: $event.target.value,_id:row._id})" >
+                <input matInput [value]="row.name">
+              </mat-form-field>
+            </td>
+          </ng-container>
 
-              <input matInput [value]="row.quantity" type="number">
-              <button mat-flat-button color="primary" matSuffix (click)="updateDataTableValue({quantity: $event.target.value,_id:row._id})"><mat-icon>add</mat-icon></button>
+          <!-- Category Column -->
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-form-field>
+                <mat-select [(ngModel)]="row.category"
+                            (selectionChange)="updateDataTableValue({category: $event.value, _id:row._id})">
+                  <mat-option *ngFor="let category of catogories | slice:1:catogories.length" [value]="category.value">
+                    {{category.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
 
-            </mat-form-field>
-             </td>
-        </ng-container>
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantità</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-form-field class="quantity"
+               style="max-width: 180px; text-align: center">
+                <button mat-button color="primary" matPrefix class="d-inline-block" (click)="decrementQuantity({quantity: row.quantity,_id:row._id})">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <input matInput [value]="row.quantity" type="number" style="max-width: 150px" (keydown)="disableIt($event)" (change)="updateDataTableValue({quantity: $event.target.value,_id:row._id})">
+                <button  mat-button color="primary" matSuffix class="d-inline-block"
+                        (click)="incrementQuantity({quantity: row.quantity,_id:row._id})">
+                  <mat-icon >add</mat-icon>
+                </button>
+              </mat-form-field>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>
+            </td>
+          </ng-container>
 
-            <span>Azioni</span>
-            <button class="d-inline" mat-icon-button color="primary" (click)="openDialog('Aggiungi',$event)">
-            <mat-icon aria-label="add">add</mat-icon>
-          </button>
-            <button mat-icon-button (click)="refresh()">
-              <mat-icon>refresh</mat-icon>
-            </button>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-button (click)="openDialog('Elimina',row)"><i class="material-icons">
-              delete
-            </i></button>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="d-flex align-items-center justify-content-center"><span>Azioni</span>
+                <button class="d-inline" mat-icon-button color="primary" (click)="openDialog('Aggiungi',$event)">
+                  <mat-icon aria-label="add">add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="refresh()">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+              </div>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-        </tr>
-      </table>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button (click)="openDialog('Elimina',row)"><i class="material-icons">
+                delete
+              </i></button>
+            </td>
+          </ng-container>
 
-      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-    </div>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+      </div>
     </div>
   </div>
   <div class="centered" *ngIf="showSpinner">

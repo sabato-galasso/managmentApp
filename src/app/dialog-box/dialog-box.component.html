@@ -1,27 +1,27 @@
 <!-- dialog-box.component.html -->
 <h1 mat-dialog-title> <strong>{{action}}</strong> elemento </h1>
-<div mat-dialog-content>
+<div mat-dialog-content class="d-flex flex-column">
   <mat-form-field *ngIf="action != 'Elimina';">
-    <input placeholder="{{action}} Nome" matInput [(ngModel)]="localData.name">
+    <input placeholder="Nome" matInput [(ngModel)]="localData.name" required>
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Elimina';">
-    <mat-select placeholder="Categoria" [(ngModel)]="localData.category">
+    <mat-select placeholder="Categoria" [(ngModel)]="localData.category" required>
       <mat-option *ngFor="let category of catogories" [value]="category.value">
         {{category.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Elimina';">
-    <input placeholder="{{action}} Prezzo" matInput [(ngModel)]="localData.price" type="number" step="0.50"
+    <input placeholder="Prezzo" matInput [(ngModel)]="localData.price" type="number" step="0.50" required
     >
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Elimina';">
-    <input placeholder="{{action}} Quantità" matInput [(ngModel)]="localData.quantity" type="number" step="1"
+    <input placeholder="Quantità" matInput [(ngModel)]="localData.quantity" type="number" step="1" required
     >
   </mat-form-field>
     <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{localData.name}}</b>?</div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="doAction()" [disabled]="!(localData.name && localData.category && localData.quantity && localData.price) ">{{action}}</button>
   <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
 </div>
