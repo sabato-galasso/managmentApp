@@ -1,7 +1,6 @@
 table {
   width: 100%;
-
-  .mat-button{
-    line-height: unset;
+  .mat-table-sticky{
+    z-index: 0!important;
   }
 }

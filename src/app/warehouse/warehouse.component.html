@@ -3,13 +3,13 @@
     <div class="col-12 my-3">
       <h2>Magazzino</h2>
       <div class="row my-3">
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <mat-form-field>
             <mat-label>Filtra per Nome</mat-label>
             <input matInput [formControl]="nameFilter">
           </mat-form-field>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <mat-form-field>
             <mat-label>Filtra per categoria</mat-label>
             <mat-select [formControl]="positionFilter">
@@ -19,7 +19,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-3">
+        <div class="col-md-3 col-6">
           <mat-form-field>
             <mat-label>Filtra per Quantità</mat-label>
             <input matInput [formControl]="quantityFilter">
@@ -37,7 +37,7 @@
 
           <!-- Price Column -->
           <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo netto</th>
             <td mat-cell *matCellDef="let row">
               <mat-form-field (focusout)="updateDataTableValue({price: $event.target.value,_id:row._id})" style="max-width: 100px">
                 <input matInput [value]="row.price" type="number" step="0.5">
@@ -47,7 +47,7 @@
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="name">
+          <ng-container matColumnDef="name" sticky style="z-index: 0">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome</th>
             <td mat-cell *matCellDef="let row">
               <mat-form-field (focusout)="updateDataTableValue({name: $event.target.value,_id:row._id})" >
