@@ -3,26 +3,10 @@
     <div class="col-8">
       <h2>Tavolo: {{data.n_table}}</h2>
       <mat-tab-group>
-        <mat-tab label="Bevande">
+        <mat-tab label="{{category.viewValue}}" *ngFor="let category of catogories">
           <div class="row">
             <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
               <app-menu-items></app-menu-items>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="Second">
-          <div class="row">
-            <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
-              <app-menu-items></app-menu-items>
-
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="Drink">
-          <div class="row">
-            <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
-              <app-menu-items></app-menu-items>
-
             </div>
           </div>
         </mat-tab>

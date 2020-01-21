@@ -22,7 +22,6 @@ const warehouseSchema = mongoose.Schema({
 warehouseSchema.static('findAll', function() {
   return this.find({}, function (err, docs) {
     console.log(err)
-    console.log(docs)
     }
   ).sort({"_id":"desc"});
 });

@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const itemsMenuSchema = mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
   category: {
     type: String,
     required: true,
@@ -20,11 +15,12 @@ const itemsMenuSchema = mongoose.Schema({
   price: {
     type: Number,
     required: true
-  },
-});
+  }
+},
+  { timestamps: { createdAt: 'created_at', update_at: 'updated_at' } });
 
 itemsMenuSchema.static('findAll', function() {
-  return this.find();
+  return this.find().sort({"_id":"desc"});
 });
 
 const ItemsMenu = mongoose.model("ItemsMenu", itemsMenuSchema);

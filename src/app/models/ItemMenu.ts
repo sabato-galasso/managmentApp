@@ -1,7 +1,8 @@
 export class ItemMenu {
-  id: number;
-  category?: string;
+  _id?: string;
+  category: string;
   name: string;
-  price?: number;
-  quantity?: string;
+  price: number;
+  quantity: string;
+  updatedAt?: Date;
 }

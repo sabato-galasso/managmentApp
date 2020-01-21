@@ -133,31 +133,6 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       );
   }
 
-   disableIt(event) {
-    const which = event.which;
-    if (which === 38 || which === 40) {
-      event.preventDefault();
-    }
-  }
-
-  incrementQuantity(data) {
-    debugger
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
-      data.quantity = 0;
-    } else {
-      data.quantity++;
-    }
-    //this.updateDataTableValue(data);
-  }
-  decrementQuantity(data) {
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
-      data.quantity = 0;
-    } else {
-      data.quantity--;
-    }
-    //this.updateDataTableValue(data);
-  }
-
   openDialog(action, obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {

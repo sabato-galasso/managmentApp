@@ -2,7 +2,7 @@
   <button mat-button (click)="drawer.toggle()">
     <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
   </button>
-  <span>Application Title</span>
+  <span>App</span>
   <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space">{{userName}}</span>
   <button mat-button (click)="logout()" label="logout">
@@ -31,3 +31,4 @@
     <router-outlet></router-outlet>
 
 </mat-drawer-container>
+<mat-toolbar class="app-version"><p>Package Ver. {{versionApp}}</p></mat-toolbar>

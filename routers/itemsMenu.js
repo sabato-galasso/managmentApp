@@ -8,7 +8,7 @@ router.post("/api/items-menu", auth, async (req, res) => {
   try {
     const doc = new itemsMenuModel(req.body);
     await doc.save();
-    res.status(200).send(doc);
+    res.status(201).send(doc);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -32,6 +32,18 @@ router.get("/api/items-menu", auth, async (req, res) => {
   try {
     const items = await itemsMenuModel.find();
     res.status(200).send(items);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.delete("/api/items-menu/", auth, async (req, res) => {
+  // Delete row settings
+  try {
+    const filter = { _id: req.query._id };
+    //const update = settings.quantity
+    const doc = await itemsMenuModel.findOneAndDelete(filter);
+    res.status(201).send(doc._doc);
   } catch (error) {
     res.status(400).send(error);
   }

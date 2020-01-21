@@ -27,55 +27,92 @@
 <!-- app.component.html -->
     <div class="col-12 my-4">
       <h2>Menù</h2>
-  <table mat-table [dataSource]="dataSource" #mytable class="mat-elevation-z8" matSort>
+      <div class="row my-3">
+        <div class="col-md-3 col-6">
+          <mat-form-field>
+            <mat-label>Filtra per Nome</mat-label>
+            <input matInput [formControl]="nameFilter">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 col-6">
+          <mat-form-field>
+            <mat-label>Filtra per categoria</mat-label>
+            <mat-select [formControl]="positionFilter">
+              <mat-option *ngFor="let category of catogories" [value]="category.value">
+                {{category.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3 col-6">
+          <mat-form-field>
+            <mat-label>Filtra per Quantità</mat-label>
+            <input matInput [formControl]="quantityFilter">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" #table class="mat-elevation-z8" matSort>
 
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+      <td mat-cell *matCellDef="let element"> {{element._id}} </td>
     </ng-container>
 
     <!-- Category Column -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Categoria </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
       <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Price Column -->
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Prezzo </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo Lordo</th>
       <td mat-cell *matCellDef="let element"> <b>{{element.price}} € </b></td>
     </ng-container>
 
+        <!-- Update_at Column -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima modifica</th>
+          <td mat-cell *matCellDef="let element"> {{element.updatedAt | date :'dd/MM/yyyy hh:mm:ss'  }}</td>
+        </ng-container>
+
     <!-- Action Column -->
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let element" class="action-link">
-        <a (click)="openDialog('Update',element)" mat-button><i class="material-icons">
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex align-items-center justify-content-center"><span>Azioni</span>
+          <button class="d-inline" mat-icon-button color="primary" (click)="openDialog('Aggiungi',$event)">
+            <mat-icon aria-label="add">add</mat-icon>
+          </button>
+          <button mat-icon-button (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button (click)="openDialog('Modifica',row)"><i class="material-icons">
           edit
-        </i></a>
-        <a (click)="openDialog('Delete',element)" mat-button><i class="material-icons">
+        </i></button>
+        <button mat-button (click)="openDialog('Elimina',row)"><i class="material-icons">
           delete
-        </i></a>
+        </i></button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-      <div class="my-3 text-right">
-        <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Row</button>
-      </div>
-
     </div>
   </div>
 </div>

@@ -20,3 +20,13 @@
   flex: 1 1 auto;
   text-align: right;
 }
+.app-version{
+  height: 30px;
+  float: right;
+
+  p{
+    text-align: right;
+    font-style: italic;
+    font-size: 14px;
+  }
+}

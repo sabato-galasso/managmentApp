@@ -69,6 +69,20 @@ export class SettingsTableService {
 
   }
 
+  deleteRowData(data): Observable<ItemMenu> {
+
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.delete<ItemMenu>(baseURL + 'api/items-menu/?_id=' + data._id, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
   createRowData(dataRow: ItemMenu): Observable<ItemMenu> {
     const token = localStorage.getItem('token');
     const httpOptions = {

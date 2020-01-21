@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SettingsTable} from '../models/SettingsTable';
 import {SettingsTableService} from '../services/settings-table.service';
-import {MatDialog, MatTable} from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTable, MatTableDataSource} from '@angular/material';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {ItemMenu} from '../models/ItemMenu';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {WareHouse} from '../models/WareHouse';
 
 
 @Component({
@@ -15,13 +16,29 @@ import {Subscription} from 'rxjs';
 })
 export class SettingsComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder, private settingsTableService: SettingsTableService, public dialog: MatDialog) {
+
+  // Subsciptions
+  private componetDestroyed = new Subject();
+  subscriptionGetSettings: Subscription;
+  subscriptionUpdateItems: Subscription;
+  subscriptionFilterQuantity: Subscription;
+  subscriptionGetItems: Subscription;
+  subscriptionFilterCategory: Subscription;
+  subscriptionFilterName: Subscription;
+  subscriptionDeleteItems: Subscription;
+  subscriptionAddItems: Subscription;
+
+  constructor(private fb: FormBuilder, private settingsTableService: SettingsTableService, public dialog: MatDialog,
+              private snackBar: MatSnackBar
+  ) {
     this.createForm();
   }
 
-  private subscription: Subscription;
 
   @ViewChild('fform', {static: true}) feedbackFormDirective;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable, {static: true}) table: MatTable<ItemMenu>;
 
   tablesForm: FormGroup;
   setTable: SettingsTable;
@@ -30,15 +47,26 @@ export class SettingsComponent implements OnInit, OnDestroy {
   showSpinner = false;
 
   gettedSetting: SettingsTable;
-  gettedItemsMenu: ItemMenu[];
 
+  positionFilter = new FormControl();
+  nameFilter = new FormControl();
+  quantityFilter = new FormControl();
+  globalFilter = '';
+  filteredValues = {
+    category: '', name: '' , price: '', _id: '', quantity: ''
+  };
+
+  catogories: any[] = [
+    {value: '', viewValue: 'Tutto'},
+    {value: 'super-alcolici', viewValue: 'Super Alcolici'},
+    {value: 'bevande', viewValue: 'Bevande'},
+    {value: 'birra', viewValue: 'Birra'},
+    {value: 'cibi', viewValue: 'Cibi'}
+  ];
 
   // Table
-  displayedColumns: string[] = ['id', 'category', 'name', 'price', 'action'];
-  dataSource: ItemMenu[] = [];
-  dataRow: ItemMenu;
-
-  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  displayedColumns: string[] = ['_id', 'category', 'name', 'price', 'updatedAt', 'actions'];
+  dataSource = new MatTableDataSource([]);
 
 
   formErrors = {
@@ -68,11 +96,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.tablesForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
-    this.onValueChanged(); // (reset validation messages now
+    this.onValueChanged();
+    // reset validation messages now
+  }
+
+  refresh() {
+   this.loadData();
+  }
+
+  public loadData() {
+    this.showSpinner = true;
+    this.subscriptionGetItems = this.settingsTableService.getItemsMenu()
+      .subscribe(items => {
+          this.showSpinner = true;
+          this.dataSource.data = items;
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        },
+        errmess => { this.errMessFeed = errmess as any;
+                     this.openSnackBar(this.errMessFeed, 'Undo'); },
+        () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+      );
   }
 
 getSetting() {
- this.settingsTableService.getSettingsTable().subscribe(tables => {
+ this.subscriptionGetSettings = this.settingsTableService.getSettingsTable().subscribe(tables => {
       this.gettedSetting = tables;
       this.setTableCopy = tables;
       this.tablesForm.controls.quantity.setValue(this.gettedSetting.quantity);
@@ -80,37 +128,10 @@ getSetting() {
 
     },
     errmess => { this.gettedSetting = null; this.setTableCopy = null; this.errMessFeed = errmess as any; },
-    () => {console.log('Observable finished', this.gettedSetting);  this.showSpinner = false; }
+    () => {  this.showSpinner = false; }
   );
 }
 
-  getItemsMenu() {
-    this.subscription =  this.settingsTableService.getItemsMenu().subscribe(items => {
-        this.dataSource = items;
-      },
-      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-    );
-  }
-
-  updateRowDataSource(rowData: ItemMenu) {
-    this.settingsTableService.updateRowData(rowData).subscribe(items => {
-      console.log('items', items);
-      this.dataRow = items;
-      },
-      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataRow);  this.showSpinner = false; }
-    );
-  }
-
-  createNewData(rowData: ItemMenu) {
-    this.settingsTableService.createRowData(rowData).subscribe(items => {
-        this.dataRow = items;
-      },
-      errmess => { this.gettedItemsMenu = null; this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished', this.dataRow);  this.showSpinner = false; }
-    );
-  }
 
   onSubmit() {
     this.setTable = this.tablesForm.value;
@@ -149,64 +170,109 @@ getSetting() {
   openDialog(action, obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '350px',
+      width: '500px',
       data: obj
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event === 'Add') {
+      if (result.event === 'Aggiungi') {
         this.addRowData(result.data);
-      } else if (result.event === 'Update') {
-        this.updateRowData(result.data);
-      } else if (result.event === 'Delete') {
+      } else if (result.event === 'Modifica') {
+        this.updateDataTableValue(result.data);
+      } else if (result.event === 'Elimina') {
         this.deleteRowData(result.data);
       }
     });
   }
 
-  addRowData(row_obj) {
-    const d = new Date();
-    this.dataSource.push({
-      id: d.getTime(),
-      name: row_obj.name,
-      price: parseFloat(row_obj.price),
-      category: row_obj.category
-    });
-    this.table.renderRows();
-    row_obj = {
-      ...row_obj,
-      id: d.getTime()
-    };
-    this.createNewData(row_obj);
+  addRowData(rowObj: ItemMenu) {
+
+    this.subscriptionAddItems = this.settingsTableService.createRowData(rowObj).subscribe(items => {
+        this.showSpinner = true;
+      },
+      errmess => {
+        this.errMessFeed = errmess as any;
+        this.openSnackBar(this.errMessFeed, 'Undo');
+      },
+      () => {
+        this.refresh();
+        this.showSpinner = false; }
+    );
   }
-  updateRowData(row_obj) {
-    this.dataSource = this.dataSource.filter((value, key) => {
-      if (value.id === row_obj.id) {
-        value.name = row_obj.name;
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
+  }
+
+  updateDataTableValue(data) {
+    this.subscriptionUpdateItems = this.settingsTableService.updateRowData(data).subscribe(items => {
+        this.showSpinner = true;
+      },
+      errmess => {
+        this.errMessFeed = errmess as any;
+        this.openSnackBar(this.errMessFeed, 'Undo'); },
+      () => { this.refresh(); this.showSpinner = false; }
+    );
+  }
+  deleteRowData(rowObj: ItemMenu) {
+    this.subscriptionDeleteItems = this.settingsTableService.deleteRowData(rowObj).subscribe(items => {
+        this.showSpinner = true;
+      },
+      errmess => { this.errMessFeed = errmess as any;
+                   this.openSnackBar(this.errMessFeed, 'Undo');
+      },
+      () => {
+        this.refresh();
+        this.showSpinner = false; }
+    );
+
+  }
+
+  customFilterPredicate() {
+    const myFilterPredicate = (data: WareHouse, filter: string): boolean => {
+      let globalMatch = !this.globalFilter;
+
+      if (this.globalFilter) {
+        // search all text fields
+        globalMatch = data.name.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
       }
-      return true;
-    });
-    if (this.dataSource.length > 0) {
-      this.updateRowDataSource(this.dataSource[0]);
-    }
 
-  }
-  deleteRowData(row_obj) {
-    this.dataSource = this.dataSource.filter((value, key) => {
-      return value.id !== row_obj.id;
-    });
-  }
+      if (!globalMatch) {
+        return;
+      }
 
+      const searchString = JSON.parse(filter);
+      return data.category.toString().trim().indexOf(searchString.category) !== -1 &&
+        data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
+        data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
+    };
+    return myFilterPredicate;
+  }
 
 ngOnInit(): void {
     this.getSetting();
-    this.getItemsMenu();
+    this.loadData();
+    this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe((categoryFilterValue) => {
+    this.filteredValues.category = categoryFilterValue;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  });
+
+    this.subscriptionFilterName =  this.nameFilter.valueChanges.subscribe((nameFilterValue) => {
+    this.filteredValues.name = nameFilterValue;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  });
+
+    this.subscriptionFilterQuantity =  this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
+    this.filteredValues.quantity = quantityFilterValue;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  });
+    this.dataSource.filterPredicate = this.customFilterPredicate();
   }
 
-ngOnDestroy(): void {
-    console.log('destroy');
-    this.subscription.unsubscribe();
-}
+  ngOnDestroy() {
+    this.componetDestroyed.next();
+    this.componetDestroyed.unsubscribe();
+  }
 
 
 }

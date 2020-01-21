@@ -21,7 +21,13 @@ export class ModalContainerComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
    ) {}
   typesOfShoes: string[] = ['Caffè', 'Birra', 'Loafers', 'Moccasins', 'Sneakers'];
-
+  catogories: any[] = [
+    {value: '', viewValue: 'Tutto'},
+    {value: 'super-alcolici', viewValue: 'Super Alcolici'},
+    {value: 'bevande', viewValue: 'Bevande'},
+    {value: 'birra', viewValue: 'Birra'},
+    {value: 'cibi', viewValue: 'Cibi'}
+  ];
 
   ngOnInit() {
     this.datas.currentMessage.subscribe(message => this.message = message);
