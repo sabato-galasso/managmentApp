@@ -20,7 +20,7 @@ const itemsMenuSchema = mongoose.Schema({
   { timestamps: { createdAt: 'created_at', update_at: 'updated_at' } });
 
 itemsMenuSchema.static('findAll', function() {
-  return this.find().sort({"_id":"desc"});
+  return this.find().sort({"updated_at":"desc"});
 });
 
 const ItemsMenu = mongoose.model("ItemsMenu", itemsMenuSchema);

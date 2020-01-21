@@ -242,9 +242,14 @@ getSetting() {
       }
 
       const searchString = JSON.parse(filter);
-      return data.category.toString().trim().indexOf(searchString.category) !== -1 &&
-        data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
-        data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
+      if (data && data.category && data.name && data.quantity) {
+
+        return data.toString().trim().indexOf(searchString.category) !== -1 &&
+          data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
+          data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
+      } else {
+        return  false;
+      }
     };
     return myFilterPredicate;
   }

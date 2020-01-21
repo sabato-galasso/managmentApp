@@ -22,6 +22,6 @@
     <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{localData.name}}</b>?</div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="doAction()" [disabled]="!(localData.name && localData.category && localData.quantity && localData.price) ">{{action}}</button>
+  <button mat-button (click)="doAction()" [disabled]="!(localData.name && localData.category && localData.quantity) ">{{action}}</button>
   <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
 </div>
