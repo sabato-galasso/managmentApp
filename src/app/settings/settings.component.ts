@@ -7,6 +7,7 @@ import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {ItemMenu} from '../models/ItemMenu';
 import {Subject, Subscription} from 'rxjs';
 import {WareHouse} from '../models/WareHouse';
+import {DialogBoxSettingsComponent} from '../dialog-box-settings/dialog-box-settings.component';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private componetDestroyed = new Subject();
   subscriptionGetSettings: Subscription;
   subscriptionUpdateItems: Subscription;
-  subscriptionFilterQuantity: Subscription;
+  subscriptionFilterPrice: Subscription;
   subscriptionGetItems: Subscription;
   subscriptionFilterCategory: Subscription;
   subscriptionFilterName: Subscription;
@@ -50,7 +51,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   positionFilter = new FormControl();
   nameFilter = new FormControl();
-  quantityFilter = new FormControl();
+  priceFilter = new FormControl();
   globalFilter = '';
   filteredValues = {
     category: '', name: '' , price: '', _id: '', quantity: ''
@@ -115,7 +116,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         },
         errmess => { this.errMessFeed = errmess as any;
                      this.openSnackBar(this.errMessFeed, 'Undo'); },
-        () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
+        () => { this.showSpinner = false; }
       );
   }
 
@@ -141,7 +142,7 @@ getSetting() {
         this.setTable = tables; this.setTableCopy = tables;
       },
       errmess => { this.setTable = null; this.setTableCopy = null; this.errMessFeed = errmess as any; },
-      () => {console.log('Observable finished');  this.showSpinner = false; }
+      () => {  this.showSpinner = false; }
     );
   }
 
@@ -169,7 +170,7 @@ getSetting() {
 
   openDialog(action, obj) {
     obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
+    const dialogRef = this.dialog.open(DialogBoxSettingsComponent, {
       width: '500px',
       data: obj
     });
@@ -242,11 +243,11 @@ getSetting() {
       }
 
       const searchString = JSON.parse(filter);
-      if (data && data.category && data.name && data.quantity) {
+      if (data && data.category && data.name && data.price) {
 
         return data.toString().trim().indexOf(searchString.category) !== -1 &&
           data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
-          data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
+          data.price.toString().trim().toLowerCase().indexOf(searchString.price.toLowerCase()) !== -1;
       } else {
         return  false;
       }
@@ -267,8 +268,8 @@ ngOnInit(): void {
     this.dataSource.filter = JSON.stringify(this.filteredValues);
   });
 
-    this.subscriptionFilterQuantity =  this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
-    this.filteredValues.quantity = quantityFilterValue;
+    this.subscriptionFilterPrice =  this.priceFilter.valueChanges.subscribe((quantityFilterValue) => {
+    this.filteredValues.price = quantityFilterValue;
     this.dataSource.filter = JSON.stringify(this.filteredValues);
   });
     this.dataSource.filterPredicate = this.customFilterPredicate();

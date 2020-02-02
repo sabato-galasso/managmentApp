@@ -18,14 +18,11 @@ const warehouseSchema = mongoose.Schema({
     required: true,
   },
   },
-{ timestamps: { createdAt: 'created_at', update_at: 'updated_at' } });
+{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 
 warehouseSchema.static('findAll', function() {
-  return this.find({}, function (err, docs) {
-    console.log(err)
-    }
-  ).sort({"updated_at":"desc"});
+  return this.find({}).sort({created_at: -1});
 });
 
 const Warehouse = mongoose.model("Warehouse", warehouseSchema);

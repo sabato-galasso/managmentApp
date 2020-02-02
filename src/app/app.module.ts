@@ -49,6 +49,7 @@ import { ToastComponent } from './toast/toast.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthInterceptor} from './services/auth-interceptor.service';
 import { InputSpinnerComponent } from './input-spinner/input-spinner.component';
+import { DialogBoxSettingsComponent } from './dialog-box-settings/dialog-box-settings.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { InputSpinnerComponent } from './input-spinner/input-spinner.component';
     DialogBoxComponent,
     WarehouseComponent,
     ToastComponent,
-    InputSpinnerComponent
+    InputSpinnerComponent,
+    DialogBoxSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,7 @@ import { InputSpinnerComponent } from './input-spinner/input-spinner.component';
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     MatPaginatorModule
   ],
-  entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent],
+  entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent, DialogBoxSettingsComponent],
   providers: [LoginService,
     ProcessHttpmsgService,
     {provide: AuthInterceptor},

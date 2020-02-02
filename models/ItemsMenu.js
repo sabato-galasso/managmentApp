@@ -9,18 +9,15 @@ const itemsMenuSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  quantity: {
-    type: Number,
-  },
   price: {
     type: Number,
     required: true
   }
 },
-  { timestamps: { createdAt: 'created_at', update_at: 'updated_at' } });
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 itemsMenuSchema.static('findAll', function() {
-  return this.find().sort({"updated_at":"desc"});
+  return this.find({}).sort({created_at: -1});
 });
 
 const ItemsMenu = mongoose.model("ItemsMenu", itemsMenuSchema);

@@ -1,15 +1,14 @@
-import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource} from '@angular/material/table';
 import {WarehouseService} from '../services/warehouse.service';
 import {FormControl} from '@angular/forms';
 import {WareHouse} from '../models/WareHouse';
-import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
+import { Subject, Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {element} from 'protractor';
 
 @Component({
   selector: 'app-warehouse',
@@ -18,7 +17,7 @@ import {element} from 'protractor';
 })
 export class WarehouseComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'actions'];
+  displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'updated_at', 'actions'];
   errMessFeed: string;
   showSpinner = false;
 
@@ -111,8 +110,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       }
       const searchString = JSON.parse(filter);
       if (data && data.category && data.name && data.quantity) {
-
-        return data.toString().trim().indexOf(searchString.category) !== -1 &&
+        return data.category.toString().trim().indexOf(searchString.category) !== -1 &&
           data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
           data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
       } else {
