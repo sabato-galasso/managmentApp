@@ -1,12 +1,12 @@
 {
   "name": "manager-app-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "app.js",
   "scripts": {
     "ng": "ng",
     "start": "node -r dotenv/config app",
     "startDev": "env-cmd -f ./.env nodemon app.js",
-    "appDev": "ng serve --prod",
+    "appDev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

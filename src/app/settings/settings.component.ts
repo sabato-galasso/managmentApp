@@ -281,4 +281,7 @@ ngOnInit(): void {
   }
 
 
+  test($event) {
+    console.log($event)
+  }
 }

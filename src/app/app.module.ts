@@ -22,7 +22,7 @@ import {
   MatCardModule, MatExpansionModule,
   MatGridListModule,
   MatIconModule,
-  MatListModule, MatPaginatorModule, MatRippleModule,
+  MatListModule, MatMenuModule, MatPaginatorModule, MatRippleModule,
   MatSidenavModule, MatSortModule, MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -107,7 +107,8 @@ import { DialogBoxSettingsComponent } from './dialog-box-settings/dialog-box-set
       }
     }),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule
   ],
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent, DialogBoxSettingsComponent],
   providers: [LoginService,
