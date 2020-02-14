@@ -29,7 +29,8 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     {value: 'super-alcolici', viewValue: 'Super Alcolici'},
     {value: 'bevande', viewValue: 'Bevande'},
     {value: 'birra', viewValue: 'Birra'},
-    {value: 'cibi', viewValue: 'Cibi'}
+    {value: 'cibi', viewValue: 'Cibi'},
+    {value: 'vini', viewValue: 'Vini'}
   ];
 
   positionFilter = new FormControl();
@@ -86,7 +87,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         },
-        errmess => { this.errMessFeed = errmess as any;
+        errMess => { this.errMessFeed = errMess as any;
                      this.openSnackBar(this.errMessFeed, 'Undo'); },
         () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
       );
@@ -125,12 +126,12 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   updateDataTableValue(data) {
-
+console.log('update',data)
     this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
         this.showSpinner = true;
       },
-      errmess => {
-      this.errMessFeed = errmess as any;
+      errMess => {
+      this.errMessFeed = errMess as any;
       this.openSnackBar(this.errMessFeed, 'Undo'); },
       () => {console.log('Observable finished', this.dataSource); this.refresh(); this.showSpinner = false; }
       );
@@ -153,12 +154,12 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   addRowData(rowObj: WareHouse) {
-
+debugger
     this.subscriptionAddtems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
         this.showSpinner = true;
       },
-      errmess => {
-      this.errMessFeed = errmess as any;
+      errMess => {
+      this.errMessFeed = errMess as any;
       this.openSnackBar(this.errMessFeed, 'Undo');
       },
       () => {
@@ -171,7 +172,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     this.subscriptionDeleteItems = this.warehouseService.deleteWareHouseRow(rowObj).subscribe(items => {
         this.showSpinner = true;
       },
-      errmess => { this.errMessFeed = errmess as any;
+      errMess => { this.errMessFeed = errMess as any;
                    this.openSnackBar(this.errMessFeed, 'Undo');
       },
       () => {

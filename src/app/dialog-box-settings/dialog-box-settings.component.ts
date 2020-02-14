@@ -17,7 +17,8 @@ export class DialogBoxSettingsComponent implements OnInit {
     {value: 'super-alcolici', viewValue: 'Super Alcolici'},
     {value: 'bevande', viewValue: 'Bevande'},
     {value: 'birra', viewValue: 'Birra'},
-    {value: 'cibi', viewValue: 'Cibi'}
+    {value: 'cibi', viewValue: 'Cibi'},
+    {value: 'vini', viewValue: 'Vini'},
   ];
 
 

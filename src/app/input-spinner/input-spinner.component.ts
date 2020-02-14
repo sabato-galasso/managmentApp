@@ -13,7 +13,7 @@ export class InputSpinnerComponent  {
 
 
   incrementQuantity(data) {
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
+    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined || isNaN(data.quantity)) {
       this.rowValue = 0;
     } else {
       this.rowValue++;
@@ -23,7 +23,7 @@ export class InputSpinnerComponent  {
   }
 
   decrementQuantity(data) {
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined) {
+    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined || isNaN(data.quantity)) {
       this.rowValue = 0;
     } else {
       this.rowValue--;
@@ -42,7 +42,7 @@ export class InputSpinnerComponent  {
 
     debugger;
     switch (newData) {
-      case newData === null || newData === '' || newData === undefined:
+      case newData === null || newData === '' || newData === undefined || isNaN(newData):
         newData = this.data.quantity || 0;
         break;
         case newData < 0:

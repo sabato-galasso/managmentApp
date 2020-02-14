@@ -62,7 +62,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     {value: 'super-alcolici', viewValue: 'Super Alcolici'},
     {value: 'bevande', viewValue: 'Bevande'},
     {value: 'birra', viewValue: 'Birra'},
-    {value: 'cibi', viewValue: 'Cibi'}
+    {value: 'cibi', viewValue: 'Cibi'},
+    {value: 'vini', viewValue: 'Vini'},
   ];
 
   // Table
@@ -278,10 +279,5 @@ ngOnInit(): void {
   ngOnDestroy() {
     this.componetDestroyed.next();
     this.componetDestroyed.unsubscribe();
-  }
-
-
-  test($event) {
-    console.log($event)
   }
 }

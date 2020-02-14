@@ -12,16 +12,16 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Elimina';">
-    <input placeholder="Prezzo" matInput [(ngModel)]="localData.price" type="number" step="0.50" required
+    <input placeholder="Prezzo" matInput [(ngModel)]="localData.price" type="number" min="0"
     >
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Elimina';">
-    <input placeholder="Quantità" matInput [(ngModel)]="localData.quantity" type="number" step="1" required
+    <input placeholder="Quantità" matInput [(ngModel)]="localData.quantity" type="number" min="0"
     >
   </mat-form-field>
     <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{localData.name}}</b>?</div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="doAction()" [disabled]="!(localData.name && localData.category && localData.quantity) ">{{action}}</button>
+  <button mat-button (click)="doAction()" [disabled]="!(localData.name && localData.category ) ">{{action}}</button>
   <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
 </div>
