@@ -1,6 +1,6 @@
 {
   "name": "manager-app-frontend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "app.js",
   "scripts": {
     "ng": "ng",
@@ -15,18 +15,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~8.2.14",
+    "@angular/animations": "~9.0.4",
     "@angular/cdk": "^8.2.3",
-    "@angular/common": "~8.2.14",
-    "@angular/compiler": "~8.2.14",
-    "@angular/core": "~8.2.14",
-    "@angular/forms": "~8.2.14",
+    "@angular/common": "~9.0.4",
+    "@angular/compiler": "~9.0.4",
+    "@angular/core": "~9.0.4",
+    "@angular/forms": "~9.0.4",
     "@angular/material": "latest",
-    "@angular/platform-browser": "~8.2.14",
-    "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/pwa": "^0.803.22",
-    "@angular/router": "~8.2.14",
-    "@angular/service-worker": "~8.2.14",
+    "@angular/platform-browser": "~9.0.4",
+    "@angular/platform-browser-dynamic": "~9.0.4",
+    "@angular/router": "~9.0.4",
+    "@angular/service-worker": "~9.0.4",
     "@auth0/angular-jwt": "latest",
     "@types/socket.io": "^2.1.4",
     "bcryptjs": "^2.4.3",
@@ -40,23 +39,23 @@
     "mongoose": "^5.8.7",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "validator": "^12.1.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.22",
-    "@angular/cli": "^8.3.22",
-    "@angular/compiler-cli": "~8.2.14",
-    "@angular/language-service": "~8.2.14",
-    "@types/node": "~8.9.4",
-    "codelyzer": "^5.2.1",
+    "@angular-devkit/build-angular": "~0.900.4",
+    "@angular/cli": "^9.0.4",
+    "@angular/compiler-cli": "~9.0.4",
+    "@angular/language-service": "~9.0.4",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
     "dotenv": "^8.2.0",
     "enhanced-resolve": "^3.4.1",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.7.5"
   }
 }
