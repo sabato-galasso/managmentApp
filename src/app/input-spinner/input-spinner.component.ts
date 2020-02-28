@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-input-spinner',
@@ -13,7 +13,7 @@ export class InputSpinnerComponent  {
 
 
   incrementQuantity(data) {
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined || isNaN(data.quantity)) {
+    if (data.quantity === null || data.quantity === undefined || isNaN(data.quantity)) {
       this.rowValue = 0;
     } else {
       this.rowValue++;
@@ -23,7 +23,7 @@ export class InputSpinnerComponent  {
   }
 
   decrementQuantity(data) {
-    if (data.quantity === null || data.quantity < 0 || data.quantity === undefined || isNaN(data.quantity)) {
+    if (data.quantity === null || data.quantity === undefined || isNaN(data.quantity)) {
       this.rowValue = 0;
     } else {
       this.rowValue--;
@@ -39,7 +39,7 @@ export class InputSpinnerComponent  {
   }
 
   onChange(newData) {
-    if (newData === newData === null || newData === '' || newData === undefined || isNaN(newData) || newData < 0) {
+    if (newData === null || newData === '' || newData === undefined || isNaN(newData) ) {
       newData =  0;
     }
     this.valueChange.emit({quantity: newData, _id: this.data._id});
