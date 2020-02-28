@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {ModalContainerComponent} from '../modal-container/modal-container.component';
 import {SettingsTableService} from '../services/settings-table.service';
 import {SettingsTable} from '../models/SettingsTable';
+import {MatDialog} from '@angular/material/dialog';
 
 
 export interface DialogData {

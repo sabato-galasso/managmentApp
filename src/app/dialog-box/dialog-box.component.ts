@@ -1,9 +1,9 @@
 // dialog-box.component.ts
 import { Component, Inject, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {WareHouse} from '../models/WareHouse';
 import {CATEGORIES} from '../constants/categories';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({

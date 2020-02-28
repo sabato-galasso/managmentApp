@@ -1,7 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { StopWatchComponent } from './stop-watch/stop-watch.component';
@@ -16,16 +15,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
-import {
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatButtonModule,
-  MatCardModule, MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatListModule, MatMenuModule, MatPaginatorModule, MatRippleModule,
-  MatSidenavModule, MatSortModule, MatTableModule, MatTabsModule,
-  MatToolbarModule
-} from '@angular/material';
 import {LoginService} from './services/login.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ProcessHttpmsgService} from './services/process-httpmsg.service';
@@ -46,10 +35,24 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ToastComponent } from './toast/toast.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthInterceptor} from './services/auth-interceptor.service';
 import { InputSpinnerComponent } from './input-spinner/input-spinner.component';
 import { DialogBoxSettingsComponent } from './dialog-box-settings/dialog-box-settings.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSortModule} from '@angular/material/sort';
+import {MatRippleModule} from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [

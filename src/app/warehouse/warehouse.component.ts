@@ -1,14 +1,14 @@
-import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import { MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {WarehouseService} from '../services/warehouse.service';
 import {FormControl} from '@angular/forms';
 import {WareHouse} from '../models/WareHouse';
-import { Subject, Subscription} from 'rxjs';
-import {MatDialog} from '@angular/material';
+import {Subject, Subscription} from 'rxjs';
 import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-warehouse',
@@ -36,10 +36,9 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   positionFilter = new FormControl();
   nameFilter = new FormControl();
   quantityFilter = new FormControl();
-  globalFilter = '';
 
   filteredValues = {
-    category: '', name: '' , price: '', _id: '', quantity: ''
+    category: '', name: '' , quantity: ''
   };
 
   // Subsciptions
@@ -50,7 +49,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   subscriptionGetItems: Subscription;
    subscriptionFilterUpdateItems: Subscription;
    subscriptionDeleteItems: Subscription;
-   subscriptionAddtems: Subscription;
+   subscriptionAddItems: Subscription;
 
   dataSource = new MatTableDataSource([]);
 
@@ -72,6 +71,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptionFilterQuantity =  this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
+      debugger
       this.filteredValues.quantity = quantityFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
@@ -98,8 +98,9 @@ export class WarehouseComponent implements OnInit, OnDestroy {
 }
 
   customFilterPredicate() {
-    const myFilterPredicate = (data: WareHouse, filter: string): boolean => {
-      let globalMatch = !this.globalFilter;
+    return (data: WareHouse, filter: string): boolean => {
+      debugger
+     /* let globalMatch = !this.globalFilter;
 
       if (this.globalFilter) {
         // search all text fields
@@ -108,17 +109,17 @@ export class WarehouseComponent implements OnInit, OnDestroy {
 
       if (!globalMatch) {
         return;
-      }
+      }*/
+      console.log('sdsds',data.quantity,filter)
       const searchString = JSON.parse(filter);
       if (data && data.category && data.name && data.quantity) {
-        return data.category.toString().trim().indexOf(searchString.category) !== -1 &&
-          data.name.toString().trim().toLowerCase().indexOf(searchString.name.toLowerCase()) !== -1 &&
-          data.quantity.toString().trim().toLowerCase().indexOf(searchString.quantity.toLowerCase()) !== -1;
+        return data.category.toString().trim().includes(searchString.category) &&
+          data.name.toString().trim().toLowerCase().includes(searchString.name)  &&
+          data.quantity.toString().trim().toLowerCase().includes(searchString.quantity)
       } else {
-        return  false;
+        return false;
       }
     };
-    return myFilterPredicate;
   }
 
   openSnackBar(message: string, action: string) {
@@ -126,7 +127,6 @@ export class WarehouseComponent implements OnInit, OnDestroy {
   }
 
   updateDataTableValue(data) {
-console.log('update',data)
     this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
         this.showSpinner = true;
       },
@@ -154,8 +154,8 @@ console.log('update',data)
   }
 
   addRowData(rowObj: WareHouse) {
-debugger
-    this.subscriptionAddtems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
+
+    this.subscriptionAddItems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
         this.showSpinner = true;
       },
       errMess => {

@@ -39,24 +39,9 @@ export class InputSpinnerComponent  {
   }
 
   onChange(newData) {
-
-    debugger;
-    switch (newData) {
-      case newData === null || newData === '' || newData === undefined || isNaN(newData):
-        newData = this.data.quantity || 0;
-        break;
-        case newData < 0:
-          newData = 0;
-          break;
-      case newData:
-        // tslint:disable-next-line:radix
-         newData = parseInt(newData);
-         break;
-      default:
-        newData = 0;
-        break;
+    if (newData === newData === null || newData === '' || newData === undefined || isNaN(newData) || newData < 0) {
+      newData =  0;
     }
-
     this.valueChange.emit({quantity: newData, _id: this.data._id});
   }
 }

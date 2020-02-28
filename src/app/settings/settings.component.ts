@@ -2,12 +2,15 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SettingsTable} from '../models/SettingsTable';
 import {SettingsTableService} from '../services/settings-table.service';
-import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTable, MatTableDataSource} from '@angular/material';
-import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
 import {ItemMenu} from '../models/ItemMenu';
 import {Subject, Subscription} from 'rxjs';
 import {WareHouse} from '../models/WareHouse';
 import {DialogBoxSettingsComponent} from '../dialog-box-settings/dialog-box-settings.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 
 
 @Component({
