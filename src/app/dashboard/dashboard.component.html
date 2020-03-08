@@ -13,6 +13,10 @@
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
       <a mat-list-item
+         routerLinkActive="list-item-active" [routerLink]="['/tables']">Home
+        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
+      </a>
+      <a mat-list-item
          routerLinkActive="list-item-active" [routerLink]="['/home']">Sala
         <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
       </a>

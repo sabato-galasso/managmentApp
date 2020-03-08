@@ -140,7 +140,7 @@ getSetting() {
 
   onSubmit() {
     this.setTable = this.tablesForm.value;
-    this.setTable._id = this.gettedSetting._id;
+    this.setTable._id = this.gettedSetting._id || '0';
     this.showSpinner = true;
     this.settingsTableService.submitSettingsTable(this.setTable).subscribe(tables => {
         this.setTable = tables; this.setTableCopy = tables;

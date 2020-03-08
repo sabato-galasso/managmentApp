@@ -23,7 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import {JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { ModalContainerComponent } from './modal-container/modal-container.component';
 import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
@@ -53,6 +53,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
+import { BilliardsTablesComponent } from './pages/billiards-tables/billiards-tables.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {MatMenuModule} from '@angular/material/menu';
     WarehouseComponent,
     ToastComponent,
     InputSpinnerComponent,
-    DialogBoxSettingsComponent
+    DialogBoxSettingsComponent,
+    BilliardsTablesComponent
   ],
   imports: [
     BrowserModule,

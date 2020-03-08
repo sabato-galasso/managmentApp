@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Login} from '../models/Login';
-import {Observable} from 'rxjs';
-import {HttpHeaders} from '@angular/common/http';
-import {baseURL} from '../shared/baseUrl';
-import {catchError, tap} from 'rxjs/operators';
-import {SettingsTableService} from '../services/settings-table.service';
-import {FormGroup} from '@angular/forms';
-import {SettingsTable} from '../models/SettingsTable';
+import {SettingsTableService} from '../../services/settings-table.service';
+import {SettingsTable} from '../../models/SettingsTable';
 
 @Component({
   selector: 'app-home',
