@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         // login successful so redirect to return url
         if (user) {
           this.user = user;
-          this.router.navigateByUrl('/tables');
+          this.router.navigateByUrl('/rooms');
         }
       },
         errmess => {

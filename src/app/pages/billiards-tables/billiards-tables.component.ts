@@ -8,14 +8,15 @@ import {Router} from "@angular/router";
 })
 export class BilliardsTablesComponent implements OnInit {
 
-  constructor(    private router: Router,
+  constructor(
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  redirectTo() {
-    this.router.navigateByUrl('/home');
+  redirectTo(redirectPage: string) {
+    this.router.navigate(['/'+redirectPage]);
 
   }
 }

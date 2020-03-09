@@ -7,6 +7,7 @@ import {HomeComponent} from '../pages/home/home.component';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {WarehouseComponent} from '../warehouse/warehouse.component';
 import {BilliardsTablesComponent} from "../pages/billiards-tables/billiards-tables.component";
+import {TablesComponent} from "../pages/tables/tables.component";
 
 export const routes: Routes = [
 
@@ -16,7 +17,10 @@ export const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {path: 'home', component: HomeComponent},
-      {path: 'tables', component: BilliardsTablesComponent},
+      {path: 'rooms', component: BilliardsTablesComponent},
+      {path: 'tables', component: TablesComponent},
+      {path: 'tables/in-door', component: HomeComponent},
+      {path: 'tables/out-door', component: HomeComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'warehouse', component: WarehouseComponent},
     ]

@@ -54,6 +54,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
 import { BilliardsTablesComponent } from './pages/billiards-tables/billiards-tables.component';
+import { TablesComponent } from './pages/tables/tables.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { BilliardsTablesComponent } from './pages/billiards-tables/billiards-tab
     ToastComponent,
     InputSpinnerComponent,
     DialogBoxSettingsComponent,
-    BilliardsTablesComponent
+    BilliardsTablesComponent,
+    TablesComponent
   ],
   imports: [
     BrowserModule,
