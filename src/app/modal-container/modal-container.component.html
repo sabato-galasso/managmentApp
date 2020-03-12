@@ -2,16 +2,14 @@
   <div class="row">
     <div class="col-8">
       <h2>Tavolo: {{data.n_table}}</h2>
-      <mat-tab-group>
-        <mat-tab label="{{category.viewValue}}" *ngFor="let category of catogories">
           <div class="row">
-            <div class="col-4 my-3" *ngFor="let shoe of typesOfShoes">
-              <app-menu-items></app-menu-items>
+              <div class="col-md-3 col-6 my-3" *ngFor="let category of catogories">
+                <app-menu-items   [category]="category">
+                </app-menu-items>
             </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+            <router-outlet name="modal"></router-outlet>
 
+          </div>
     </div>
     <div class="col-1">
       <mat-divider vertical style="height: 100vh"></mat-divider>

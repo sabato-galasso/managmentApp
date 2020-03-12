@@ -23,6 +23,8 @@ export const routes: Routes = [
       {path: 'tables/out-door', component: HomeComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'warehouse', component: WarehouseComponent},
+      { path: 'home/:id', component: LoginComponent, outlet: 'modal' }
+
     ]
   },
   {
@@ -35,6 +37,6 @@ export const routes: Routes = [
       },
     ]
   },
-  { path: '**', redirectTo: 'tables' }
+  { path: '**', redirectTo: 'rooms',pathMatch: 'full'  }
 ];
 

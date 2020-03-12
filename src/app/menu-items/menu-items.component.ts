@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-menu-items',
@@ -9,6 +9,7 @@ export class MenuItemsComponent implements OnInit {
 
   constructor() { }
 
+  @Input() category;
   centered = false;
   disabled = false;
   unbounded = false;
