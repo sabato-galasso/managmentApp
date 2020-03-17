@@ -8,6 +8,9 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {WarehouseComponent} from '../warehouse/warehouse.component';
 import {BilliardsTablesComponent} from "../pages/billiards-tables/billiards-tables.component";
 import {TablesComponent} from "../pages/tables/tables.component";
+import {TablesMenuComponent} from "../pages/tables-menu/tables-menu.component";
+import {PaniniComponent} from "../pages/panini/panini.component";
+import {AlcoliciComponent} from "../pages/alcolici/alcolici.component";
 
 export const routes: Routes = [
 
@@ -23,7 +26,10 @@ export const routes: Routes = [
       {path: 'tables/out-door', component: HomeComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'warehouse', component: WarehouseComponent},
-      { path: 'home/:id', component: LoginComponent, outlet: 'modal' }
+      //{ path: 'home/:id', component: LoginComponent, outlet: 'modal' }
+      { path: 'home/:id', component: TablesMenuComponent},
+      { path: 'home/:id/panini', component: PaniniComponent},
+      { path: 'home/:id/alcolici', component: AlcoliciComponent},
 
     ]
   },

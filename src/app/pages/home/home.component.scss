@@ -1,21 +1,15 @@
-.example-container {
-  height: 100vh;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
-
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.example-sidenav {
-  //padding: 20px;
-}
-
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
+.full-overlay{
+  position: relative;
+  z-index: 1;
+ // height:200px;
+  text-align: center;
+ // background:url("../../../assets/img/table.jpg") no-repeat;
+  background-size: contain;
+  margin: 0 -16px;
+ // @include dark-overlay;
+  &.active-overlay{
+    &:after{
+      background:rgba(0, 0, 0, 0.50);
+    }
+  }
 }

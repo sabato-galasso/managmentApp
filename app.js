@@ -3,6 +3,7 @@ const userRouter = require("./routers/user");
 const settingsRouter = require("./routers/settingsTable");
 const itemsMenuRouter = require("./routers/itemsMenu");
 const warehouseRouter = require("./routers/warehouse");
+const customersRouter = require("./routers/customers");
 
 require('dotenv').config({path: __dirname + '/.env'});
 require("./db/db");
@@ -26,14 +27,15 @@ app.use(userRouter);
 app.use(settingsRouter);
 app.use(itemsMenuRouter);
 app.use(warehouseRouter);
+app.use(customersRouter);
 
 
 // Serve only the static files form the dist directory
-/*app.use(express.static(__dirname + '/dist/managerAppFrontend'));
+app.use(express.static(__dirname + '/dist/managerAppFrontend'));
 
 app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname+'/dist/managerAppFrontend/index.html'));
-});*/
+});
 
 
 app.listen(port, () => {

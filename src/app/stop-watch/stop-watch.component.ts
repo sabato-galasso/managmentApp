@@ -3,6 +3,7 @@ import {ModalContainerComponent} from '../modal-container/modal-container.compon
 import {SettingsTableService} from '../services/settings-table.service';
 import {SettingsTable} from '../models/SettingsTable';
 import {MatDialog} from '@angular/material/dialog';
+import {CustomerService} from "../services/customer.service";
 
 
 export interface DialogData {
@@ -29,6 +30,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   counter: number;
   timerRef: any;
   running = false;
+  paused = false;
   startText = 'Start';
 
 
@@ -42,7 +44,8 @@ export class StopWatchComponent implements OnInit, OnDestroy {
 
   @Input() keyEl: string;
 
-  constructor(public dialog: MatDialog, private settingsTableService: SettingsTableService) {}
+  constructor(public dialog: MatDialog, private settingsTableService: SettingsTableService,
+              private customerService: CustomerService) {}
 
 
   openDialog(): void {
@@ -57,8 +60,21 @@ export class StopWatchComponent implements OnInit, OnDestroy {
     });
   }
 
+  startTable(){
+    this.running = true;
+    let a = {
+      category: 'test',
+      statusTable: 1,
+      priceTable: 1
+    }
+    this.customerService.addNewCustomerData(a).subscribe(res => {
+      console.log('res',res)
+    })
+  }
+
   startTimer() {
     this.running = !this.running;
+    this.paused = false;
     if (this.running) {
       this.startText = 'Stop';
       const startTime = Date.now() - (this.counter || 0);
@@ -71,6 +87,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
       });
     } else {
       this.startText = 'Resume';
+      this.paused = true;
       clearInterval(this.timerRef);
     }
   }

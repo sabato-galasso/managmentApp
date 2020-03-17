@@ -55,6 +55,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
 import { BilliardsTablesComponent } from './pages/billiards-tables/billiards-tables.component';
 import { TablesComponent } from './pages/tables/tables.component';
+import {CustomerService} from "./services/customer.service";
+import { TablesMenuComponent } from './pages/tables-menu/tables-menu.component';
+import { PaniniComponent } from './pages/panini/panini.component';
+import { AlcoliciComponent } from './pages/alcolici/alcolici.component';
+import { ItemComponent } from './components/item/item.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +81,11 @@ import { TablesComponent } from './pages/tables/tables.component';
     InputSpinnerComponent,
     DialogBoxSettingsComponent,
     BilliardsTablesComponent,
-    TablesComponent
+    TablesComponent,
+    TablesMenuComponent,
+    PaniniComponent,
+    AlcoliciComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +134,7 @@ import { TablesComponent } from './pages/tables/tables.component';
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     DataService,
+    CustomerService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
   bootstrap: [AppComponent]

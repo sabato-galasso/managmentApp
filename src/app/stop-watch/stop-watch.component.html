@@ -1,42 +1,53 @@
-<div class="col-3 m-3">
-  <mat-card [ngClass]="{'active-card': running,  'pause-card' : !running }" [tabIndex]="keyEl + 1">
-    <mat-card-header>
-      <mat-card-title>Tavolo {{(keyEl + 1)| number}}
-      </mat-card-title>
-    </mat-card-header>
-    <div [ngClass]="{'active-overlay': running }" class="full-overlay">
-      <app-spinner-in-progress *ngIf="running"></app-spinner-in-progress>
+<!--<div  class="card mb-4 py-3 border-left-primary m-4" [ngClass]="{'active-card': running,  'pause-card' : paused }">
+  <div class="card-body mx-3"  [tabIndex]="keyEl + 1">
+    <div class="d-flex justify-content-between f-small">
+      <div><span class="f-large">B{{(keyEl + 1)| number}}</span></div>
+      <div [ngClass]="{'bounceIn': running}"><span class="f-medium">{{hours}} : {{minutes}} : {{seconds}}</span>
+      </div>
     </div>
-    <mat-card-content class="my-3">
-      <div class="position-relative">
-        <h1 class="custom-pos" [ngClass]="{'bounceIn': running}">{{hours}} : {{minutes}} : {{seconds}}</h1>
-      </div>
-      <div>
-        <h2 class="display-4">Prezzo / 1h</h2>
-        <span>{{pphValue}}€&nbsp;</span>
-      </div>
-    </mat-card-content>
-    <table>
-      <tr>
-        <td><h3>Tavolo: </h3>
-        </td>
-        <td><h1 [ngClass]="{'bounceIn delay': running}">  {{price}} €</h1></td>
-      </tr>
-    </table>
-    <mat-card-actions align="start">
+    <hr/>
+    <div class="d-flex justify-content-between my-3">
+      <div [ngClass]="{'bounceIn delay': running} " class="f-large">  <b>{{price}} €</b></div>
+    </div>
+<div class="d-flex justify-content-start pt-3">
+    <button mat-raised-button (click)="startTimer()" *ngIf="!running" color="primary">
+      <mat-icon aria-hidden="false" aria-label="play">play_arrow</mat-icon>
+    </button>
+    <button mat-raised-button (click)="startTimer()" *ngIf="running" color="accent">
+      <mat-icon aria-hidden="false" aria-label="pause">pause</mat-icon>
+    </button>
+    <button mat-raised-button (click)="clearTimer()" *ngIf="running" color="warn" class="mx-3">
+      <mat-icon aria-hidden="false" aria-label="stop">stop</mat-icon>
+    </button>
+    <button mat-fab color="primary" (click)="openDialog()" class="menu-button">
+      <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+    </button>
+</div>
+  </div>
+
+</div>-->
+<div class="card bg-primary shadow m-4 " matRipple [ngClass]="{'bg-active': running,  'pause-card' : paused }"
+     (click)="startTable()">
+  <div class="card-body center text-white">
+    <h1>B{{(keyEl + 1)| number}}</h1>
+<!--
+    <div class="d-flex justify-content-start pt-3">
       <button mat-raised-button (click)="startTimer()" *ngIf="!running" color="primary">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">play_arrow</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="play">play_arrow</mat-icon>
       </button>
       <button mat-raised-button (click)="startTimer()" *ngIf="running" color="accent">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">pause</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="pause">pause</mat-icon>
       </button>
-      <button mat-raised-button (click)="clearTimer()" *ngIf="running" color="warn">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">stop</mat-icon>
+      <button mat-raised-button (click)="clearTimer()" *ngIf="running" color="warn" class="mx-3">
+        <mat-icon aria-hidden="false" aria-label="stop">stop</mat-icon>
       </button>
       <button mat-fab color="primary" (click)="openDialog()" class="menu-button">
         <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
       </button>
-    </mat-card-actions>
-  </mat-card>
-
+    </div>  </div>
+-->
+    <button mat-fab color="primary" [routerLink]="['/home',(keyEl + 1)| number]" class="menu-button">
+      <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+    </button>
+</div>
 </div>
