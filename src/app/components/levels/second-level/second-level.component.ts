@@ -11,8 +11,7 @@ import {CustomerTableModel} from "../../../models/CustomerTableModel";
 export class SecondLevelComponent implements OnInit {
   paramId: string;
   customerTable: CustomerTableModel;
-  private categories: { firstLevel: ({ img: string; level: number; viewValue: string; value: string; items: number } | { img: string; level: number; viewValue: string; value: string; items: number } | { img: string; level: number; children: ({ children: string; level: number; viewValue: string; value: string; items: number } | { children: string; level: number; viewValue: string; value: string; items: number })[]; viewValue: string; value: string; items: number } | { children: string; level: number; viewValue: string; value: string; items: number } | { children: string; level: number; viewValue: string; value: string; items: number })[] }[];
-
+  categories: any;
   constructor(private socketService: WebsocketService,private route: ActivatedRoute) {
     this.paramId =  this.route.snapshot.params.id;
 
