@@ -3,6 +3,14 @@ const User = require("../models/User");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
+
+
+// Later in a different route
+router.get('/api', (req, res, next)=>{
+
+  const io = res.locals['socketio']
+});
+
 router.get("/api/users/me", auth, async (req, res) => {
   // View logged in user profile
   res.send(req.user);
@@ -59,5 +67,6 @@ router.post("/api/users/me/logoutall", auth, async (req, res) => {
     res.status(500).send(error);
   }
 });
+
 
 module.exports = router;

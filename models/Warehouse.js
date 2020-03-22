@@ -25,6 +25,11 @@ warehouseSchema.static('findAll', function() {
   return this.find({}).sort({created_at: -1});
 });
 
+warehouseSchema.static('findByCategory',function (res) {
+
+  return this.find(res).sort({created_at: -1});
+});
+
 const Warehouse = mongoose.model("Warehouse", warehouseSchema);
 
 module.exports = Warehouse;

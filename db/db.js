@@ -5,6 +5,7 @@ const db = mongoose.connection;
 mongoose.connect(url, {
   useNewUrlParser: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
 db.once("open", _ => {

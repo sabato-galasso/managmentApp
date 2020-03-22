@@ -1,14 +1,14 @@
 {
   "name": "manager-app-frontend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "app.js",
   "scripts": {
     "ng": "ng",
     "start": "node -r dotenv/config app",
     "startDev": "env-cmd -f ./.env nodemon app.js",
+    "prod": "(cd server-socket && npm run start) & npm run start & npm run appDev",
     "appDev": "ng serve",
     "build": "ng build",
-    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "buildProd": "ng build --prod --aot"
@@ -41,6 +41,7 @@
     "path": "^0.12.7",
     "rxjs": "~6.5.4",
     "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "tslib": "^1.11.1",
     "validator": "^12.2.0",
     "zone.js": "~0.10.3"
@@ -51,12 +52,13 @@
     "@angular/compiler-cli": "~9.0.6",
     "@angular/language-service": "~9.0.6",
     "@types/node": "^13.9.1",
+    "@types/socket.io-client": "^1.4.32",
     "codelyzer": "^5.2.1",
     "dotenv": "^8.2.0",
     "enhanced-resolve": "^4.1.1",
     "protractor": "~5.4.3",
     "ts-node": "~8.6.2",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.7.5"
   }
 }

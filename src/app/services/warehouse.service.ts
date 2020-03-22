@@ -26,6 +26,19 @@ export class WarehouseService {
 
   }
 
+  getWareHouseCategory(category : string): Observable<WareHouse[]> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<WareHouse[]>(baseURL + 'api/warehouse/category/'+category, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
   updateWareHouse(data): Observable<WareHouse> {
     const token = localStorage.getItem('token');
     const httpOptions = {

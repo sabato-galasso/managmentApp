@@ -4,6 +4,8 @@ import {SettingsTableService} from '../services/settings-table.service';
 import {SettingsTable} from '../models/SettingsTable';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerService} from "../services/customer.service";
+import {WebsocketService} from "../services/socket.service";
+import {CustomerTableModel} from "../models/CustomerTableModel";
 
 
 export interface DialogData {
@@ -42,10 +44,18 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   errMessFeed: string;
 
 
-  @Input() keyEl: string;
+  @Input() keyEl: number;
+  customerTable: CustomerTableModel;
 
   constructor(public dialog: MatDialog, private settingsTableService: SettingsTableService,
-              private customerService: CustomerService) {}
+              private customerService: CustomerService, private socketService: WebsocketService) {
+    //Init model
+    this.customerTable = {
+      price: '0',
+      timer: '0',
+      status: 0
+    }
+  }
 
 
   openDialog(): void {
@@ -59,17 +69,25 @@ export class StopWatchComponent implements OnInit, OnDestroy {
       this.animal = result;
     });
   }
-
   startTable(){
-    this.running = true;
-    let a = {
-      category: 'test',
-      statusTable: 1,
-      priceTable: 1
-    }
-    this.customerService.addNewCustomerData(a).subscribe(res => {
-      console.log('res',res)
-    })
+if (this.running){
+  return
+}    this.socketService.onNewMessage(this.keyEl.toString()).subscribe(msg => {
+      this.customerTable = msg
+      console.log('msg',msg)
+      this.running = true;
+
+    });
+
+let data = {
+  priceTable: this.customerTable.price,
+  category: 'game',
+  statusTable: 1,
+  nTable: this.keyEl
+}
+this.customerService.addNewCustomerData(data).subscribe(res => {
+  console.log(res)
+})
   }
 
   startTimer() {
@@ -137,6 +155,10 @@ export class StopWatchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getSettingsTable();
+    this.socketService.getSocket(this.keyEl.toString()).subscribe(msg => {
+      this.customerTable = msg
+      console.log('dddddd',msg)
+    });
   }
 }
 

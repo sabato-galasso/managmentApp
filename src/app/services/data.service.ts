@@ -10,7 +10,8 @@ export class DataService {
   constructor() { }
 
   changeMessage(message: string) {
-    this.messageSource.next(message);
+    let c = 'dfd'
+    this.messageSource.next(c);
   }
 
 }

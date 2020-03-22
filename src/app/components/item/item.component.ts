@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-item',
@@ -17,6 +17,7 @@ export class ItemComponent implements OnInit {
   counter = 0;
 
   @Output() valueChange = new EventEmitter();
+  @Input() category: any;
 
   constructor() { }
 

@@ -13,26 +13,17 @@
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
       <a mat-list-item
-         routerLinkActive="list-item-active" [routerLink]="['/rooms']">Home
-        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
-      </a>
-      <a mat-list-item
          routerLinkActive="list-item-active" [routerLink]="['/home']">Sala
         <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
       </a>
         <a mat-list-item [routerLink]="['/settings']" routerLinkActive="list-item-active">Impostazioni
           <mat-icon matListIcon class="nav-list-icon">settings_applications</mat-icon>
-
         </a>
       <a mat-list-item [routerLink]="['/warehouse']" routerLinkActive="list-item-active">Magazzino
         <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
-
       </a>
     </mat-nav-list>
   </mat-drawer>
-
-
     <router-outlet></router-outlet>
-
 </mat-drawer-container>
 <mat-toolbar class="app-version"><p>Package Ver. {{versionApp}}</p></mat-toolbar>

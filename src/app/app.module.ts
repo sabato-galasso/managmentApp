@@ -2,10 +2,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { StopWatchComponent } from './stop-watch/stop-watch.component';
 import {RoutingModule} from './routing/routing.module';
-import 'hammerjs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -20,13 +19,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {ProcessHttpmsgService} from './services/process-httpmsg.service';
 import {baseURL} from './shared/baseUrl';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './pages/home/home.component';
-import {JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
+import {JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { ModalContainerComponent } from './modal-container/modal-container.component';
-import { SpinnerInProgressComponent } from './spinner-in-progress/spinner-in-progress.component';
+import { SpinnerInProgressComponent } from './components/spinner-in-progress/spinner-in-progress.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import {HoverContainerComponent} from './hover-container/hover-container.component';
 import {DataService} from './services/data.service';
@@ -53,13 +51,13 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatMenuModule} from '@angular/material/menu';
-import { BilliardsTablesComponent } from './pages/billiards-tables/billiards-tables.component';
-import { TablesComponent } from './pages/tables/tables.component';
 import {CustomerService} from "./services/customer.service";
 import { TablesMenuComponent } from './pages/tables-menu/tables-menu.component';
-import { PaniniComponent } from './pages/panini/panini.component';
-import { AlcoliciComponent } from './pages/alcolici/alcolici.component';
 import { ItemComponent } from './components/item/item.component';
+import {WebsocketService} from "./services/socket.service";
+import { UserItemsComponent } from './components/user-items/user-items.component';
+import { ItemLevelComponent } from './components/levels/item-level/item-level.component';
+import { SecondLevelComponent } from './components/levels/second-level/second-level.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +65,6 @@ import { ItemComponent } from './components/item/item.component';
     LoginComponent,
     StopWatchComponent,
     DashboardComponent,
-    HeaderComponent,
     SettingsComponent,
     LoginLayoutComponent,
     HomeComponent,
@@ -80,12 +77,11 @@ import { ItemComponent } from './components/item/item.component';
     ToastComponent,
     InputSpinnerComponent,
     DialogBoxSettingsComponent,
-    BilliardsTablesComponent,
-    TablesComponent,
     TablesMenuComponent,
-    PaniniComponent,
-    AlcoliciComponent,
-    ItemComponent
+    ItemComponent,
+    UserItemsComponent,
+    ItemLevelComponent,
+    SecondLevelComponent
   ],
   imports: [
     BrowserModule,
@@ -115,16 +111,9 @@ import { ItemComponent } from './components/item/item.component';
     MatRippleModule,
     MatSortModule,
     MatSnackBarModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: funcTokenGetter,
-        whitelistedDomains: ['localhost:3000'],
-        blacklistedRoutes: ['http://localhost:3000/auth/login']
-      }
-    }),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent, DialogBoxSettingsComponent],
   providers: [LoginService,
@@ -135,10 +124,10 @@ import { ItemComponent } from './components/item/item.component';
     JwtHelperService,
     DataService,
     CustomerService,
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+    WebsocketService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-export function funcTokenGetter() { return localStorage.getItem('access_token'); }
 

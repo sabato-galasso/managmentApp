@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Login} from '../../models/Login';
@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    @Inject('BaseURL') public baseURL,
     private route: ActivatedRoute,
     private router: Router,
     ) { }
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
         // login successful so redirect to return url
         if (user) {
           this.user = user;
-          this.router.navigateByUrl('/rooms');
+          this.router.navigateByUrl('/home');
         }
       },
         errmess => {

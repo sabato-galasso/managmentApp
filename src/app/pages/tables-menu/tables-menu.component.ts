@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {WebsocketService} from "../../services/socket.service";
+import {CustomerTableModel} from "../../models/CustomerTableModel";
 
 @Component({
   selector: 'app-tables-menu',
@@ -9,35 +11,49 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class TablesMenuComponent implements OnInit {
 
   paramId:string;
-  constructor(private route: ActivatedRoute) {
+  customerTable: CustomerTableModel;
+  constructor(private route: ActivatedRoute, private socketService: WebsocketService) {
     this.paramId =  this.route.snapshot.params.id;
+
+    this.customerTable = {
+      price : '0',
+      timer: '0',
+      status: 0
+    }
   }
 
   ngOnInit(): void {
+
+    this.socketService.getSocket(this.paramId).subscribe(msg => {
+      this.customerTable = msg
+      console.log('ttttttt',msg)
+    });
   }
 
   catogories: any[] = [
     {
-      value: 'bevande', viewValue: 'Bevande', children: [{
-        spina: [{
-          piccola: [{
-            item1: '2'
-          }
-          ],
-          media: [{
-            item1: '2'
 
-          }
-          ],
-        }
+      firstLevel: [
+        {
+        value: 'bevande', viewValue: 'Bevande', img: '' ,'items': 1, 'level': 0
+      },
+        {
+          value: 'cocktails', viewValue: 'Cocktails', img: '' ,'items': 1, 'level': 0
+        },
+        {value: 'birre', viewValue: 'Birre',img:'', 'items': 0, 'level': 1 ,children: [{
 
-        ],
-      }]
+          }]},
+        {value: 'super-alcolici', viewValue: 'Alcolici', children: 'alcolici','items': 1, 'level': 0},
+        {value: 'panini', viewValue: 'Panini',children: 'panini','items': 1, 'level': 0}
+      ],
     },
-    {value: 'cocktails', viewValue: 'Cocktails'},
-    {value: 'birre', viewValue: 'Birre'},
-    {value: 'alcolici', viewValue: 'Alcolici', children: 'alcolici'},
-    {value: 'panini', viewValue: 'Panini',children: 'panini'}
+
   ];
 
+  closeTable() {
+
+    this.socketService.emitCloseTable(this.paramId).subscribe(msg => {
+      this.customerTable = msg
+      console.log('ttttttt',msg)
+    });  }
 }

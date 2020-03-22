@@ -15,6 +15,18 @@ router.get("/api/warehouse", auth, async (req, res) => {
   }
 });
 
+
+router.get("/api/warehouse/category/:category", auth, async (req, res) => {
+  // Get warehouse category
+  try {
+    const filter = {category: req.params.category };
+    const doc = await warehouseModel.findByCategory(filter);
+    res.status(200).send(doc);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.put("/api/warehouse", auth, async (req, res) => {
   // Create a new settings
   try {

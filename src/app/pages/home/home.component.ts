@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   items: Array<number>;
 
   gettedSetting: SettingsTable;
+  msg: string;
 
   constructor(private settingsTableService: SettingsTableService) {
   }

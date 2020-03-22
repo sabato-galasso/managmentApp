@@ -12,6 +12,10 @@ const customerSchema = mongoose.Schema({
     priceTable: {
       type: Number,
       required: true
+    },
+    nTable: {
+      type: String,
+      required: true
     }
   },
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });

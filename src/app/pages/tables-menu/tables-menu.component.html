@@ -1,16 +1,36 @@
 <div class="container">
-  <div class="row">
-    <div class="col-8">
-      <button [routerLink]="['/','home']" mat-button>
+  <div class="row position-relative">
+    <button mat-raised-button color="warn" (click)="closeTable()"
+            class="position-absolute" style="left: -10%; top: 23px">
+      <i class="material-icons f-large">
+        clear
+      </i> <span class="f-large"></span></button>
+    <div class="col-8 mt-4">
+      <button [routerLink]="['/','home']" mat-raised-button color="primary">
         <i class="material-icons f-50">
-        keyboard_backspace
-      </i></button>
+          keyboard_backspace
+        </i>
+      </button>
+      <button [routerLink]="['/','home']" mat-raised-button
+              color="primary"
+              class="float-right" *ngIf="customerTable.status == 0">
+      <i class="material-icons f-50">
+        play_arrow
+      </i>
+    </button>
+      <button [routerLink]="['/','home']" mat-raised-button color="accent"
+              *ngIf="customerTable.status == 1"
+              class="float-right">
+        <i class="material-icons f-50">
+          pause
+        </i>
+      </button>
       <div>
         <h1>Tavolo: {{paramId}}</h1>
       </div>
       <div class="row">
-        <div class="col-md-3 col-6 my-3" *ngFor="let category of catogories">
-          <app-menu-items  [category]="category">
+        <div class="col-md-3 col-6 my-3" *ngFor="let category of catogories[0].firstLevel">
+          <app-menu-items [category]="category">
           </app-menu-items>
         </div>
       </div>
@@ -19,30 +39,7 @@
       <mat-divider vertical style="height: 100vh"></mat-divider>
     </div>
     <div class="col-3">
-      <mat-list role="list">
-        <mat-list-item role="listitem">
-          <h2 mat-line> Tavolo: {{paramId}}</h2>
-          <div><b></b></div>
-        </mat-list-item>
-        <mat-list-item role="listitem">
-          <h3 mat-line> Apertura (durata) </h3>
-          <div><b>000</b></div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-
-        <mat-list-item role="listitem">
-          <h3 mat-line> Servizi </h3>
-          <div><b>000</b></div>
-        </mat-list-item>
-        <mat-list-item role="listitem">  <h3 mat-line> Tavolo </h3>
-          <div><b>000</b></div> </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item role="listitem">
-          <h3 mat-line> Totale </h3>
-          <div><b>000</b></div>
-        </mat-list-item>
-      </mat-list>
-
+      <app-user-items [numberTable]="paramId" [customerTable]="customerTable"></app-user-items>
     </div>
   </div>
 </div>
