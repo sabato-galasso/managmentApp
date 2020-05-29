@@ -10,6 +10,8 @@ import {TablesMenuComponent} from "../pages/tables-menu/tables-menu.component";
 import {ItemComponent} from "../components/item/item.component";
 import {ItemLevelComponent} from "../components/levels/item-level/item-level.component";
 import {SecondLevelComponent} from "../components/levels/second-level/second-level.component";
+import {MenuManagerComponent} from "../pages/menu-manager/menu-manager.component";
+import {MenuCategoryComponent} from "../pages/menu-category/menu-category.component";
 
 export const routes: Routes = [
 
@@ -23,7 +25,10 @@ export const routes: Routes = [
       {path: 'warehouse', component: WarehouseComponent},
       { path: 'home/:id', component: TablesMenuComponent},
       {path: 'home/:id/items/category/:category', component: ItemLevelComponent},
-      {path: 'home/:id/level', component: SecondLevelComponent}
+      {path: 'home/:id/level/:category', component: SecondLevelComponent},
+      {path: 'level/:category/:category1', component: ItemLevelComponent},
+      {path: 'menu-manager', component: MenuManagerComponent},
+      {path: 'menu-category', component: MenuCategoryComponent}
     ]
   },
   {

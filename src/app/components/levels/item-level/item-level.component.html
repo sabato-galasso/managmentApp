@@ -27,8 +27,8 @@
         <h1>Tavolo: {{paramId}}</h1>
       </div>
       <div class="row">
-        <div class="col-md-3 col-6 my-3" *ngFor="let category of cat">
-          <app-item [category]="category">
+        <div class="col-md-3 col-6 my-3" *ngFor="let item of items">
+          <app-item [item]="item">
           </app-item>
         </div>
       </div>

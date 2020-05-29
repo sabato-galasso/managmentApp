@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalContainerComponent } from './modal-container.component';
+import { MenuCategoryComponent } from './menu-category.component';
 
-describe('AddItemsComponent', () => {
-  let component: ModalContainerComponent;
-  let fixture: ComponentFixture<ModalContainerComponent>;
+describe('MenuCategoryComponent', () => {
+  let component: MenuCategoryComponent;
+  let fixture: ComponentFixture<MenuCategoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalContainerComponent ]
+      declarations: [ MenuCategoryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalContainerComponent);
+    fixture = TestBed.createComponent(MenuCategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

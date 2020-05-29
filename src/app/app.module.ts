@@ -23,7 +23,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import {JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
-import { ModalContainerComponent } from './modal-container/modal-container.component';
 import { SpinnerInProgressComponent } from './components/spinner-in-progress/spinner-in-progress.component';
 import { MenuItemsComponent } from './menu-items/menu-items.component';
 import {HoverContainerComponent} from './hover-container/hover-container.component';
@@ -58,6 +57,14 @@ import {WebsocketService} from "./services/socket.service";
 import { UserItemsComponent } from './components/user-items/user-items.component';
 import { ItemLevelComponent } from './components/levels/item-level/item-level.component';
 import { SecondLevelComponent } from './components/levels/second-level/second-level.component';
+import { MenuManagerComponent } from './pages/menu-manager/menu-manager.component';
+import {MenuManagerServiceService} from "./services/menu-manager-service.service";
+import {DialogBoxCreateMenuComponent} from "./modal/dialog-box-menu/dialog-box-create-menu.component";
+import { MenuCategoryComponent } from './pages/menu-category/menu-category.component';
+import {DialogBoxCreateCategoryComponent} from "./modal/dialog-box-menu-category/dialog-box-create-category.component";
+import {SlugifyPipe} from "./utility/slugify.pipe";
+import {FilterArrayPipe} from "./utility/filterArray.pipe";
+import {ItemFirstComponent} from "./components/levels/item/item-first.component";
 
 @NgModule({
   declarations: [
@@ -68,7 +75,6 @@ import { SecondLevelComponent } from './components/levels/second-level/second-le
     SettingsComponent,
     LoginLayoutComponent,
     HomeComponent,
-    ModalContainerComponent,
     SpinnerInProgressComponent,
     MenuItemsComponent,
     HoverContainerComponent,
@@ -81,7 +87,13 @@ import { SecondLevelComponent } from './components/levels/second-level/second-le
     ItemComponent,
     UserItemsComponent,
     ItemLevelComponent,
-    SecondLevelComponent
+    SecondLevelComponent,
+    MenuManagerComponent,
+    DialogBoxCreateMenuComponent,
+    MenuCategoryComponent,
+    DialogBoxCreateCategoryComponent,
+    FilterArrayPipe,
+    ItemFirstComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +127,7 @@ import { SecondLevelComponent } from './components/levels/second-level/second-le
     MatMenuModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  entryComponents: [LoginComponent, ModalContainerComponent, DialogBoxComponent, DialogBoxSettingsComponent],
+  entryComponents: [LoginComponent, DialogBoxComponent, DialogBoxSettingsComponent, DialogBoxCreateMenuComponent , DialogBoxCreateCategoryComponent],
   providers: [LoginService,
     ProcessHttpmsgService,
     {provide: AuthInterceptor},
@@ -125,7 +137,10 @@ import { SecondLevelComponent } from './components/levels/second-level/second-le
     DataService,
     CustomerService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
-    WebsocketService
+    WebsocketService,
+    MenuManagerServiceService,
+    SlugifyPipe,
+    FilterArrayPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MenuResponse} from "../models/Menu/MenuResponse";
 
 @Component({
   selector: 'app-menu-items',
@@ -9,7 +10,7 @@ export class MenuItemsComponent implements OnInit {
 
   constructor() { }
 
-  @Input() category;
+  @Input() menu: MenuResponse;
   centered = false;
   disabled = false;
   unbounded = false;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {WebsocketService} from "../../../services/socket.service";
 import {ActivatedRoute} from "@angular/router";
 import {CustomerTableModel} from "../../../models/CustomerTableModel";
+import {WarehouseService} from "../../../services/warehouse.service";
+import {MenuManagerServiceService} from "../../../services/menu-manager-service.service";
 
 @Component({
   selector: 'app-second-level',
@@ -12,35 +14,19 @@ export class SecondLevelComponent implements OnInit {
   paramId: string;
   customerTable: CustomerTableModel;
   categories: any;
-  constructor(private socketService: WebsocketService,private route: ActivatedRoute) {
+  private subcategory: string;
+  firstLevel = [];
+  constructor(private socketService: WebsocketService,
+              private route: ActivatedRoute,
+              private menuServices: MenuManagerServiceService) {
     this.paramId =  this.route.snapshot.params.id;
+    this.subcategory =  this.route.snapshot.params.category;
 
     this.customerTable = {
       status : 0,
       timer: '0',
       price: '0'
     }
-
-    this.categories = [
-      {
-
-        firstLevel: [
-          {
-            value: 'bevande', viewValue: 'Bevande', img: '' ,'items': 1, 'level': 0
-          },
-          {
-            value: 'cocktails', viewValue: 'Cocktails', img: '' ,'items': 1, 'level': 0
-          },
-          {value: 'birre', viewValue: 'Birre',img:'', 'items': 0, 'level': 1 ,children: [
-              {value: 'spina', viewValue: 'spina', children: 'spina','items': 1, 'level': 0},
-              {value: 'bottiglia', viewValue: 'bottiglia',children: 'bottiglia','items': 1, 'level': 0}
-            ]},
-          {value: 'alcolici', viewValue: 'Alcolici', children: 'alcolici','items': 1, 'level': 0},
-          {value: 'panini', viewValue: 'Panini',children: 'panini','items': 1, 'level': 0}
-        ],
-      },
-
-    ];
   }
 
   ngOnInit(): void {
@@ -48,6 +34,15 @@ export class SecondLevelComponent implements OnInit {
       this.customerTable = msg
       console.log('ttttttt',msg)
     });
+
+    this.menuServices.getMenuFirstLevelCategoryItems(this.subcategory).subscribe(res => {
+      console.log(res)
+      this.firstLevel = res;
+      this.firstLevel.forEach(el => {
+        el.concat = '/'+el.slugCategoryFirstLevel+'/'+el.slugCategory
+      })
+
+    })
   }
 
   closeTable() {

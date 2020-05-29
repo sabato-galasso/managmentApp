@@ -1,0 +1,35 @@
+<!-- dialog-box-create-menu.component.html -->
+<h1 mat-dialog-title> <strong>{{action}}</strong> elemento </h1>
+<div mat-dialog-content class="d-flex flex-column">
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="Nome articolo" matInput [(ngModel)]="localData.nameArticle" required>
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <mat-select placeholder="Categoria" required   (selectionChange)="setValues($event,'category')">
+      <mat-option *ngFor="let category of categories" [value]="category.slugCategory">
+        {{category.nameCategory}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <mat-select placeholder="Categoria 1° Lv."  (selectionChange)="setValues($event,'nameFirstLevel')">
+      <mat-option *ngFor="let category of categories1" [value]="category.slugCategoryFirst">
+        {{category.nameFirstLevel}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="Prezzo al pubblico" matInput [(ngModel)]="localData.price" type="number" min="0"
+    >
+  </mat-form-field>
+    <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{data.nameArticle}}</b>?</div>
+</div>
+<div mat-dialog-actions *ngIf="action === 'Aggiungi';">
+  <button mat-button (click)="doAction()" [disabled]="!(localData.nameArticle ) ">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
+</div>
+
+<div mat-dialog-actions *ngIf="action === 'Elimina';">
+  <button mat-button (click)="doDeleteAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
+</div>

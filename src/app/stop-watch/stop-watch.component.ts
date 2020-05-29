@@ -1,5 +1,4 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ModalContainerComponent} from '../modal-container/modal-container.component';
 import {SettingsTableService} from '../services/settings-table.service';
 import {SettingsTable} from '../models/SettingsTable';
 import {MatDialog} from '@angular/material/dialog';
@@ -35,8 +34,6 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   paused = false;
   startText = 'Start';
 
-
-  animal: string;
   name: string;
 
   showSpinner = false;
@@ -58,17 +55,6 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   }
 
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalContainerComponent, {
-      height: '100vh',
-      width:'1800px',
-      data: {name: this.name, animal: this.animal, n_table: this.keyEl + 1, price: this.price}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
-    });
-  }
   startTable(){
 if (this.running){
   return

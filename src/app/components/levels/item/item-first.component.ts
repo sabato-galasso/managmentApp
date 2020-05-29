@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  selector: 'app-item-first',
+  templateUrl: './item-first.component.html',
+  styleUrls: ['./item-first.component.scss']
 })
-export class ItemComponent implements OnInit {
-
+export class ItemFirstComponent implements OnInit {
   centered = false;
   disabled = false;
   unbounded = false;
@@ -17,17 +16,13 @@ export class ItemComponent implements OnInit {
   counter = 0;
 
   @Output() valueChange = new EventEmitter();
-  @Input() item: any;
-
+  @Input() level
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  valueChanged() {
 
-  valueChanged() { // You can give any function name
-    this.counter = this.counter + 1;
-    this.valueChange.emit(this.counter);
   }
-
 }

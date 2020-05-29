@@ -1,0 +1,14 @@
+<h1 mat-dialog-title> <strong>{{action}}</strong> elemento </h1>
+<div mat-dialog-content class="d-flex flex-column">
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="Nome Categoria" matInput [(ngModel)]="localData.nameCategory" required>
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Elimina';">
+    <input placeholder="Nome Categoria 1° Lv." matInput [(ngModel)]="localData.nameFirstLevel" required>
+  </mat-form-field>
+    <div  *ngIf="action === 'Elimina';">Sicuro di eliminare <b>{{localData.nameCategory}}</b>?</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()" [disabled]="!(localData.nameCategory) ">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Annulla</button>
+</div>

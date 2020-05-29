@@ -27,9 +27,9 @@
         <h1>Tavolo: {{paramId}}</h1>
       </div>
       <div class="row">
-        <div class="col-md-3 col-6 my-3" *ngFor="let category of categories[0].firstLevel[2].children">
-          <app-item [category]="category">
-          </app-item>
+        <div class="col-md-3 col-6 my-3" *ngFor="let level of firstLevel">
+          <app-item-first [level]="level">
+          </app-item-first>
         </div>
       </div>
     </div>

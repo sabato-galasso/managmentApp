@@ -4,6 +4,8 @@ const settingsRouter = require("./routers/settingsTable");
 const itemsMenuRouter = require("./routers/itemsMenu");
 const warehouseRouter = require("./routers/warehouse");
 const customersRouter = require("./routers/customers");
+const categoryRouter = require("./routers/category");
+const menuRouter = require("./routers/menu");
 const socketRouter = require("./routers/socket");
 const port = process.env.PORT || 3000;
 const app = express();
@@ -27,6 +29,8 @@ app.use(settingsRouter);
 app.use(itemsMenuRouter);
 app.use(warehouseRouter);
 app.use(customersRouter);
+app.use(categoryRouter);
+app.use(menuRouter);
 
 
 

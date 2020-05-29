@@ -3,6 +3,7 @@ import {WebsocketService} from "../../../services/socket.service";
 import {CustomerTableModel} from "../../../models/CustomerTableModel";
 import {ActivatedRoute} from "@angular/router";
 import {WarehouseService} from "../../../services/warehouse.service";
+import {MenuManagerServiceService} from "../../../services/menu-manager-service.service";
 
 @Component({
   selector: 'app-item-level',
@@ -12,40 +13,23 @@ import {WarehouseService} from "../../../services/warehouse.service";
 export class ItemLevelComponent implements OnInit {
 
   paramId: string;
-  private categories: { firstLevel: ({ img: string; level: number; viewValue: string; value: string; items: number } | { img: string; level: number; viewValue: string; value: string; items: number } | { img: string; level: number; children: {}[]; viewValue: string; value: string; items: number } | { children: string; level: number; viewValue: string; value: string; items: number } | { children: string; level: number; viewValue: string; value: string; items: number })[] }[];
   customerTable: CustomerTableModel;
-  private categoryName: string;
-cat = [];
+  private categorySlug: string;
+  items = [];
 
-  constructor(private socketService: WebsocketService,private route: ActivatedRoute,private warehouseService: WarehouseService) {
+  constructor(private socketService: WebsocketService,
+              private route: ActivatedRoute,
+              private warehouseService: WarehouseService,
+              private menuService: MenuManagerServiceService,
+              ) {
     this.paramId =  this.route.snapshot.params.id;
-    this.categoryName =  this.route.snapshot.params.category;
+    this.categorySlug =  this.route.snapshot.params.category;
 
     this.customerTable = {
       status : 0,
       timer: '0',
       price: '0'
     }
-
-    this.categories = [
-      {
-
-        firstLevel: [
-          {
-            value: 'bevande', viewValue: 'Bevande', img: '' ,'items': 1, 'level': 0
-          },
-          {
-            value: 'cocktails', viewValue: 'Cocktails', img: '' ,'items': 1, 'level': 0
-          },
-          {value: 'birre', viewValue: 'Birre',img:'', 'items': 0, 'level': 1 ,children: [{
-
-            }]},
-          {value: 'alcolici', viewValue: 'Alcolici', children: 'alcolici','items': 1, 'level': 0},
-          {value: 'panini', viewValue: 'Panini',children: 'panini','items': 1, 'level': 0}
-        ],
-      },
-
-    ];
   }
 
   ngOnInit(): void {
@@ -55,9 +39,9 @@ cat = [];
       console.log('ttttttt',msg)
     });
 
-    this.warehouseService.getWareHouseCategory(this.categoryName).subscribe(res => {
+    this.menuService.getMenuCategoryItems(this.categorySlug).subscribe(res => {
       console.log(res)
-      this.cat = res;
+      this.items = res;
     })
   }
 
