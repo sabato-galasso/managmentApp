@@ -71,7 +71,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptionFilterQuantity =  this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
-      debugger
+
       this.filteredValues.quantity = quantityFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
@@ -99,7 +99,7 @@ export class WarehouseComponent implements OnInit, OnDestroy {
 
   customFilterPredicate() {
     return (data: WareHouse, filter: string): boolean => {
-      debugger
+
      /* let globalMatch = !this.globalFilter;
 
       if (this.globalFilter) {

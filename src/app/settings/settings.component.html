@@ -114,21 +114,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
     </div>
-
-
-    <button
-      [matMenuTriggerFor]="menu"
-      [matMenuTriggerData]="{label: 'one'}"
-      #triggerOne="matMenuTrigger">One</button>
-    <button
-      [matMenuTriggerFor]="menu"
-      [matMenuTriggerData]="{label: 'two'}"
-      #triggerTwo="matMenuTrigger">Two</button>
-    <mat-menu matMenuContent #menu="matMenu">
-      <ng-template let-label="label" matMenuContent>
-        <button mat-menu-item>{{label}}</button>
-      </ng-template>
-    </mat-menu>
   </div>
 </div>
 <div class="centered" *ngIf="showSpinner">

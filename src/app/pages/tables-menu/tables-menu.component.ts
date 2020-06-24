@@ -15,7 +15,8 @@ export class TablesMenuComponent implements OnInit {
   paramId:string;
   customerTable: CustomerTableModel;
   private menu: MenuResponse[];
-  constructor(private route: ActivatedRoute, private socketService: WebsocketService, private menuService: MenuManagerServiceService) {
+  constructor(private route: ActivatedRoute, private socketService: WebsocketService,
+              private menuService: MenuManagerServiceService) {
     this.paramId =  this.route.snapshot.params.id;
 
     this.customerTable = {
@@ -32,32 +33,15 @@ export class TablesMenuComponent implements OnInit {
       console.log('ttttttt',msg)
     });
 
-    this.menuService.getMenu().subscribe(res => {
-      debugger
+ /*   this.menuService.getMenu().subscribe(res => {
+
+      this.menu = res
+    })*/
+    this.menuService.getCategories().subscribe(res => {
+
       this.menu = res
     })
   }
-
- /* catogories: any[] = [
-    {
-
-      firstLevel: [
-        {
-        value: 'bevande', viewValue: 'Bevande', img: '' ,'items': 1, 'level': 0
-      },
-        {
-          value: 'cocktails', viewValue: 'Cocktails', img: '' ,'items': 1, 'level': 0
-        },
-        {value: 'birre', viewValue: 'Birre',img:'', 'items': 0, 'level': 1 ,children: [
-            {value: 'super-alcolici', viewValue: 'Spina', children: 'alcolici','items': 1, 'level': 0},
-            {value: 'super-alcolici', viewValue: 'Bottiglia', children: 'alcolici','items': 1, 'level': 0},
-          ]},
-        {value: 'super-alcolici', viewValue: 'Alcolici', children: 'alcolici','items': 1, 'level': 0},
-        {value: 'panini', viewValue: 'Panini',children: 'panini','items': 1, 'level': 0}
-      ],
-    },
-
-  ];*/
 
   closeTable() {
 

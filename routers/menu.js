@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/api/menu", auth, async (req, res) => {
   // Get settings
   try {
-    const doc = await menuModel.findAll();
+    const doc = await menuModel.find();
     res.status(200).send(doc);
   } catch (error) {
     res.status(400).send(error);
@@ -31,6 +31,17 @@ router.get("/api/menu/subcategory/:category", auth, async (req, res) => {
   // Get warehouse category
   try {
     const filter = {slugCategoryFirstLevel: req.params.category };
+    const doc = await menuModel.findBySlugCategory(filter);
+    res.status(200).send(doc);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.get("/api/menu/subcategory-category/:subcategory/:category", auth, async (req, res) => {
+  // Get warehouse category
+  try {
+    const filter = {slugCategoryFirstLevel: req.params.category, slugCategory: req.params.subcategory };
     const doc = await menuModel.findBySlugCategory(filter);
     res.status(200).send(doc);
   } catch (error) {

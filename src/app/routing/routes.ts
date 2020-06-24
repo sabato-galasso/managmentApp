@@ -26,7 +26,7 @@ export const routes: Routes = [
       { path: 'home/:id', component: TablesMenuComponent},
       {path: 'home/:id/items/category/:category', component: ItemLevelComponent},
       {path: 'home/:id/level/:category', component: SecondLevelComponent},
-      {path: 'level/:category/:category1', component: ItemLevelComponent},
+      {path: 'home/:id/level/:category/:category1', component: ItemLevelComponent},
       {path: 'menu-manager', component: MenuManagerComponent},
       {path: 'menu-category', component: MenuCategoryComponent}
     ]

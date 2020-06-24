@@ -78,7 +78,7 @@ export class MenuManagerComponent implements OnInit {
     this.requestDataFromMultipleSources()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(items => {
-        //debugger
+        //
           this.showSpinner = true;
           this.dataSource.data = items[0];
           this.dataSource.sort = this.sort;
@@ -99,7 +99,7 @@ export class MenuManagerComponent implements OnInit {
 
   customFilterPredicate() {
     return (data: WareHouse, filter: string): boolean => {
-      debugger
+
       /* let globalMatch = !this.globalFilter;
 
        if (this.globalFilter) {
@@ -127,7 +127,7 @@ export class MenuManagerComponent implements OnInit {
   }
 
   updateDataTableValue(data: MenuResponse) {
-    debugger
+
     /*if(data.category)
       data.slugCategory = this.slugifyPipe.transform(data.name)
 

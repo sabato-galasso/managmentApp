@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
-        debugger
+
         if (err.status === 401) {
           this.router.navigate(['login'], { queryParams: { returnUrl: req.url } });
         }

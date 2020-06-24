@@ -56,7 +56,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
 
 
   startTable(){
-if (this.running){
+/*if (this.running){
   return
 }    this.socketService.onNewMessage(this.keyEl.toString()).subscribe(msg => {
       this.customerTable = msg
@@ -73,7 +73,7 @@ let data = {
 }
 this.customerService.addNewCustomerData(data).subscribe(res => {
   console.log(res)
-})
+})*/
   }
 
   startTimer() {

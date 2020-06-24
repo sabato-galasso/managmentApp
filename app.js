@@ -6,7 +6,7 @@ const warehouseRouter = require("./routers/warehouse");
 const customersRouter = require("./routers/customers");
 const categoryRouter = require("./routers/category");
 const menuRouter = require("./routers/menu");
-const socketRouter = require("./routers/socket");
+//const socketRouter = require("./routers/socket");
 const port = process.env.PORT || 3000;
 const app = express();
 

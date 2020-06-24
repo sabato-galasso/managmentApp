@@ -65,6 +65,7 @@ import {DialogBoxCreateCategoryComponent} from "./modal/dialog-box-menu-category
 import {SlugifyPipe} from "./utility/slugify.pipe";
 import {FilterArrayPipe} from "./utility/filterArray.pipe";
 import {ItemFirstComponent} from "./components/levels/item/item-first.component";
+import {MessageSharingService} from "./services/message-sharing.service";
 
 @NgModule({
   declarations: [
@@ -140,7 +141,8 @@ import {ItemFirstComponent} from "./components/levels/item/item-first.component"
     WebsocketService,
     MenuManagerServiceService,
     SlugifyPipe,
-    FilterArrayPipe
+    FilterArrayPipe,
+    MessageSharingService
   ],
   bootstrap: [AppComponent]
 })

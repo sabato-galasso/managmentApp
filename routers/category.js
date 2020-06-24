@@ -16,10 +16,35 @@ router.get("/api/category", auth, async (req, res) => {
 });
 
 
-router.get("/api/category/category/:category", auth, async (req, res) => {
+router.get("/api/category/:category", auth, async (req, res) => {
   // Get warehouse category
   try {
-    const filter = {category: req.params.category };
+
+    const filter = {slugCategory: req.params.category };
+    const doc = await menuCategory.findByCategory(filter);
+    res.status(200).send(doc);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+
+router.get("/api/category/subcategory/:category", auth, async (req, res) => {
+  // Get warehouse category
+  try {
+
+    const filter = {slugCategoryFirst: req.params.category };
+    const doc = await menuCategory.findByCategory(filter);
+    res.status(200).send(doc);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.get("/api/subcategory/:category", auth, async (req, res) => {
+  // Get warehouse category
+  try {
+    const filter = {slugCategoryFirst: req.params.category };
     const doc = await menuCategory.findByCategory(filter);
     res.status(200).send(doc);
   } catch (error) {

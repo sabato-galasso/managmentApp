@@ -1,23 +1,23 @@
 <div class="container">
   <div class="row position-relative">
-    <button mat-raised-button color="warn" (click)="closeTable()"
+<!--    <button mat-raised-button color="warn" (click)="closeTable()"
             class="position-absolute" style="left: -10%; top: 23px">
       <i class="material-icons f-large">
         clear
-      </i> <span class="f-large"></span></button>
+      </i> <span class="f-large"></span></button>-->
     <div class="col-8 mt-4">
       <button [routerLink]="['/','home']" mat-raised-button color="primary">
         <i class="material-icons f-50">
           keyboard_backspace
         </i>
       </button>
-      <button [routerLink]="['/','home']" mat-raised-button
+<!--      <button [routerLink]="['/','home']" mat-raised-button
               color="primary"
               class="float-right" *ngIf="customerTable.status == 0">
       <i class="material-icons f-50">
         play_arrow
       </i>
-    </button>
+    </button>-->
       <button [routerLink]="['/','home']" mat-raised-button color="accent"
               *ngIf="customerTable.status == 1"
               class="float-right">

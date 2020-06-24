@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {WebsocketService} from "../../../services/socket.service";
 import {ActivatedRoute} from "@angular/router";
 import {CustomerTableModel} from "../../../models/CustomerTableModel";
-import {WarehouseService} from "../../../services/warehouse.service";
+import {Location} from '@angular/common';
 import {MenuManagerServiceService} from "../../../services/menu-manager-service.service";
 
 @Component({
@@ -18,7 +18,8 @@ export class SecondLevelComponent implements OnInit {
   firstLevel = [];
   constructor(private socketService: WebsocketService,
               private route: ActivatedRoute,
-              private menuServices: MenuManagerServiceService) {
+              private menuServices: MenuManagerServiceService,
+              private location: Location) {
     this.paramId =  this.route.snapshot.params.id;
     this.subcategory =  this.route.snapshot.params.category;
 
@@ -35,12 +36,11 @@ export class SecondLevelComponent implements OnInit {
       console.log('ttttttt',msg)
     });
 
-    this.menuServices.getMenuFirstLevelCategoryItems(this.subcategory).subscribe(res => {
+    this.menuServices.getSubCategoriesNew(this.subcategory).subscribe(res => {
       console.log(res)
+debugger
       this.firstLevel = res;
-      this.firstLevel.forEach(el => {
-        el.concat = '/'+el.slugCategoryFirstLevel+'/'+el.slugCategory
-      })
+
 
     })
   }
@@ -51,5 +51,9 @@ export class SecondLevelComponent implements OnInit {
       this.customerTable = msg
       console.log('ttttttt',msg)
     });  }
+
+  back() {
+    this.location.back();
+  }
 
 }

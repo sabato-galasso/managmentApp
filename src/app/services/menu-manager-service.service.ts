@@ -40,7 +40,7 @@ export class MenuManagerServiceService {
 
   }
 
-  getMenuFirstLevelCategoryItems(subcategory : string): Observable<MenuResponse[]> {
+  getMenuCategorySubcategoryItems(category : string,subcategory : string): Observable<MenuResponse[]> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -49,6 +49,19 @@ export class MenuManagerServiceService {
       })
     };
     return this.http.get<MenuResponse[]>(baseURL + 'api/menu/subcategory/'+subcategory, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  test(category : string,subcategory : string): Observable<MenuResponse[]> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<MenuResponse[]>(baseURL + 'api/menu/subcategory-category/'+subcategory+'/'+category, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }
@@ -95,7 +108,7 @@ export class MenuManagerServiceService {
   /*** Category Manager ***/
 
 
-  getCategories(): Observable<MenuCategoryResponse[]> {
+  getCategories(): Observable<MenuResponse[]> {
     const token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -103,7 +116,33 @@ export class MenuManagerServiceService {
         Authorization: 'Bearer ' + token,
       })
     };
-    return this.http.get<MenuCategoryResponse[]>(baseURL + 'api/category', httpOptions)
+    return this.http.get<MenuResponse[]>(baseURL + 'api/category', httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  getSubCategories(subcategory : string): Observable<MenuResponse[]> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<MenuResponse[]>(baseURL + 'api/category/'+subcategory, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+  getSubCategoriesNew(subcategory : string): Observable<MenuResponse[]> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<MenuResponse[]>(baseURL + 'api/category/subcategory/'+subcategory, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }

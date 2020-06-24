@@ -80,7 +80,7 @@ export class MenuCategoryComponent implements OnInit {
     this.showSpinner = true;
     this.subscriptionGetItems = this.menuService.getCategories()
       .subscribe(items => {
-        debugger
+
           this.showSpinner = true;
           this.dataSource.data = items;
           this.dataSource.sort = this.sort;
@@ -98,7 +98,7 @@ export class MenuCategoryComponent implements OnInit {
 
   customFilterPredicate() {
     return (data: WareHouse, filter: string): boolean => {
-      debugger
+
       /* let globalMatch = !this.globalFilter;
 
        if (this.globalFilter) {
@@ -126,7 +126,7 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   updateDataTableValue(data) {
-    debugger
+
   /*  if(data.name)
       data.slugCategory = this.slugifyPipe.transform(data.name)
 
@@ -160,7 +160,7 @@ export class MenuCategoryComponent implements OnInit {
   }
 
   addRowData(rowObj: MenuCategoryResponse) {
-debugger
+
     if(rowObj.nameCategory){
       rowObj.slugCategory = this.slugifyPipe.transform(rowObj.nameCategory)
     }

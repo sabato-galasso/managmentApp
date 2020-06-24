@@ -3,7 +3,7 @@ const http = require('http').createServer(app)
 require('dotenv').config()
 
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     res.send("Node Server is running. Yay!!")
 })
 
@@ -60,6 +60,6 @@ socket.on(`else${id}`, () =>  {
                 clearInterval(timerRef);
           socket.emit(`result${id}`,  '0')
            });
-}
+} */
 
 http.listen(process.env.PORT)

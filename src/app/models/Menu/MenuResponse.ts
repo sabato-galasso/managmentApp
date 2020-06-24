@@ -7,4 +7,5 @@ export class MenuResponse {
   price: string;
   quantity: string;
   _id?: string;
+  slugCategoryFirst: string;
 }

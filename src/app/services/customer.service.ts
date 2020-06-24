@@ -92,7 +92,42 @@ export class CustomerService {
     };
     return this.http.post<any>(baseURL + 'api/customer', data, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
-
   }
+  updateCustomerData(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.put<any>(baseURL + 'api/customer', data, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
+  getCustomerDataByTable(nTable: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.get<any>(baseURL + 'api/customer?n='+nTable, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
+  closeCustomerData(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token,
+      })
+    };
+    return this.http.put<any>(baseURL + 'api/customer/close', data, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+  }
+
 
 }
