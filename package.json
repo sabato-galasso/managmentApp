@@ -11,7 +11,8 @@
     "build": "ng build",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buildProd": "ng build --prod --aot"
+    "buildProd": "ng build --prod --aot",
+    "release": "dotenv release-it"
   },
   "private": true,
   "dependencies": {
@@ -61,6 +62,7 @@
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "protractor": "~7.0.0",
+    "release-it": "^13.6.3",
     "ts-node": "~8.10.2",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
