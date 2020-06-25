@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import * as io from 'socket.io-client';
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core'
+//import * as io from 'socket.io-client';
+//import {Observable} from "rxjs";
 
 @Injectable()
 export class WebsocketService {
-  private socket: SocketIOClient.Socket;
+  // private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://localhost:1234');
+    //  this.socket = io('http://localhost:1234');
   }
-
+  //TODO add socket
   // EMITTER
-  sendMessage(msg: string) {
+  /* sendMessage(msg: string) {
     this.socket.emit('sendMessage', { message: msg });
   }
 
@@ -45,5 +45,5 @@ export class WebsocketService {
     });
   }
 
-
+*/
 }

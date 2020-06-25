@@ -1,118 +1,46 @@
 <div class="container">
-  <div class="row ">
-<div class="col-12">
-<form novalidate [formGroup]="tablesForm" (ngSubmit)="onSubmit()" #fform='ngForm' class="my-3">
-<h2>Dati sala</h2>
-      <mat-form-field class="mr-3">
-        <input matInput placeholder="Numero tavoli"  type="number"  formControlName="quantity">
-      </mat-form-field>
-      <mat-form-field class="mr-3">
-        <mat-label class="display-4">Prezzo / 1h</mat-label>
-        <input
-          matInput
-          name="price"
-          placeholder="Prezzo"
-          type="number" step="0.50"
-          formControlName="price"
+  <div class="row">
+    <div class="col-12">
+      <form
+        novalidate
+        [formGroup]="tablesForm"
+        (ngSubmit)="onSubmit()"
+        #fform="ngForm"
+        class="my-3"
+      >
+        <h2>Gestione tavoli locale</h2>
+        <mat-form-field class="mr-3">
+          <input
+            matInput
+            placeholder="Numero tavoli Biliardi"
+            type="number"
+            formControlName="quantity"
+          />
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <mat-label class="display-4">Prezzo / 1h</mat-label>
+          <input
+            matInput
+            name="price"
+            placeholder="Prezzo"
+            type="number"
+            step="0.50"
+            formControlName="price"
+          />
+          <span matPrefix>€&nbsp;</span>
+        </mat-form-field>
+
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class=""
+          [disabled]="tablesForm.invalid"
         >
-        <span matPrefix>€&nbsp;</span>
-      </mat-form-field>
-
-    <button type="submit" mat-raised-button color="primary" class="" [disabled]="tablesForm.invalid">Salva</button>
-
-
-</form>
-  <mat-divider></mat-divider>
-</div>
-<!-- app.component.html -->
-    <div class="col-12 my-4">
-      <h2>Menù</h2>
-      <div class="row my-3">
-        <div class="col-md-3 col-6">
-          <mat-form-field>
-            <mat-label>Filtra per Nome</mat-label>
-            <input matInput [formControl]="nameFilter">
-          </mat-form-field>
-        </div>
-        <div class="col-md-3 col-6">
-          <mat-form-field>
-            <mat-label>Filtra per categoria</mat-label>
-            <mat-select [formControl]="positionFilter">
-              <mat-option *ngFor="let category of catogories" [value]="category.value">
-                {{category.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-md-3 col-6">
-          <mat-form-field>
-            <mat-label>Filtra per Prezzo</mat-label>
-            <input matInput [formControl]="priceFilter">
-          </mat-form-field>
-        </div>
-      </div>
-
-      <table mat-table [dataSource]="dataSource" #table class="mat-elevation-z8" matSort>
-
-    <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Id Column -->
-    <ng-container matColumnDef="_id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
-      <td mat-cell *matCellDef="let element;"> {{element._id}}</td>
-    </ng-container>
-
-    <!-- Category Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezzo Finito</th>
-      <td mat-cell *matCellDef="let element"> <b>{{element.price}} € </b></td>
-    </ng-container>
-
-        <!-- Update_at Column -->
-        <ng-container matColumnDef="updatedAt">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima modifica</th>
-          <td mat-cell *matCellDef="let element"> {{element.updated_at | date :'dd/MM/yyyy HH:mm:ss'}}</td>
-        </ng-container>
-
-    <!-- Action Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>
-        <div class="d-flex align-items-center justify-content-center"><span>Azioni</span>
-          <button class="d-inline" mat-icon-button color="primary" (click)="openDialog('Aggiungi',$event)">
-            <mat-icon aria-label="add">add</mat-icon>
-          </button>
-          <button mat-icon-button (click)="refresh()">
-            <mat-icon>refresh</mat-icon>
-          </button>
-        </div>
-
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <button mat-button (click)="openDialog('Modifica',row)"><i class="material-icons">
-          edit
-        </i></button>
-        <button mat-button (click)="openDialog('Elimina',row)"><i class="material-icons">
-          delete
-        </i></button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+          Salva
+        </button>
+      </form>
+      <mat-divider></mat-divider>
     </div>
   </div>
 </div>

@@ -1,46 +1,51 @@
 <div class="container">
   <div class="row position-relative">
-<!--    <button mat-raised-button color="warn" (click)="closeTable()"
+    <!--    <button mat-raised-button color="warn" (click)="closeTable()"
             class="position-absolute" style="left: -10%; top: 23px">
       <i class="material-icons f-large">
         clear
       </i> <span class="f-large"></span></button>-->
     <div class="col-8 mt-4">
-      <button [routerLink]="['/','home']" mat-raised-button color="primary">
+      <button [routerLink]="['/', 'home']" mat-raised-button color="primary">
         <i class="material-icons f-50">
           keyboard_backspace
         </i>
       </button>
-<!--      <button [routerLink]="['/','home']" mat-raised-button
+      <!--      <button [routerLink]="['/','home']" mat-raised-button
               color="primary"
               class="float-right" *ngIf="customerTable.status == 0">
       <i class="material-icons f-50">
         play_arrow
       </i>
     </button>-->
-      <button [routerLink]="['/','home']" mat-raised-button color="accent"
-              *ngIf="customerTable.status == 1"
-              class="float-right">
+      <button
+        [routerLink]="['/', 'home']"
+        mat-raised-button
+        color="accent"
+        *ngIf="customerTable.status == 1"
+        class="float-right"
+      >
         <i class="material-icons f-50">
           pause
         </i>
       </button>
       <div>
-        <h1>Tavolo: {{paramId}}</h1>
+        <h1>Tavolo: {{ paramId }}</h1>
       </div>
       <div class="row">
         <div class="col-md-3 col-6 my-3" *ngFor="let item of menu">
-          <app-menu-items [menu]="item">
-          </app-menu-items>
+          <app-menu-items [menu]="item"> </app-menu-items>
         </div>
       </div>
     </div>
     <div class="col-1">
-      <mat-divider vertical style="height: 100vh"></mat-divider>
+      <mat-divider vertical style="height: 100vh;"></mat-divider>
     </div>
     <div class="col-3">
-      <app-user-items [numberTable]="paramId" [customerTable]="customerTable"></app-user-items>
+      <app-user-items
+        [numberTable]="paramId"
+        [customerTable]="customerTable"
+      ></app-user-items>
     </div>
   </div>
 </div>
-

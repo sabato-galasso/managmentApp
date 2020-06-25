@@ -4,7 +4,7 @@
   </button>
   <span>App</span>
   <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space">{{userName}}</span>
+  <span class="example-fill-remaining-space">{{ userName }}</span>
   <button mat-button (click)="logout()" label="logout">
     <mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
   </button>
@@ -12,24 +12,47 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
-      <a mat-list-item
-         routerLinkActive="list-item-active" [routerLink]="['/home']">Sala
+      <a
+        mat-list-item
+        routerLinkActive="list-item-active"
+        [routerLink]="['/home']"
+        >Sala
         <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
       </a>
-        <a mat-list-item [routerLink]="['/settings']" routerLinkActive="list-item-active">Impostazioni
-          <mat-icon matListIcon class="nav-list-icon">settings_applications</mat-icon>
-        </a>
-      <a mat-list-item [routerLink]="['/warehouse']" routerLinkActive="list-item-active">Magazzino
+      <a
+        mat-list-item
+        [routerLink]="['/settings']"
+        routerLinkActive="list-item-active"
+        >Impostazioni
+        <mat-icon matListIcon class="nav-list-icon"
+          >settings_applications</mat-icon
+        >
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/warehouse']"
+        routerLinkActive="list-item-active"
+        >Magazzino
         <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
       </a>
-      <a mat-list-item [routerLink]="['/menu-manager']" routerLinkActive="list-item-active">Gestione Menù
-        <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
+      <a
+        mat-list-item
+        [routerLink]="['/menu-manager']"
+        routerLinkActive="list-item-active"
+        >Menù cassa
+        <mat-icon matListIcon class="nav-list-icon">point_of_sale</mat-icon>
       </a>
-      <a mat-list-item [routerLink]="['/menu-category']" routerLinkActive="list-item-active">Gestione Categorie
-        <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
+      <a
+        mat-list-item
+        [routerLink]="['/menu-category']"
+        routerLinkActive="list-item-active"
+        >Categorie
+        <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
       </a>
     </mat-nav-list>
   </mat-drawer>
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </mat-drawer-container>
-<mat-toolbar class="app-version"><p>Package Ver. {{versionApp}}</p></mat-toolbar>
+<mat-toolbar class="app-version"
+  ><p>Package Ver. {{ versionApp }}</p></mat-toolbar
+>

@@ -1,0 +1,80 @@
+<mat-list role="list">
+  <h2 mat-line>
+    <b>Tavolo: {{ numberTable }}</b>
+  </h2>
+  <mat-list-item role="listitem">
+    <div class="d-flex justify-content-between w-100">
+      <div>
+        <button
+          mat-raised-button
+          color="accent"
+          *ngIf="tavoloAttivo"
+          (click)="closeTable()"
+        >
+          Chiudi consumazioni
+        </button>
+      </div>
+    </div>
+  </mat-list-item>
+  <!--  <mat-list-item role="listitem">
+    <h3 mat-line> Contatore: </h3>
+    <div><b>{{customerTable.timer}}</b></div>
+  </mat-list-item>
+  <mat-divider></mat-divider>-->
+  <mat-list role="listitem" *ngIf="consumazioni && consumazioni.length > 0">
+    <h3 mat-line>Consumazioni</h3>
+    <mat-list-item *ngFor="let item of consumazioni">
+      <div class="d-flex justify-content-between w-100">
+        <div class="d-flex align-items-center">
+          <b>{{ item.quantity }} X </b>
+        </div>
+        <div class="d-flex align-items-center">
+          <b>{{ item.store }}</b>
+        </div>
+        <div class="d-flex align-items-center">
+          <span>{{ item.price }}€</span>
+        </div>
+      </div>
+      <div style="position: absolute; right: -130px;">
+        <button
+          mat-stroked-button
+          color="primary"
+          class="d-inline-block"
+          *ngIf="item.quantity > 0"
+          (click)="removeItem()"
+        >
+          -
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="d-inline-block"
+          *ngIf="item.quantity > 0"
+        >
+          +
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <mat-list-item role="listitem">
+    <h3 mat-line>Tavolo</h3>
+    <div>
+      <b>{{ customerTable.price }}€</b>
+    </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item role="listitem">
+    <div class="d-flex justify-content-between w-100" *ngIf="total">
+      <div>
+        <b>
+          Totale
+        </b>
+      </div>
+      <div>
+        <span
+          ><b>{{ total }} €</b></span
+        >
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>
