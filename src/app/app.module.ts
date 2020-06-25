@@ -131,7 +131,7 @@ import {MessageSharingService} from "./services/message-sharing.service";
   entryComponents: [LoginComponent, DialogBoxComponent, DialogBoxSettingsComponent, DialogBoxCreateMenuComponent , DialogBoxCreateCategoryComponent],
   providers: [LoginService,
     ProcessHttpmsgService,
-    {provide: AuthInterceptor},
+    { provide: AuthInterceptor, useValue: undefined },
     {provide: 'BaseURL', useValue: baseURL},
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
