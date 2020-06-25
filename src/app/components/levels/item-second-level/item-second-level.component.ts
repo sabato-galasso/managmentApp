@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
-  selector: 'app-item-first',
-  templateUrl: './item-first.component.html',
-  styleUrls: ['./item-first.component.scss'],
+  selector: 'app-item-second-level',
+  templateUrl: './item-second-level.component.html',
+  styleUrls: ['./item-second-level.component.scss'],
 })
-export class ItemFirstComponent implements OnInit {
+export class ItemSecondLevelComponent implements OnInit {
   centered = false
   disabled = false
   unbounded = false

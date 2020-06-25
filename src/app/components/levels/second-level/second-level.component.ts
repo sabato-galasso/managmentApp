@@ -14,7 +14,7 @@ export class SecondLevelComponent implements OnInit {
   paramId: string
   customerTable: CustomerTableModel
   categories: any
-  private subcategory: string
+  private category: string
   firstLevel = []
   constructor(
     private socketService: WebsocketService,
@@ -23,7 +23,7 @@ export class SecondLevelComponent implements OnInit {
     private location: Location
   ) {
     this.paramId = this.route.snapshot.params.id
-    this.subcategory = this.route.snapshot.params.category
+    this.category = this.route.snapshot.params.category
 
     this.customerTable = {
       status: 0,
@@ -38,7 +38,7 @@ export class SecondLevelComponent implements OnInit {
       console.log('ttttttt',msg)
     });*/
 
-    this.menuServices.getSubCategoriesNew(this.subcategory).subscribe((res) => {
+    this.menuServices.filterByCategory(this.category).subscribe((res) => {
       console.log(res)
       debugger
       this.firstLevel = res

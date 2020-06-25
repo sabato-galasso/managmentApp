@@ -33,9 +33,9 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     private messageService: MessageSharingService
   ) {
     this.paramId = this.route.snapshot.params.id
-    this.subCategorySlug = this.route.snapshot.params.category1
+    this.subCategorySlug = this.route.snapshot.params.subCategory
     this.categorySlug = this.route.snapshot.params.category
-
+    debugger
     this.customerTable = {
       status: 0,
       timer: '0',
@@ -74,11 +74,12 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
       this.customerTable = msg
       console.log('ttttttt',msg)
     });*/
-    debugger
+
     if (this.subCategorySlug) {
       this.menuService
-        .test(this.categorySlug, this.subCategorySlug)
+        .filterByCategoryAndSubcategory(this.categorySlug, this.subCategorySlug)
         .subscribe((res) => {
+          debugger
           console.log(res)
           this.items = res
         })
@@ -94,7 +95,7 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     this.customerService.getCustomerDataByTable(this.paramId).subscribe(
       (res) => {
         console.log('dsdsd', res)
-        debugger
+
         this.isActiveTable = res && res.summed.length > 0
         this._id = res && res._id ? res._id : null
       },

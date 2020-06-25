@@ -69,6 +69,7 @@ import { FilterArrayPipe } from './utility/filterArray.pipe'
 import { ItemFirstComponent } from './components/levels/item/item-first.component'
 import { MessageSharingService } from './services/message-sharing.service'
 import { MenuFirstLevelComponent } from './pages/tables-menu/menu-first-level.component'
+import { ItemSecondLevelComponent } from './components/levels/item-second-level/item-second-level.component'
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { MenuFirstLevelComponent } from './pages/tables-menu/menu-first-level.co
     DialogBoxCreateCategoryComponent,
     FilterArrayPipe,
     ItemFirstComponent,
+    ItemSecondLevelComponent,
   ],
   imports: [
     BrowserModule,

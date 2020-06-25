@@ -4,6 +4,7 @@ import { WebsocketService } from '../../services/socket.service'
 import { CustomerTableModel } from '../../models/CustomerTableModel'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
 import { MenuResponse } from '../../models/Menu/MenuResponse'
+import _ from 'lodash'
 
 @Component({
   selector: 'app-tables-menu',
@@ -38,8 +39,10 @@ export class MenuFirstLevelComponent implements OnInit {
 
       this.menu = res
     })*/
+
     this.menuService.getCategories().subscribe((res) => {
-      this.menu = res
+      debugger
+      this.menu = _.uniqBy(res, 'slugCategory')
     })
   }
 
