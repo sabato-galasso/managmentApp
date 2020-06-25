@@ -45,7 +45,6 @@ export class MenuCategoryComponent implements OnInit {
   subscriptionGetItems: Subscription;
   subscriptionFilterUpdateItems: Subscription;
   subscriptionDeleteItems: Subscription;
-  subscriptionAddItems: Subscription;
 
   dataSource = new MatTableDataSource([]);
 
