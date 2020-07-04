@@ -3,7 +3,7 @@
     <div
       class="example-box m-3"
       *ngFor="let item of interni; let idx = index"
-      [routerLink]="['/home', 'int-' + idx + 1]"
+      [routerLink]="['/home', 'int-' + (idx + 1)]"
     >
       Interni {{ idx + 1 }}
       <div class="example-handle">

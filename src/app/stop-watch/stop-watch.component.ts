@@ -6,13 +6,6 @@ import { CustomerService } from '../services/customer.service'
 import { WebsocketService } from '../services/socket.service'
 import { CustomerTableModel } from '../models/CustomerTableModel'
 
-export interface DialogData {
-  animal: string
-  name: string
-  n_table: string
-  price: string
-}
-
 @Component({
   selector: 'app-stop-watch',
   templateUrl: './stop-watch.component.html',
@@ -43,9 +36,8 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private settingsTableService: SettingsTableService,
-    private customerService: CustomerService
-  ) // private socketService: WebsocketService
-  {
+    private customerService: CustomerService // private socketService: WebsocketService
+  ) {
     //Init model
     this.customerTable = {
       price: '0',

@@ -3,7 +3,7 @@
     <div
       class="example-box m-3"
       *ngFor="let item of copertiStruttura; let idx = index"
-      [routerLink]="['/home', 'int-' + idx + 1]"
+      [routerLink]="['/home', 'int-' + (idx + 1)]"
     >
       Esterno S {{ idx + 1 }}
       <div class="example-handle">
@@ -18,7 +18,7 @@
     <div
       class="example-box m-3"
       *ngFor="let item of copertiObrelloni; let idx = index"
-      [routerLink]="['/home', 'ext-c-' + idx + 1]"
+      [routerLink]="['/home', 'ext-c-' + (idx + 1)]"
     >
       Esterno C {{ idx + 1 }}
       <div class="example-handle">

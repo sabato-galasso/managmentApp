@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { SettingsTableService } from '../../services/settings-table.service'
 import { SettingsTable } from '../../models/SettingsTable'
 import { Subject } from 'rxjs'
@@ -16,6 +16,7 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   private copertiStruttura: number[]
   private copertiObrelloni: number[]
   private unsubscribe$ = new Subject<void>()
+  @Input() keyEl: number
 
   constructor(private settingsTableService: SettingsTableService) {}
 
