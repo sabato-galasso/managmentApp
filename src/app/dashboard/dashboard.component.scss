@@ -20,13 +20,23 @@
   flex: 1 1 auto;
   text-align: right;
 }
-.app-version{
+.app-version {
   height: 30px;
   float: right;
 
-  p{
+  p {
     text-align: right;
     font-style: italic;
     font-size: 14px;
+  }
+}
+
+mat-sidenav {
+  width: 300px;
+}
+li {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }

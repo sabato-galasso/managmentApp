@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const settingTableSchema = mongoose.Schema({
   quantity: {
@@ -9,12 +9,24 @@ const settingTableSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-});
+  internal: {
+    type: Number,
+    required: true,
+  },
+  external_c: {
+    type: Number,
+    required: true,
+  },
+  external_s: {
+    type: Number,
+    required: true,
+  },
+})
 
-settingTableSchema.static('findLastOne', function() {
-  return this.findOne();
-});
+settingTableSchema.static('findLastOne', function () {
+  return this.findOne()
+})
 
-const Settings = mongoose.model("SettingsTable", settingTableSchema);
+const Settings = mongoose.model('SettingsTable', settingTableSchema)
 
-module.exports = Settings;
+module.exports = Settings

@@ -58,6 +58,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
   createForm(): void {
     this.tablesForm = this.fb.group({
       quantity: [1, [Validators.required, Validators.minLength(1)]],
+      internal: [1, [Validators.required, Validators.minLength(1)]],
+      external_s: [1, [Validators.required, Validators.minLength(1)]],
+      external_c: [1, [Validators.required, Validators.minLength(1)]],
       price: [1, [Validators.required]],
     })
 
@@ -77,7 +80,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.tablesForm.controls.quantity.setValue(
             this.gettedSetting.quantity
           )
-          this.tablesForm.controls.price.setValue(this.gettedSetting.price)
+          this.tablesForm.controls.internal.setValue(
+            this.gettedSetting.internal
+          )
+          this.tablesForm.controls.external_s.setValue(
+            this.gettedSetting.external_s
+          )
+          this.tablesForm.controls.external_c.setValue(
+            this.gettedSetting.external_c
+          )
         },
         (errmess) => {
           this.gettedSetting = null
@@ -94,6 +105,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.setTable = this.tablesForm.value
     this.setTable._id = this.gettedSetting._id || '0'
     this.showSpinner = true
+
     this.settingsTableService.submitSettingsTable(this.setTable).subscribe(
       (tables) => {
         this.setTable = tables

@@ -70,6 +70,12 @@ import { ItemFirstComponent } from './components/levels/item/item-first.componen
 import { MessageSharingService } from './services/message-sharing.service'
 import { MenuFirstLevelComponent } from './pages/tables-menu/menu-first-level.component'
 import { ItemSecondLevelComponent } from './components/levels/item-second-level/item-second-level.component'
+import { RoomsComponent } from './pages/rooms/rooms.component'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { CreateCustomerComponent } from './modal/create-customer/create-customer.component'
+import { InternalRoomComponent } from './pages/internal-room/internal-room.component'
+import { ExternalRoomComponent } from './pages/external-room/external-room.component'
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 @NgModule({
   declarations: [
@@ -100,6 +106,10 @@ import { ItemSecondLevelComponent } from './components/levels/item-second-level/
     FilterArrayPipe,
     ItemFirstComponent,
     ItemSecondLevelComponent,
+    RoomsComponent,
+    CreateCustomerComponent,
+    InternalRoomComponent,
+    ExternalRoomComponent,
   ],
   imports: [
     BrowserModule,
@@ -134,6 +144,8 @@ import { ItemSecondLevelComponent } from './components/levels/item-second-level/
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    MatAutocompleteModule,
+    DragDropModule,
   ],
   entryComponents: [
     LoginComponent,

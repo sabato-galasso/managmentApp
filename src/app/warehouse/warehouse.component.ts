@@ -1,106 +1,125 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {WarehouseService} from '../services/warehouse.service';
-import {FormControl} from '@angular/forms';
-import {WareHouse} from '../models/WareHouse';
-import {Subject, Subscription} from 'rxjs';
-import {DialogBoxComponent} from '../dialog-box/dialog-box.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialog} from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatPaginator } from '@angular/material/paginator'
+import { MatSort } from '@angular/material/sort'
+import { MatTableDataSource } from '@angular/material/table'
+import { WarehouseService } from '../services/warehouse.service'
+import { FormControl } from '@angular/forms'
+import { WareHouse } from '../models/WareHouse'
+import { Subject, Subscription } from 'rxjs'
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
-  styleUrls: ['./warehouse.component.scss']
+  styleUrls: ['./warehouse.component.scss'],
 })
 export class WarehouseComponent implements OnInit, OnDestroy {
+  displayedColumns: string[] = [
+    '_id',
+    'name',
+    'category',
+    'quantity',
+    'price',
+    'updated_at',
+    'actions',
+  ]
+  errMessFeed: string
+  showSpinner = false
 
-  displayedColumns: string[] = ['_id', 'name', 'category', 'quantity', 'price', 'updated_at', 'actions'];
-  errMessFeed: string;
-  showSpinner = false;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator
+  @ViewChild(MatSort, { static: true }) sort: MatSort
 
   catogories: any[] = [
-    {value: '', viewValue: 'Tutto'},
-    {value: 'super-alcolici', viewValue: 'Super Alcolici'},
-    {value: 'bevande', viewValue: 'Bevande'},
-    {value: 'birra', viewValue: 'Birra'},
-    {value: 'cibi', viewValue: 'Cibi'},
-    {value: 'vini', viewValue: 'Vini'}
-  ];
+    { value: '', viewValue: 'Tutto' },
+    { value: 'super-alcolici', viewValue: 'Super Alcolici' },
+    { value: 'bevande', viewValue: 'Bevande' },
+    { value: 'birra', viewValue: 'Birra' },
+    { value: 'cibi', viewValue: 'Cibi' },
+    { value: 'vini', viewValue: 'Vini' },
+  ]
 
-  positionFilter = new FormControl();
-  nameFilter = new FormControl();
-  quantityFilter = new FormControl();
+  positionFilter = new FormControl()
+  nameFilter = new FormControl()
+  quantityFilter = new FormControl()
 
   filteredValues = {
-    category: '', name: '' , quantity: ''
-  };
+    category: '',
+    name: '',
+    quantity: '',
+  }
 
   // Subsciptions
-  private componetDestroyed = new Subject();
-   subscriptionFilterName: Subscription;
-   subscriptionFilterCategory: Subscription;
-   subscriptionFilterQuantity: Subscription;
-  subscriptionGetItems: Subscription;
-   subscriptionFilterUpdateItems: Subscription;
-   subscriptionDeleteItems: Subscription;
-   subscriptionAddItems: Subscription;
+  private componetDestroyed = new Subject()
+  subscriptionFilterName: Subscription
+  subscriptionFilterCategory: Subscription
+  subscriptionFilterQuantity: Subscription
+  subscriptionGetItems: Subscription
+  subscriptionFilterUpdateItems: Subscription
+  subscriptionDeleteItems: Subscription
+  subscriptionAddItems: Subscription
 
-  dataSource = new MatTableDataSource([]);
+  dataSource = new MatTableDataSource([])
 
-  constructor(private warehouseService: WarehouseService,
-              public dialog: MatDialog,
-              private snackBar: MatSnackBar
-              ) {}
+  constructor(
+    private warehouseService: WarehouseService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.loadData();
-    this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe((categoryFilterValue) => {
-      this.filteredValues.category = categoryFilterValue;
-      this.dataSource.filter = JSON.stringify(this.filteredValues);
-    });
+    this.loadData()
+    this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe(
+      (categoryFilterValue) => {
+        this.filteredValues.category = categoryFilterValue
+        this.dataSource.filter = JSON.stringify(this.filteredValues)
+      }
+    )
 
-    this.subscriptionFilterName =  this.nameFilter.valueChanges.subscribe((nameFilterValue) => {
-      this.filteredValues.name = nameFilterValue;
-      this.dataSource.filter = JSON.stringify(this.filteredValues);
-    });
+    this.subscriptionFilterName = this.nameFilter.valueChanges.subscribe(
+      (nameFilterValue) => {
+        this.filteredValues.name = nameFilterValue
+        this.dataSource.filter = JSON.stringify(this.filteredValues)
+      }
+    )
 
-    this.subscriptionFilterQuantity =  this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
-
-      this.filteredValues.quantity = quantityFilterValue;
-      this.dataSource.filter = JSON.stringify(this.filteredValues);
-    });
-    this.dataSource.filterPredicate = this.customFilterPredicate();
+    this.subscriptionFilterQuantity = this.quantityFilter.valueChanges.subscribe(
+      (quantityFilterValue) => {
+        this.filteredValues.quantity = quantityFilterValue
+        this.dataSource.filter = JSON.stringify(this.filteredValues)
+      }
+    )
+    this.dataSource.filterPredicate = this.customFilterPredicate()
   }
 
   public loadData() {
-        this.showSpinner = true;
-        this.subscriptionGetItems = this.warehouseService.getWareHouse()
-      .subscribe(items => {
-          this.showSpinner = true;
-          this.dataSource.data = items;
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        },
-        errMess => { this.errMessFeed = errMess as any;
-                     this.openSnackBar(this.errMessFeed, 'Undo'); },
-        () => {console.log('Observable finished', this.dataSource);  this.showSpinner = false; }
-      );
-}
+    this.showSpinner = true
+    this.subscriptionGetItems = this.warehouseService.getWareHouse().subscribe(
+      (items) => {
+        this.showSpinner = true
+        this.dataSource.data = items
+        this.dataSource.sort = this.sort
+        this.dataSource.paginator = this.paginator
+      },
+      (errMess) => {
+        this.errMessFeed = errMess as any
+        this.openSnackBar(this.errMessFeed, 'Undo')
+      },
+      () => {
+        console.log('Observable finished', this.dataSource)
+        this.showSpinner = false
+      }
+    )
+  }
 
   refresh() {
-    this.loadData();
-}
+    this.loadData()
+  }
 
   customFilterPredicate() {
     return (data: WareHouse, filter: string): boolean => {
-
-     /* let globalMatch = !this.globalFilter;
+      /* let globalMatch = !this.globalFilter;
 
       if (this.globalFilter) {
         // search all text fields
@@ -110,80 +129,105 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       if (!globalMatch) {
         return;
       }*/
-      console.log('sdsds',data.quantity,filter)
-      const searchString = JSON.parse(filter);
+      console.log('sdsds', data.quantity, filter)
+      const searchString = JSON.parse(filter)
       if (data && data.category && data.name && data.quantity) {
-        return data.category.toString().trim().includes(searchString.category) &&
-          data.name.toString().trim().toLowerCase().includes(searchString.name)  &&
-          data.quantity.toString().trim().toLowerCase().includes(searchString.quantity)
+        return (
+          data.category.toString().trim().includes(searchString.category) &&
+          data.name
+            .toString()
+            .trim()
+            .toLowerCase()
+            .includes(searchString.name) &&
+          data.quantity
+            .toString()
+            .trim()
+            .toLowerCase()
+            .includes(searchString.quantity)
+        )
       } else {
-        return false;
+        return false
       }
-    };
+    }
   }
 
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action);
+    this.snackBar.open(message, action)
   }
 
   updateDataTableValue(data) {
-    this.subscriptionFilterUpdateItems = this.warehouseService.updateWareHouse(data).subscribe(items => {
-        this.showSpinner = true;
-      },
-      errMess => {
-      this.errMessFeed = errMess as any;
-      this.openSnackBar(this.errMessFeed, 'Undo'); },
-      () => {console.log('Observable finished', this.dataSource); this.refresh(); this.showSpinner = false; }
-      );
+    this.subscriptionFilterUpdateItems = this.warehouseService
+      .updateWareHouse(data)
+      .subscribe(
+        (items) => {
+          this.showSpinner = true
+        },
+        (errMess) => {
+          this.errMessFeed = errMess as any
+          this.openSnackBar(this.errMessFeed, 'Undo')
+        },
+        () => {
+          console.log('Observable finished', this.dataSource)
+          this.refresh()
+          this.showSpinner = false
+        }
+      )
   }
 
   openDialog(action, obj) {
-    obj.action = action;
+    obj.action = action
     const dialogRef = this.dialog.open(DialogBoxComponent, {
       width: '500px',
-      data: obj
-    });
+      data: obj,
+    })
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result.event === 'Aggiungi') {
-        this.addRowData(result.data);
+        this.addRowData(result.data)
       } else if (result.event === 'Elimina') {
-        this.deleteRowData(result.data);
+        this.deleteRowData(result.data)
       }
-    });
+    })
   }
 
   addRowData(rowObj: WareHouse) {
-
-    this.subscriptionAddItems = this.warehouseService.addWareHouse(rowObj).subscribe(items => {
-        this.showSpinner = true;
-      },
-      errMess => {
-      this.errMessFeed = errMess as any;
-      this.openSnackBar(this.errMessFeed, 'Undo');
-      },
-      () => {
-        this.refresh();
-        this.showSpinner = false; }
-    );
+    this.subscriptionAddItems = this.warehouseService
+      .addWareHouse(rowObj)
+      .subscribe(
+        (items) => {
+          this.showSpinner = true
+        },
+        (errMess) => {
+          this.errMessFeed = errMess as any
+          this.openSnackBar(this.errMessFeed, 'Undo')
+        },
+        () => {
+          this.refresh()
+          this.showSpinner = false
+        }
+      )
   }
 
   deleteRowData(rowObj: WareHouse) {
-    this.subscriptionDeleteItems = this.warehouseService.deleteWareHouseRow(rowObj).subscribe(items => {
-        this.showSpinner = true;
-      },
-      errMess => { this.errMessFeed = errMess as any;
-                   this.openSnackBar(this.errMessFeed, 'Undo');
-      },
-      () => {
-        this.refresh();
-        this.showSpinner = false; }
-    );
-
+    this.subscriptionDeleteItems = this.warehouseService
+      .deleteWareHouseRow(rowObj)
+      .subscribe(
+        (items) => {
+          this.showSpinner = true
+        },
+        (errMess) => {
+          this.errMessFeed = errMess as any
+          this.openSnackBar(this.errMessFeed, 'Undo')
+        },
+        () => {
+          this.refresh()
+          this.showSpinner = false
+        }
+      )
   }
 
   ngOnDestroy() {
-    this.componetDestroyed.next();
-    this.componetDestroyed.unsubscribe();
+    this.componetDestroyed.next()
+    this.componetDestroyed.unsubscribe()
   }
 }

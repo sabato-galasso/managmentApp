@@ -11,6 +11,9 @@ import { SecondLevelComponent } from '../components/levels/second-level/second-l
 import { MenuManagerComponent } from '../pages/menu-manager/menu-manager.component'
 import { MenuCategoryComponent } from '../pages/menu-category/menu-category.component'
 import { MenuFirstLevelComponent } from '../pages/tables-menu/menu-first-level.component'
+import { RoomsComponent } from '../pages/rooms/rooms.component'
+import { InternalRoomComponent } from '../pages/internal-room/internal-room.component'
+import { ExternalRoomComponent } from '../pages/external-room/external-room.component'
 
 export const routes: Routes = [
   {
@@ -18,7 +21,10 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuardService],
     children: [
+      { path: '', component: RoomsComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'internal-room', component: InternalRoomComponent },
+      { path: 'external-room', component: ExternalRoomComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'warehouse', component: WarehouseComponent },
       { path: 'home/:id', component: MenuFirstLevelComponent },

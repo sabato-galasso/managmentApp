@@ -29,7 +29,30 @@
           />
           <span matPrefix>€&nbsp;</span>
         </mat-form-field>
-
+        <mat-form-field class="mr-3">
+          <input
+            matInput
+            placeholder="Numero tavoli interni"
+            type="number"
+            formControlName="internal"
+          />
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <input
+            matInput
+            placeholder="Numero tavoli esterni ombrelloni"
+            type="number"
+            formControlName="external_s"
+          />
+        </mat-form-field>
+        <mat-form-field class="mr-3">
+          <input
+            matInput
+            placeholder="Numero tavoli pedana"
+            type="number"
+            formControlName="external_c"
+          />
+        </mat-form-field>
         <button
           type="submit"
           mat-raised-button

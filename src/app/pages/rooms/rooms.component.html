@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row position-relative">
+    <div class="col-4 mt-4">
+      <div
+        class="example-ripple-container mat-elevation-z4"
+        [routerLink]="['/home']"
+        matRipple
+        [matRippleCentered]="centered"
+        [matRippleDisabled]="disabled"
+        [matRippleUnbounded]="unbounded"
+        [matRippleRadius]="radius"
+        [matRippleColor]="color"
+      >
+        Biliardi
+      </div>
+    </div>
+    <div class="col-4 mt-4">
+      <div
+        class="example-ripple-container mat-elevation-z4"
+        [routerLink]="['/internal-room']"
+        matRipple
+        [matRippleCentered]="centered"
+        [matRippleDisabled]="disabled"
+        [matRippleUnbounded]="unbounded"
+        [matRippleRadius]="radius"
+        [matRippleColor]="color"
+      >
+        Interni
+      </div>
+    </div>
+    <div class="col-4 mt-4">
+      <div
+        class="example-ripple-container mat-elevation-z4"
+        [routerLink]="['/external-room']"
+        matRipple
+        [matRippleCentered]="centered"
+        [matRippleDisabled]="disabled"
+        [matRippleUnbounded]="unbounded"
+        [matRippleRadius]="radius"
+        [matRippleColor]="color"
+      >
+        Esterni
+      </div>
+    </div>
+  </div>
+</div>

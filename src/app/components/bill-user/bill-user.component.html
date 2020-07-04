@@ -41,7 +41,7 @@
           color="primary"
           class="d-inline-block"
           *ngIf="item.quantity > 0"
-          (click)="removeItem()"
+          (click)="removeItem(item, item.ids)"
         >
           -
         </button>
@@ -50,6 +50,7 @@
           color="primary"
           class="d-inline-block"
           *ngIf="item.quantity > 0"
+          (click)="addItem(item, item.ids)"
         >
           +
         </button>

@@ -2,21 +2,74 @@
   <button mat-button (click)="drawer.toggle()">
     <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
   </button>
-  <span>App</span>
+  <span>Billiards 1.0</span>
+  <div class="example-fill-remaining-space">
+    <button mat-raised-button [routerLink]="['/home']" class="mr-3">
+      Biliardi
+    </button>
+    <button mat-raised-button [routerLink]="['/internal-room']" class="mr-3">
+      Interni
+    </button>
+    <button mat-raised-button [routerLink]="['/external-room']">
+      Esterni
+    </button>
+  </div>
   <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space">{{ userName }}</span>
-  <button mat-button (click)="logout()" label="logout">
-    <mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
-  </button>
+  <form class="example-fill-remaining-space">
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Cerca clienti"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <button
+        mat-button
+        mat-icon-button
+        matSuffix
+        (click)="clearSearchField()"
+        *ngIf="myControl.value"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+          (click)="redirectTo('/home/' + option)"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button
+      mat-mini-fab
+      class="ml-3"
+      color="secondary"
+      aria-label="clienti"
+      (click)="openDialog()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </form>
+  <div class="example-fill-remaining-space">
+    <button mat-raised-button (click)="open()">Clienti attivi</button>
+  </div>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>
+      <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/']"
+        >Sala
+        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
+      </a>
       <a
         mat-list-item
         routerLinkActive="list-item-active"
         [routerLink]="['/home']"
-        >Sala
+        >Biliardi
         <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
       </a>
       <a
@@ -27,6 +80,13 @@
         <mat-icon matListIcon class="nav-list-icon"
           >settings_applications</mat-icon
         >
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/customer-list']"
+        routerLinkActive="list-item-active"
+        >Lista clienti
+        <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
       </a>
       <a
         mat-list-item
@@ -49,10 +109,31 @@
         >Categorie
         <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
       </a>
+      <button mat-button (click)="logout()" label="logout">
+        Esci
+        <mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
+      </button>
     </mat-nav-list>
   </mat-drawer>
   <router-outlet></router-outlet>
+  <mat-sidenav #drawer1 mode="side" position="end">
+    <div class="px-5">
+      <h2>
+        Lista
+      </h2>
+    </div>
+    <div *ngIf="userActived">
+      <ul *ngFor="let user of userActived" class="px-5">
+        <li
+          style="cursor: pointer;"
+          (click)="redirectTo('/home/' + user.nTable)"
+        >
+          <h3>Tavolo: {{ user.nTable }}</h3>
+        </li>
+      </ul>
+    </div>
+  </mat-sidenav>
 </mat-drawer-container>
 <mat-toolbar class="app-version"
-  ><p>Package Ver. {{ versionApp }}</p></mat-toolbar
->
+  ><p>Package Ver. {{ versionApp }}</p>
+</mat-toolbar>

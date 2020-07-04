@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { WebsocketService } from '../../services/socket.service'
 import { CustomerTableModel } from '../../models/CustomerTableModel'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
 import { MenuResponse } from '../../models/Menu/MenuResponse'
 import _ from 'lodash'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-tables-menu',
   templateUrl: './menu-first-level.component.html',
   styleUrls: ['./menu-first-level.component.scss'],
 })
-export class MenuFirstLevelComponent implements OnInit {
+export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   paramId: string
   customerTable: CustomerTableModel
   private menu: MenuResponse[]
+  private unsubscribe$ = new Subject<void>()
+
   constructor(
     private route: ActivatedRoute,
     private socketService: WebsocketService,
@@ -40,10 +44,12 @@ export class MenuFirstLevelComponent implements OnInit {
       this.menu = res
     })*/
 
-    this.menuService.getCategories().subscribe((res) => {
-      debugger
-      this.menu = _.uniqBy(res, 'slugCategory')
-    })
+    this.menuService
+      .getCategories()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
+        this.menu = _.uniqBy(res, 'slugCategory')
+      })
   }
 
   closeTable() {
@@ -51,5 +57,14 @@ export class MenuFirstLevelComponent implements OnInit {
       this.customerTable = msg
       console.log('ttttttt',msg)
     });  */
+  }
+
+  locationBack() {
+    window.history.back()
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 }

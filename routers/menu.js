@@ -35,6 +35,16 @@ router.get('/api/menu/subcategory/:category', auth, async (req, res) => {
   }
 })
 
+router.get('/api/items/', auth, async (req, res) => {
+  try {
+    const filter = { _id: req.query.ids }
+    let items = await menuModel.findOne(filter)
+    res.status(200).send(items)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
 router.get(
   '/api/menu/subcategory-category/:subcategory/:category',
   auth,

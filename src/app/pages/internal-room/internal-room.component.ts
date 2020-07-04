@@ -1,45 +1,44 @@
 import { Component, OnInit } from '@angular/core'
-import { SettingsTableService } from '../../services/settings-table.service'
-import { SettingsTable } from '../../models/SettingsTable'
 import { Subject } from 'rxjs'
+import { SettingsTable } from '../../models/SettingsTable'
+import { SettingsTableService } from '../../services/settings-table.service'
 import { takeUntil } from 'rxjs/operators'
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-internal-room',
+  templateUrl: './internal-room.component.html',
+  styleUrls: ['./internal-room.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  errMessFeed: string
-  showSpinner = false
-  items: Array<number>
-  gettedSetting: SettingsTable
+export class InternalRoomComponent implements OnInit {
+  private gettedSetting: SettingsTable
+  private errMessFeed: any
+  showSpinner: boolean
+  private interni: number[]
   private unsubscribe$ = new Subject<void>()
 
   constructor(private settingsTableService: SettingsTableService) {}
 
-  ngOnInit(): void {
-    this.getSetting()
-  }
-
-  getSetting() {
+  getSettingsTable() {
     this.settingsTableService
       .getSettingsTable()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (tables) => {
           this.gettedSetting = tables
-          this.items = Array.from(Array(this.gettedSetting.quantity).keys())
+          this.interni = Array.from(Array(this.gettedSetting.internal).keys())
         },
         (errmess) => {
           this.gettedSetting = null
           this.errMessFeed = errmess as any
         },
         () => {
-          console.log('Observable finished', this.gettedSetting)
           this.showSpinner = false
         }
       )
+  }
+
+  ngOnInit(): void {
+    this.getSettingsTable()
   }
 
   ngOnDestroy(): void {

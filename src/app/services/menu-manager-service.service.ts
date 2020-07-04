@@ -112,6 +112,31 @@ export class MenuManagerServiceService {
       .post<MenuResponse>(baseURL + 'api/menu', data, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))
   }
+  serialize(obj) {
+    let str =
+      '?' +
+      Object.keys(obj)
+        .reduce(function (a, k) {
+          a.push(k + '=' + encodeURIComponent(obj[k]))
+          return a
+        }, [])
+        .join('&')
+    return str
+  }
+  getItemMenu(data): Observable<MenuResponse> {
+    const token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+    let s = this.serialize(data)
+
+    return this.http
+      .get<MenuResponse>(baseURL + 'api/items/' + s, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
 
   deleteMenuRow(data): Observable<MenuResponse> {
     const token = localStorage.getItem('token')

@@ -78,6 +78,7 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     if (this.subCategorySlug) {
       this.menuService
         .filterByCategoryAndSubcategory(this.categorySlug, this.subCategorySlug)
+        .pipe(takeUntil(this.unsubscribe$))
         .subscribe((res) => {
           debugger
           console.log(res)
@@ -86,23 +87,27 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     } else {
       this.menuService
         .getMenuCategoryItems(this.categorySlug)
+        .pipe(takeUntil(this.unsubscribe$))
         .subscribe((res) => {
           console.log(res)
           this.items = res
         })
     }
 
-    this.customerService.getCustomerDataByTable(this.paramId).subscribe(
-      (res) => {
-        console.log('dsdsd', res)
+    this.customerService
+      .getCustomerDataByTable(this.paramId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (res) => {
+          console.log('dsdsd', res)
 
-        this.isActiveTable = res && res.summed.length > 0
-        this._id = res && res._id ? res._id : null
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+          this.isActiveTable = res && res.summed.length > 0
+          this._id = res && res._id ? res._id : null
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   closeTable() {
