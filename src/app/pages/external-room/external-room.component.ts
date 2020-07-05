@@ -13,8 +13,8 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   private gettedSetting: SettingsTable
   private errMessFeed: any
   showSpinner: boolean
-  private copertiStruttura: number[]
-  private copertiObrelloni: number[]
+  copertiStruttura: number[]
+  copertiObrelloni: number[]
   private unsubscribe$ = new Subject<void>()
   @Input() keyEl: number
 

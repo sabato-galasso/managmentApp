@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('drawer1') drawer1: MatSidenav
 
   private name: any
-  private userActived: any
+  userActived: any
 
   constructor(
     private auth: AuthService,

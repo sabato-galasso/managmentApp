@@ -10,10 +10,10 @@ import { takeUntil } from 'rxjs/operators'
   styleUrls: ['./internal-room.component.scss'],
 })
 export class InternalRoomComponent implements OnInit {
-  private gettedSetting: SettingsTable
+  gettedSetting: SettingsTable
   private errMessFeed: any
   showSpinner: boolean
-  private interni: number[]
+  interni: number[]
   private unsubscribe$ = new Subject<void>()
 
   constructor(private settingsTableService: SettingsTableService) {}

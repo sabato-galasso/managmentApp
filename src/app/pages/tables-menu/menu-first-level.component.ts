@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators'
 export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   paramId: string
   customerTable: CustomerTableModel
-  private menu: MenuResponse[]
+  menu: MenuResponse[]
   private unsubscribe$ = new Subject<void>()
 
   constructor(
