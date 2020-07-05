@@ -5,6 +5,7 @@ import { MessageSharingService } from '../../services/message-sharing.service'
 import { Subject, Subscription } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-user-items',
@@ -26,7 +27,8 @@ export class BillUserComponent implements OnInit, OnDestroy {
   constructor(
     private customerService: CustomerService,
     private messageService: MessageSharingService,
-    private menuService: MenuManagerServiceService
+    private menuService: MenuManagerServiceService,
+    private _snackBar: MatSnackBar
   ) {
     this.customerTable = {
       price: '0',
@@ -102,6 +104,9 @@ export class BillUserComponent implements OnInit, OnDestroy {
         console.log('close', res)
         this.tavoloAttivo = false
         this.consumazioni = null
+        this.messageService.updateId(null)
+        this.messageService.updateTavoloAttivo(this.tavoloAttivo)
+        this.messageService.updateConsumazioni([])
       })
   }
 
@@ -168,5 +173,14 @@ export class BillUserComponent implements OnInit, OnDestroy {
             )
         }
       })
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, '', {
+      duration: 2000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: '',
+    })
   }
 }

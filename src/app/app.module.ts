@@ -76,6 +76,7 @@ import { CreateCustomerComponent } from './modal/create-customer/create-customer
 import { InternalRoomComponent } from './pages/internal-room/internal-room.component'
 import { ExternalRoomComponent } from './pages/external-room/external-room.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
+import { DoubleClickDirective } from './directive/double-click.directive'
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     CreateCustomerComponent,
     InternalRoomComponent,
     ExternalRoomComponent,
+    DoubleClickDirective,
   ],
   imports: [
     BrowserModule,

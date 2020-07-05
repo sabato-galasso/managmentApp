@@ -40,7 +40,7 @@ export class SecondLevelComponent implements OnInit {
 
     this.menuServices.filterByCategory(this.category).subscribe((res) => {
       console.log(res)
-      debugger
+
       this.firstLevel = res
     })
   }

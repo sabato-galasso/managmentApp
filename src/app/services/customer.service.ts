@@ -48,7 +48,7 @@ export class CustomerService {
     }
 
     let s = this.serialize(data)
-    debugger
+
     return this.http
       .get<any>(baseURL + 'api/get-customer/' + s, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))

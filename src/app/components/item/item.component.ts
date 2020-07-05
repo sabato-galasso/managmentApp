@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { CustomerService } from '../../services/customer.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MessageSharingService } from '../../services/message-sharing.service'
-import { takeUntil } from 'rxjs/operators'
+import { delay, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
@@ -30,6 +30,7 @@ export class ItemComponent implements OnInit {
   @Input() _id: string
   paramId: any
   private unsubscribe$ = new Subject<void>()
+  private isOk: boolean
 
   constructor(
     private customerService: CustomerService,
@@ -44,9 +45,11 @@ export class ItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  valueChanged(Event: any, dataItem: any) {
-    Event.stopPropagation()
+  valueChanged(event: any, dataItem: any) {
+    event.stopPropagation()
+    event.preventDefault()
     this.counter = this.counter + 1
+    this.isOk = true
     this.valueChange.emit(this.counter)
     dataItem.quantity = 1
     let data = {
@@ -69,6 +72,7 @@ export class ItemComponent implements OnInit {
       this.customerService
         .updateCustomerData(data)
         .pipe(takeUntil(this.unsubscribe$))
+
         .subscribe(
           (res) => {
             this.isActiveTable = true
@@ -82,6 +86,7 @@ export class ItemComponent implements OnInit {
       this.customerService
         .addNewCustomerData(data)
         .pipe(takeUntil(this.unsubscribe$))
+        .pipe(delay(500))
         .subscribe(
           (res) => {
             this.isActiveTable = true
@@ -99,10 +104,12 @@ export class ItemComponent implements OnInit {
 
   openSnackBar(message: string) {
     this._snackBar.open(message, '', {
-      duration: 4000,
+      duration: 1000,
       horizontalPosition: 'end',
       verticalPosition: 'top',
       panelClass: '',
     })
   }
+
+  log() {}
 }

@@ -35,7 +35,7 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     this.paramId = this.route.snapshot.params.id
     this.subCategorySlug = this.route.snapshot.params.subCategory
     this.categorySlug = this.route.snapshot.params.category
-    debugger
+
     this.customerTable = {
       status: 0,
       timer: '0',
@@ -47,7 +47,6 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (_id) => {
-          debugger
           this._id = this._id ? this._id : _id
         },
         (error) => {
@@ -60,7 +59,6 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (isActive) => {
-          debugger
           this.isActiveTable = isActive
         },
         (error) => {
@@ -80,7 +78,6 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
         .filterByCategoryAndSubcategory(this.categorySlug, this.subCategorySlug)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((res) => {
-          debugger
           console.log(res)
           this.items = res
         })
