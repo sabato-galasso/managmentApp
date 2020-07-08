@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { CustomerService } from '../services/customer.service'
 import { WebsocketService } from '../services/socket.service'
 import { CustomerTableModel } from '../models/CustomerTableModel'
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-stop-watch',
@@ -32,6 +34,8 @@ export class StopWatchComponent implements OnInit, OnDestroy {
 
   @Input() keyEl: number
   customerTable: CustomerTableModel
+  ids: string[] = []
+  private unsubscribe$ = new Subject<void>()
 
   constructor(
     public dialog: MatDialog,
@@ -100,6 +104,8 @@ this.customerService.addNewCustomerData(data).subscribe(res => {
 
   ngOnDestroy() {
     clearInterval(this.timerRef)
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 
   stopwatchCalc(sec) {
@@ -121,27 +127,48 @@ this.customerService.addNewCustomerData(data).subscribe(res => {
   }
 
   getSettingsTable() {
-    this.settingsTableService.getSettingsTable().subscribe(
-      (tables) => {
-        this.gettedSetting = tables
-        this.pphValue = this.gettedSetting.price
-      },
-      (errmess) => {
-        this.gettedSetting = null
-        this.errMessFeed = errmess as any
-      },
-      () => {
-        console.log('Observable finished', this.gettedSetting)
-        this.showSpinner = false
-      }
-    )
+    this.settingsTableService
+      .getSettingsTable()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (tables) => {
+          this.gettedSetting = tables
+          this.pphValue = this.gettedSetting.price
+        },
+        (errmess) => {
+          this.gettedSetting = null
+          this.errMessFeed = errmess as any
+        },
+        () => {
+          console.log('Observable finished', this.gettedSetting)
+          this.showSpinner = false
+        }
+      )
   }
 
   ngOnInit(): void {
     this.getSettingsTable()
+    this.getOpened()
     /*this.socketService.getSocket(this.keyEl.toString()).subscribe(msg => {
       this.customerTable = msg
       console.log('dddddd',msg)
     });*/
+  }
+
+  getOpened() {
+    this.customerService
+      .openedCustomerData('biliardi-')
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
+        if (res && res.length > 0) {
+          res.forEach((el) => {
+            this.ids.push(el.nTable)
+          })
+        }
+      })
+  }
+
+  getActived(s: string) {
+    return this.ids.includes(s)
   }
 }

@@ -1,6 +1,7 @@
 <div
   class="card bg-primary shadow m-4"
   matRipple
+  [class.bg-active]="getActived('biliardi-' + keyEl)"
   [ngClass]="{ 'bg-active': customerTable.status === 1, 'pause-card': paused }"
   [matRippleDisabled]="running"
   (click)="startTable()"

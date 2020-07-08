@@ -16,7 +16,7 @@ export class InternalRoomComponent implements OnInit {
   showSpinner: boolean
   interni: number[]
   private unsubscribe$ = new Subject<void>()
-  selectedIndex: number[] = []
+  ids: string[] = []
 
   constructor(
     private settingsTableService: SettingsTableService,
@@ -59,14 +59,13 @@ export class InternalRoomComponent implements OnInit {
       .subscribe((res) => {
         if (res && res.length > 0) {
           res.forEach((el) => {
-            this.setSelected(el.nTable.split('-')[1])
+            this.ids.push(el.nTable)
           })
         }
       })
   }
 
-  setSelected(id: number) {
-    debugger
-    this.selectedIndex.push(Number(id))
+  getActived(s: string) {
+    return this.ids.includes(s)
   }
 }

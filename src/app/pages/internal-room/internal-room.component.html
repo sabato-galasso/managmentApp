@@ -1,7 +1,7 @@
 <div class="row justify-content-center full-overlay">
   <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
     <div
-      [ngClass]="{ 'bg-active': selectedIndex.includes(idx + 1) }"
+      [class.bg-active]="getActived('interno-' + (idx + 1))"
       class="example-box m-3"
       *ngFor="let item of interni; let idx = index"
       [routerLink]="['/home', 'interno-' + (idx + 1)]"
