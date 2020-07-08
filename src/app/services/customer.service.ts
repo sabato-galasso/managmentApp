@@ -14,6 +14,19 @@ export class CustomerService {
     private processHTTPMsgService: ProcessHttpmsgService
   ) {}
 
+  openedCustomerData(data: string): Observable<any> {
+    const token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+    return this.http
+      .get<any>(baseURL + 'api/customer-opened?nTable=' + data, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
+
   addNewCustomerData(data: any): Observable<any> {
     const token = localStorage.getItem('token')
     const httpOptions = {

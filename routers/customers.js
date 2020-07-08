@@ -104,11 +104,9 @@ router.put('/api/customer-remove/index', auth, async (req, res) => {
     const filter = { _id: req.body._id }
     let doc = await customerModel.findOne(filter)
 
-    res
-      .status(201)
-      .send({
-        index: doc._doc.consumazioni.findIndex((el) => el._id === req.body.ids),
-      })
+    res.status(201).send({
+      index: doc._doc.consumazioni.findIndex((el) => el._id === req.body.ids),
+    })
   } catch (error) {
     res.status(400).send(error)
   }
@@ -172,7 +170,17 @@ router.delete('/api/customer/', auth, async (req, res) => {
 
 router.get('/api/customer-open', auth, async (req, res) => {
   try {
-    const filter = { statusTable: 1 }
+    const filter = { statusTable: 1, category: 'customer' }
+    let items = await customerModel.find(filter)
+    res.status(200).send(items)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+router.get('/api/customer-opened', auth, async (req, res) => {
+  try {
+    const filter = { nTable: { $regex: req.query.nTable }, statusTable: 1 }
     let items = await customerModel.find(filter)
     res.status(200).send(items)
   } catch (error) {

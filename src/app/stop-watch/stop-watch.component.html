@@ -1,12 +1,21 @@
-<div class="card bg-primary shadow m-4 " matRipple [ngClass]="{'bg-active': customerTable.status === 1,  'pause-card' : paused }"
-     [matRippleDisabled]="running"
-     (click)="startTable()" >
+<div
+  class="card bg-primary shadow m-4"
+  matRipple
+  [ngClass]="{ 'bg-active': customerTable.status === 1, 'pause-card': paused }"
+  [matRippleDisabled]="running"
+  (click)="startTable()"
+>
   <div class="card-body center text-white">
-    <h1>B{{keyEl}}</h1>
-    <button mat-fab color="primary" [routerLink]="['/home',keyEl]" class="menu-button">
+    <h1>B{{ keyEl }}</h1>
+    <button
+      mat-fab
+      color="primary"
+      [routerLink]="['/home', 'biliardi-' + keyEl]"
+      class="menu-button"
+    >
       <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
     </button>
-</div>
-<!--  <div>{{customerTable.timer}}</div>-->
+  </div>
+  <!--  <div>{{customerTable.timer}}</div>-->
 </div>
 <!--<div>{{customerTable.price}}</div>-->

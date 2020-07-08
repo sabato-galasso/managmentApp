@@ -52,9 +52,19 @@ export class ItemComponent implements OnInit {
     this.isOk = true
     this.valueChange.emit(this.counter)
     dataItem.quantity = 1
+    const array = [
+      'esterno-ombrellone-',
+      'esterno-pedana-',
+      'interno-',
+      'biliardi-',
+    ]
     let data = {
       priceTable: 1,
-      category: this.paramId && isNaN(this.paramId) ? 'customer' : 'game',
+      category:
+        this.paramId &&
+        !array.some((item) => new RegExp(item).test(this.paramId))
+          ? 'customer'
+          : 'game',
       statusTable: 1,
       nTable: this.numberTable,
       consumazioni: [dataItem],

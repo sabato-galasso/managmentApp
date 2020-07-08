@@ -8,6 +8,7 @@ import { CustomerService } from '../../../services/customer.service'
 import { MessageSharingService } from '../../../services/message-sharing.service'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-item-level',
@@ -30,7 +31,8 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
     private warehouseService: WarehouseService,
     private menuService: MenuManagerServiceService,
     private customerService: CustomerService,
-    private messageService: MessageSharingService
+    private messageService: MessageSharingService,
+    private _location: Location
   ) {
     this.paramId = this.route.snapshot.params.id
     this.subCategorySlug = this.route.snapshot.params.subCategory
@@ -117,5 +119,9 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
+  }
+
+  back() {
+    this._location.back()
   }
 }

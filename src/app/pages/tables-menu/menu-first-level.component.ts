@@ -7,6 +7,7 @@ import { MenuResponse } from '../../models/Menu/MenuResponse'
 import _ from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-tables-menu',
@@ -22,7 +23,8 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private socketService: WebsocketService,
-    private menuService: MenuManagerServiceService
+    private menuService: MenuManagerServiceService,
+    private _location: Location
   ) {
     this.paramId = this.route.snapshot.params.id
 
@@ -60,7 +62,7 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   }
 
   locationBack() {
-    window.history.back()
+    this._location.back()
   }
 
   ngOnDestroy(): void {

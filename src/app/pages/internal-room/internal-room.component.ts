@@ -3,6 +3,7 @@ import { Subject } from 'rxjs'
 import { SettingsTable } from '../../models/SettingsTable'
 import { SettingsTableService } from '../../services/settings-table.service'
 import { takeUntil } from 'rxjs/operators'
+import { CustomerService } from '../../services/customer.service'
 
 @Component({
   selector: 'app-internal-room',
@@ -15,8 +16,12 @@ export class InternalRoomComponent implements OnInit {
   showSpinner: boolean
   interni: number[]
   private unsubscribe$ = new Subject<void>()
+  selectedIndex: number[] = []
 
-  constructor(private settingsTableService: SettingsTableService) {}
+  constructor(
+    private settingsTableService: SettingsTableService,
+    private customerService: CustomerService
+  ) {}
 
   getSettingsTable() {
     this.settingsTableService
@@ -39,10 +44,29 @@ export class InternalRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSettingsTable()
+    this.getOpened()
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
+  }
+
+  getOpened() {
+    this.customerService
+      .openedCustomerData('interno-')
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
+        if (res && res.length > 0) {
+          res.forEach((el) => {
+            this.setSelected(el.nTable.split('-')[1])
+          })
+        }
+      })
+  }
+
+  setSelected(id: number) {
+    debugger
+    this.selectedIndex.push(Number(id))
   }
 }
