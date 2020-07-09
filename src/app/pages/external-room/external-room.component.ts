@@ -19,6 +19,8 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>()
   ids: string[] = []
   @Input() keyEl: number
+  dragPosition = [{ x: 0, y: 0 }]
+  disabled: boolean = true
 
   constructor(
     private settingsTableService: SettingsTableService,
@@ -52,6 +54,7 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getSettingsTable()
     this.getOpened()
+    // this.dragPosition[0] = {x: this.dragPosition[0].x + 50, y: this.dragPosition[0].y + 50};
   }
 
   ngOnDestroy(): void {
@@ -89,5 +92,9 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
 
   getActived(s: string) {
     return this.ids.includes(s)
+  }
+
+  enabled() {
+    this.disabled = !this.disabled
   }
 }

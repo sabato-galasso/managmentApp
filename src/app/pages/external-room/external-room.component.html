@@ -1,34 +1,51 @@
 <div class="row justify-content-center full-overlay">
   <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
     <div
+      cdkDrag
+      [cdkDragDisabled]="disabled"
       [class.bg-active]="getActived('esterno-pedana-' + (idx + 1))"
-      class="example-box m-3"
+      class="col-3 example-box m-3"
       *ngFor="let item of copertiStruttura; let idx = index"
       [routerLink]="['/home', 'esterno-pedana-' + (idx + 1)]"
     >
-      Esterno Pedana {{ idx + 1 }}
-      <div class="example-handle">
-        <!--        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">-->
-        <!--          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>-->
-        <!--          <path d="M0 0h24v24H0z" fill="none"></path>-->
-        <!--        </svg>-->
+      <div>
+        Esterno Pedana {{ idx + 1 }}
+        <div class="example-handle" *ngIf="!disabled">
+          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+            ></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
     <div
-      class="example-box m-3"
+      cdkDrag
+      [cdkDragFreeDragPosition]="dragPosition[idx]"
+      [cdkDragDisabled]="disabled"
+      class="col-3 example-box m-3"
       [class.bg-active]="getActived('esterno-ombrellone-' + (idx + 1))"
       *ngFor="let item of copertiObrelloni; let idx = index"
       [routerLink]="['/home', 'esterno-ombrellone-' + (idx + 1)]"
     >
       Esterno Ombrelloni {{ idx + 1 }}
-      <div class="example-handle">
-        <!--        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">-->
-        <!--          <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>-->
-        <!--          <path d="M0 0h24v24H0z" fill="none"></path>-->
-        <!--        </svg>-->
+      <div class="example-handle" *ngIf="!disabled">
+        <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+          ></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+        </svg>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row justify-content-center full-overlay">
+  <div class="col-3">
+    <button mat-raised-button (click)="enabled()">Abilita trascinamento</button>
   </div>
 </div>
