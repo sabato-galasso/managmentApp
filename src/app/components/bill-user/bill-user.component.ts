@@ -84,7 +84,7 @@ export class BillUserComponent implements OnInit, OnDestroy {
           this._id = res._id || null
           this.consumazioni = res && res.summed.length > 0 ? res.summed : null
           this.tavoloAttivo = res && res.summed.length > 0
-          this.total = res.total || 0.0
+          this.total = res.total.toFixed(2) || 0.0
         },
         (error) => {
           console.log(error)
@@ -133,7 +133,7 @@ export class BillUserComponent implements OnInit, OnDestroy {
                 resp && resp.summed.length > 0 ? resp.summed : []
               /// this.tavoloAttivo = resp && resp.summed.length > 0
               this.tavoloAttivo = true
-              this.total = resp.total || 0.0
+              this.total = resp.total.toFixed(2) || 0.0
             })
         }
       })
