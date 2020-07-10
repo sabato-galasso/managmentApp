@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "ng": "ng",
-    "start": "node -r dotenv/config app",
+    "start1": "node -r dotenv/config app",
+    "start": "node app.js",
     "startDev": "env-cmd -f ./.env nodemon app.js",
     "prod1": "(cd server-socket && npm run start) & npm run start & npm run appDev",
     "prod": "npm run start & npm run appDev",
@@ -15,7 +16,7 @@
     "buildProd": "ng build --prod --aot",
     "release": "dotenv release-it",
     "postinstall": "ngcc",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
