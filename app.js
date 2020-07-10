@@ -7,11 +7,13 @@ const customersRouter = require('./routers/customers')
 const categoryRouter = require('./routers/category')
 const menuRouter = require('./routers/menu')
 const customerLIst = require('./routers/customerList')
+const path = require('path')
+
 //const socketRouter = require("./routers/socket");
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 const app = express()
 
-require('dotenv').config({ path: __dirname + '/.env' })
+//require('dotenv').config({ path: __dirname + '/.env' })
 require('./db/db')
 
 //CORS Middleware
