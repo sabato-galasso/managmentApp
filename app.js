@@ -8,15 +8,9 @@ const categoryRouter = require('./routers/category')
 const menuRouter = require('./routers/menu')
 const customerLIst = require('./routers/customerList')
 const path = require('path')
-let port
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({ path: __dirname + '/.env' })
-  port = process.env.PORT || 8080
-} else {
-  port = process.env.PORT || 8080
-}
 
 //const socketRouter = require("./routers/socket");
+const port = process.env.PORT || 8080
 const app = express()
 
 //require('dotenv').config({ path: __dirname + '/.env' })

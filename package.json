@@ -16,7 +16,7 @@
     "buildProd": "ng build --prod --aot",
     "release": "dotenv release-it",
     "postinstall": "ng build --aot --prod",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod --aot"
   },
   "private": true,
   "dependencies": {
@@ -41,7 +41,7 @@
     "lodash": "^4.17.19",
     "material-design-icons": "^3.0.1",
     "mongodb": "^3.5.9",
-    "mongoose": "^5.9.22",
+    "mongoose": "^5.9.23",
     "ngx-loading": "^8.0.0",
     "nodemon": "^2.0.4",
     "path": "^0.12.7",
@@ -52,8 +52,8 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.0",
-    "@angular/cli": "^10.0.0",
+    "@angular-devkit/build-angular": "~0.1000.2",
+    "@angular/cli": "^10.0.2",
     "@angular/compiler-cli": "~10.0.3",
     "@angular/language-service": "~10.0.3",
     "@types/node": "^14.0.22",
