@@ -48,4 +48,16 @@
       ></app-user-items>
     </div>
   </div>
+  <div class="my-container">
+    <ngx-loading
+      [show]="isLoading"
+      [config]="{
+        backdropBorderRadius: '0',
+        backdropBackgroundColour: 'rgba(0,0,0,0.87)',
+        fullScreenBackdrop: 'true'
+      }"
+    >
+    </ngx-loading>
+    <span class="text">Apertura tavolo in corso</span>
+  </div>
 </div>

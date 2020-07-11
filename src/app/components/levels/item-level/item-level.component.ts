@@ -24,6 +24,7 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
   isActiveTable: boolean
   _id: string
   private unsubscribe$ = new Subject<void>()
+  isLoading: boolean
 
   constructor(
     private socketService: WebsocketService,
@@ -43,6 +44,13 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
       timer: '0',
       price: '0',
     }
+
+    this.messageService
+      .getLoading()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res) => {
+        this.isLoading = res
+      })
 
     this.messageService
       .getId()

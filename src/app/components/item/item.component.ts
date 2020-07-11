@@ -93,6 +93,7 @@ export class ItemComponent implements OnInit {
           (error) => {}
         )
     } else {
+      this.messageService.updateLoading(true)
       this.customerService
         .addNewCustomerData(data)
         .pipe(takeUntil(this.unsubscribe$))
@@ -106,6 +107,7 @@ export class ItemComponent implements OnInit {
           },
           (error) => {},
           () => {
+            this.messageService.updateLoading(false)
             this.openSnackBar('Tavolo aperto')
           }
         )

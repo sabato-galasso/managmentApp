@@ -20,12 +20,12 @@ router.post('/api/customer', auth, async (req, res) => {
               return {
                 store: key,
                 quantity: _.sumBy(objs, 'quantity'),
-                price: _.sumBy(objs, 'price'),
+                price: _.round(_.sumBy(objs, 'price'), 2),
                 ids: objs[0]._id,
               }
             })
             .value(),
-          total: _.sumBy(result._doc.consumazioni, 'price'),
+          total: _.round(_.sumBy(result._doc.consumazioni, 'price'), 2),
         })
       }
     })
@@ -51,12 +51,12 @@ router.put('/api/customer', auth, async (req, res) => {
           return {
             store: key,
             quantity: _.sumBy(objs, 'quantity'),
-            price: _.sumBy(objs, 'price'),
+            price: _.round(_.sumBy(objs, 'price'), 2),
             ids: objs[0]._id,
           }
         })
         .value(),
-      total: _.sumBy(doc._doc.consumazioni, 'price'),
+      total: _.round(_.sumBy(doc._doc.consumazioni, 'price'), 2),
     })
   } catch (error) {
     res.status(400).send(error)
@@ -87,12 +87,12 @@ router.put('/api/customer-remove', auth, async (req, res) => {
           return {
             store: key,
             quantity: _.sumBy(objs, 'quantity'),
-            price: _.sumBy(objs, 'price'),
+            price: _.round(_.sumBy(objs, 'price'), 2),
             ids: objs[0]._id,
           }
         })
         .value(),
-      total: _.sumBy(doc._doc.consumazioni, 'price'),
+      total: _.round(_.sumBy(doc._doc.consumazioni, 'price'), 2),
     })
   } catch (error) {
     res.status(400).send(error)
@@ -140,13 +140,13 @@ router.get('/api/customer', auth, async (req, res) => {
             return {
               store: key,
               quantity: _.sumBy(objs, 'quantity'),
-              price: _.sumBy(objs, 'price'),
+              price: _.round(_.sumBy(objs, 'price'), 2),
               ids: objs[0]._id,
             }
           })
           .value(),
         _id: items._doc._id,
-        total: _.sumBy(items._doc.consumazioni, 'price'),
+        total: _.round(_.sumBy(items._doc.consumazioni, 'price'), 2),
       })
     } else {
       res.status(200).send({ summed: [], _id: null, total: 0.0 })

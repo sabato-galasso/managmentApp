@@ -77,6 +77,7 @@ import { InternalRoomComponent } from './pages/internal-room/internal-room.compo
 import { ExternalRoomComponent } from './pages/external-room/external-room.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { DoubleClickDirective } from './directive/double-click.directive'
+import { NgxLoadingModule } from 'ngx-loading'
 
 @NgModule({
   declarations: [
@@ -148,6 +149,7 @@ import { DoubleClickDirective } from './directive/double-click.directive'
     }),
     MatAutocompleteModule,
     DragDropModule,
+    NgxLoadingModule.forRoot({}),
   ],
   entryComponents: [
     LoginComponent,
