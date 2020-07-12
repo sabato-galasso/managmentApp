@@ -129,7 +129,6 @@ export class WarehouseComponent implements OnInit, OnDestroy {
       if (!globalMatch) {
         return;
       }*/
-      console.log('sdsds', data.quantity, filter)
       const searchString = JSON.parse(filter)
       if (data && data.category && data.name && data.quantity) {
         return (

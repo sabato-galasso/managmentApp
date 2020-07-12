@@ -14,6 +14,7 @@ import { MenuFirstLevelComponent } from '../pages/tables-menu/menu-first-level.c
 import { RoomsComponent } from '../pages/rooms/rooms.component'
 import { InternalRoomComponent } from '../pages/internal-room/internal-room.component'
 import { ExternalRoomComponent } from '../pages/external-room/external-room.component'
+import { HistoryClientsComponent } from '../pages/history-clients/history-clients.component'
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: '', component: RoomsComponent },
       { path: 'home', component: HomeComponent },
       { path: 'internal-room', component: InternalRoomComponent },
+      { path: 'history', component: HistoryClientsComponent },
       { path: 'external-room', component: ExternalRoomComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'warehouse', component: WarehouseComponent },

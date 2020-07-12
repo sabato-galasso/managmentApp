@@ -78,6 +78,8 @@ import { ExternalRoomComponent } from './pages/external-room/external-room.compo
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { DoubleClickDirective } from './directive/double-click.directive'
 import { NgxLoadingModule } from 'ngx-loading'
+import { HistoryClientsComponent } from './pages/history-clients/history-clients.component'
+import { DeleteCustomerComponent } from './modal/delete-customer/delete-customer.component'
 
 @NgModule({
   declarations: [
@@ -113,6 +115,8 @@ import { NgxLoadingModule } from 'ngx-loading'
     InternalRoomComponent,
     ExternalRoomComponent,
     DoubleClickDirective,
+    HistoryClientsComponent,
+    DeleteCustomerComponent,
   ],
   imports: [
     BrowserModule,

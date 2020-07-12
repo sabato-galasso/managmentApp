@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-const customerSchema = mongoose.Schema({
+const customerSchema = mongoose.Schema(
+  {
     category: {
       type: String,
       required: true,
@@ -11,27 +12,34 @@ const customerSchema = mongoose.Schema({
     },
     priceTable: {
       type: Number,
-      required: true
+      required: true,
     },
     nTable: {
       type: String,
-      required: true
+      required: true,
     },
-  consumazioni: {
+    consumazioni: {
       type: Array,
-      default : []
-  }
+      default: [],
+    },
   },
-  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
+)
 
-customerSchema.static('findAll', function() {
-  return this.find({}).sort({created_at: -1});
-});
+customerSchema.static('findAll', function () {
+  return this.find({}).sort({ created_at: -1 })
+})
 
-customerSchema.static('findByTableOpened', function(res) {
-  return this.findOne({nTable: res.nTable, statusTable: 1}).sort({created_at: -1});
-});
+customerSchema.static('findByTableOpened', function (res) {
+  return this.findOne({ nTable: res.nTable, statusTable: 1 }).sort({
+    created_at: -1,
+  })
+})
 
-const Customer = mongoose.model("Customer", customerSchema);
+customerSchema.static('findAllWithStatus', function () {
+  return this.find({}).sort({ created_at: -1 })
+})
 
-module.exports = Customer;
+const Customer = mongoose.model('Customer', customerSchema)
+
+module.exports = Customer

@@ -81,11 +81,18 @@
           >settings_applications</mat-icon
         >
       </a>
-      <a
+      <!--      <a
         mat-list-item
         [routerLink]="['/customer-list']"
         routerLinkActive="list-item-active"
         >Lista clienti
+        <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
+      </a>-->
+      <a
+        mat-list-item
+        [routerLink]="['/history']"
+        routerLinkActive="list-item-active"
+        >Storico consumazioni
         <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
       </a>
       <a

@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 my-3">
+      <h2>Storico Consumazioni</h2>
+      <div class="row my-3">
+        <div class="col-md-3 col-6">
+          <mat-form-field>
+            <mat-label>Filtra per Nome</mat-label>
+            <input matInput [formControl]="nameFilter" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- ID Column -->
+          <ng-container matColumnDef="_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="d-none"> {{ row._id }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nTable" sticky style="">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tavolo</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.nTable }}
+            </td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Totale</th>
+            <td mat-cell *matCellDef="let row"></td>
+          </ng-container>
+
+          <!-- Category Column -->
+          <ng-container matColumnDef="statusTable">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Stato</th>
+            <td mat-cell *matCellDef="let row">
+              <button
+                mat-raised-button
+                color="primary"
+                *ngIf="row.statusTable == '1'"
+              >
+                Attivo
+              </button>
+              <button mat-raised-button *ngIf="row.statusTable == '0'">
+                Chiuso
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="consumazioni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              consumazioni
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <div *ngIf="row.consumazioni && row.consumazioni.length > 0">
+                <div *ngFor="let item of row.consumazioni">
+                  {{ item.nameArticle }} - {{ item.price }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="updated_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Ultima modifica
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="d-flex align-items-center justify-content-center">
+                <span>Azioni</span>
+                <button mat-icon-button (click)="refresh()">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button (click)="openDialog('Elimina', row)">
+                <i class="material-icons">
+                  delete
+                </i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+  <div class="centered" *ngIf="showSpinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

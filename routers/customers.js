@@ -4,6 +4,17 @@ const auth = require('../middleware/auth')
 const router = express.Router()
 const _ = require('lodash')
 
+router.delete('/api/delete-customer', auth, async (req, res) => {
+  // Delete row settings
+  try {
+    const filter = { _id: req.query._id }
+    const doc = await customerModel.findByIdAndRemove(filter)
+    res.status(201).send(doc)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
 router.post('/api/customer', auth, async (req, res) => {
   try {
     const doc = new customerModel(req.body)
@@ -156,13 +167,39 @@ router.get('/api/customer', auth, async (req, res) => {
   }
 })
 
-router.delete('/api/customer/', auth, async (req, res) => {
-  // Delete row settings
+router.get('/api/all-customer', auth, async (req, res) => {
   try {
-    const filter = { _id: req.query._id }
-    //const update = settings.quantity
-    const doc = await itemsMenuModel.findOneAndDelete(filter)
-    res.status(201).send(doc._doc)
+    let items = await customerModel.findAllWithStatus()
+    /* if(items && items.length > 0){
+      items.forEach( el=> {
+
+      })
+    }*/
+    /*  if (
+      items &&
+      items._doc.consumazioni &&
+      items._doc.consumazioni.length > 0
+    ) {
+      res.status(200).send({
+        summed: _(items._doc.consumazioni)
+          .groupBy('nameArticle')
+          .map((objs, key) => {
+            return {
+              store: key,
+              quantity: _.sumBy(objs, 'quantity'),
+              price: _.round(_.sumBy(objs, 'price'), 2),
+              ids: objs[0]._id,
+            }
+          })
+          .value(),
+        _id: items._doc._id,
+        total: _.round(_.sumBy(items._doc.consumazioni, 'price'), 2),
+      })
+    } else {
+      res.status(200).send({ summed: [], _id: null, total: 0.0 })
+    }*/
+
+    res.status(200).send(items)
   } catch (error) {
     res.status(400).send(error)
   }

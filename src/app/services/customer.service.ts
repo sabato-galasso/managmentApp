@@ -13,6 +13,18 @@ export class CustomerService {
     private http: HttpClient,
     private processHTTPMsgService: ProcessHttpmsgService
   ) {}
+  deleteByHistory(_id: string): Observable<any> {
+    const token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+    return this.http
+      .delete(baseURL + 'api/delete-customer?_id=' + _id, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
 
   openedCustomerData(data: string): Observable<any> {
     const token = localStorage.getItem('token')
@@ -40,17 +52,6 @@ export class CustomerService {
       .pipe(catchError(this.processHTTPMsgService.handleError))
   }
 
-  serialize(obj) {
-    let str =
-      '?' +
-      Object.keys(obj)
-        .reduce(function (a, k) {
-          a.push(k + '=' + encodeURIComponent(obj[k]))
-          return a
-        }, [])
-        .join('&')
-    return str
-  }
   getCustomerItmeById(data: any): Observable<any> {
     const token = localStorage.getItem('token')
     const httpOptions = {
@@ -169,5 +170,30 @@ export class CustomerService {
     return this.http
       .get<any>(baseURL + 'api/customer-list', httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
+
+  getHistory(): Observable<any> {
+    const token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+    return this.http
+      .get<any>(baseURL + 'api/all-customer', httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
+
+  serialize(obj) {
+    let str =
+      '?' +
+      Object.keys(obj)
+        .reduce(function (a, k) {
+          a.push(k + '=' + encodeURIComponent(obj[k]))
+          return a
+        }, [])
+        .join('&')
+    return str
   }
 }
