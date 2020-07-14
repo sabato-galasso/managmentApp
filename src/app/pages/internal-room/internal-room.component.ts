@@ -17,7 +17,7 @@ export class InternalRoomComponent implements OnInit {
   interni: any[] = []
   private unsubscribe$ = new Subject<void>()
   ids: any[] = []
-  private isReady: boolean
+  isReady: boolean
   private arr: any[] = []
 
   constructor(
