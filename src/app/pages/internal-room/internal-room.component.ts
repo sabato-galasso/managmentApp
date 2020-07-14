@@ -14,9 +14,11 @@ export class InternalRoomComponent implements OnInit {
   gettedSetting: SettingsTable
   private errMessFeed: any
   showSpinner: boolean
-  interni: number[]
+  interni: any[] = []
   private unsubscribe$ = new Subject<void>()
-  ids: string[] = []
+  ids: any[] = []
+  private isReady: boolean
+  private arr: any[] = []
 
   constructor(
     private settingsTableService: SettingsTableService,
@@ -30,7 +32,12 @@ export class InternalRoomComponent implements OnInit {
       .subscribe(
         (tables) => {
           this.gettedSetting = tables
-          this.interni = Array.from(Array(this.gettedSetting.internal).keys())
+          this.arr = Array.from(Array(this.gettedSetting.internal).keys())
+          this.arr.forEach((el) => {
+            this.interni.push({
+              idx: el + 1,
+            })
+          })
         },
         (errmess) => {
           this.gettedSetting = null
@@ -38,13 +45,13 @@ export class InternalRoomComponent implements OnInit {
         },
         () => {
           this.showSpinner = false
+          this.getOpened()
         }
       )
   }
 
   ngOnInit(): void {
     this.getSettingsTable()
-    this.getOpened()
   }
 
   ngOnDestroy(): void {
@@ -56,16 +63,23 @@ export class InternalRoomComponent implements OnInit {
     this.customerService
       .openedCustomerData('interno-')
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
-        if (res && res.length > 0) {
-          res.forEach((el) => {
-            this.ids.push(el.nTable)
-          })
+      .subscribe(
+        (res) => {
+          if (res && res.length > 0) {
+            res.forEach((el) => {
+              this.ids.push({ nTable: el.nTable, _id: el._id })
+            })
+          }
+        },
+        (err) => {},
+        () => {
+          this.isReady = true
         }
-      })
+      )
   }
 
   getActived(s: string) {
-    return this.ids.includes(s)
+    return this.ids.some((item) => item.nTable.includes(s))
+    //return this.ids.includes(s)
   }
 }
