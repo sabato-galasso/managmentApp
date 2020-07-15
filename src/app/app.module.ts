@@ -1,6 +1,10 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
+import {
+  BrowserModule,
+  HAMMER_GESTURE_CONFIG,
+  HammerModule,
+} from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './pages/login/login.component'
 import { StopWatchComponent } from './stop-watch/stop-watch.component'
@@ -80,6 +84,7 @@ import { DoubleClickDirective } from './directive/double-click.directive'
 import { NgxLoadingModule } from 'ngx-loading'
 import { HistoryClientsComponent } from './pages/history-clients/history-clients.component'
 import { DeleteCustomerComponent } from './modal/delete-customer/delete-customer.component'
+import { MyHammerConfig } from './Hammer/HammerConfig'
 
 @NgModule({
   declarations: [
@@ -154,6 +159,7 @@ import { DeleteCustomerComponent } from './modal/delete-customer/delete-customer
     MatAutocompleteModule,
     DragDropModule,
     NgxLoadingModule.forRoot({}),
+    HammerModule,
   ],
   entryComponents: [
     LoginComponent,
@@ -177,6 +183,10 @@ import { DeleteCustomerComponent } from './modal/delete-customer/delete-customer
     SlugifyPipe,
     FilterArrayPipe,
     MessageSharingService,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })
