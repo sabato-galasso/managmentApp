@@ -6,6 +6,7 @@ import { Subject, Subscription } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatSnackBarVerticalPosition } from '@angular/material/snack-bar/snack-bar-config'
 
 @Component({
   selector: 'app-user-items',
@@ -30,12 +31,6 @@ export class BillUserComponent implements OnInit, OnDestroy {
     private menuService: MenuManagerServiceService,
     private _snackBar: MatSnackBar
   ) {
-    this.customerTable = {
-      price: '0',
-      timer: '0',
-      status: 0,
-    }
-
     this.subscription = this.messageService
       .getConsumazioni()
       .pipe(takeUntil(this.unsubscribe$))
@@ -95,19 +90,23 @@ export class BillUserComponent implements OnInit, OnDestroy {
   closeTable() {
     let data = {
       nTable: this.numberTable,
-      _id: this._id,
     }
     this.customerService
       .closeCustomerData(data)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
-        console.log('close', res)
-        this.tavoloAttivo = false
-        this.consumazioni = null
-        this.messageService.updateId(null)
-        this.messageService.updateTavoloAttivo(this.tavoloAttivo)
-        this.messageService.updateConsumazioni([])
-      })
+      .subscribe(
+        (res) => {
+          this.tavoloAttivo = false
+          this.consumazioni = null
+          this.messageService.updateId(null)
+          this.messageService.updateTavoloAttivo(this.tavoloAttivo)
+          this.messageService.updateConsumazioni([])
+        },
+        (error) => {},
+        () => {
+          this.openSnackBar('Tavolo Chiuso')
+        }
+      )
   }
 
   ngOnDestroy(): void {
@@ -127,14 +126,19 @@ export class BillUserComponent implements OnInit, OnDestroy {
           this.customerService
             .removeItemCustomerData(item)
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((resp) => {
-              this._id = resp._id || null
-              this.consumazioni =
-                resp && resp.summed.length > 0 ? resp.summed : []
-              /// this.tavoloAttivo = resp && resp.summed.length > 0
-              this.tavoloAttivo = true
-              this.total = resp.total.toFixed(2) || 0.0
-            })
+            .subscribe(
+              (resp) => {
+                this._id = resp._id || null
+                this.consumazioni =
+                  resp && resp.summed.length > 0 ? resp.summed : []
+                this.tavoloAttivo = true
+                this.total = resp.total.toFixed(2) || 0.0
+              },
+              (error) => {},
+              () => {
+                this.openSnackBar('Ordine rimosso', 1000, 'bottom')
+              }
+            )
         }
       })
   }
@@ -175,11 +179,15 @@ export class BillUserComponent implements OnInit, OnDestroy {
       })
   }
 
-  openSnackBar(message: string) {
+  openSnackBar(
+    message: string,
+    duration = 1000,
+    verticalPosition: MatSnackBarVerticalPosition = 'top'
+  ) {
     this._snackBar.open(message, '', {
-      duration: 2000,
+      duration: duration,
       horizontalPosition: 'end',
-      verticalPosition: 'top',
+      verticalPosition: verticalPosition,
       panelClass: '',
     })
   }

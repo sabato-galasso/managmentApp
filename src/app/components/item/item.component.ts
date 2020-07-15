@@ -5,6 +5,7 @@ import { MessageSharingService } from '../../services/message-sharing.service'
 import { delay, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatSnackBarVerticalPosition } from '@angular/material/snack-bar/snack-bar-config'
 
 @Component({
   selector: 'app-item',
@@ -87,7 +88,10 @@ export class ItemComponent implements OnInit {
                 this.messageService.updateTavoloAttivo(this.isActiveTable)
                 this.messageService.updateConsumazioni(res)
               },
-              (error) => {}
+              (error) => {},
+              () => {
+                this.openSnackBar('Ordine Aggiunto', 1000, 'bottom')
+              }
             )
         } else {
           this.messageService.updateLoading(true)
@@ -111,11 +115,15 @@ export class ItemComponent implements OnInit {
       })
   }
 
-  openSnackBar(message: string) {
+  openSnackBar(
+    message: string,
+    duration = 1000,
+    verticalPosition: MatSnackBarVerticalPosition = 'top'
+  ) {
     this._snackBar.open(message, '', {
-      duration: 1000,
+      duration: duration,
       horizontalPosition: 'end',
-      verticalPosition: 'top',
+      verticalPosition: verticalPosition,
       panelClass: '',
     })
   }
