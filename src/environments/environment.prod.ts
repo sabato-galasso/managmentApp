@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://xenon-tracer-283507.ey.r.appspot.com/',
+  apiUrl: 'http://164.90.224.187:8080/',
 }
