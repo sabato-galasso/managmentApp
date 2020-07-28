@@ -18,9 +18,11 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   copertiObrelloni: number[]
   private unsubscribe$ = new Subject<void>()
   ids: string[] = []
+  positionItem: any[] = []
   @Input() keyEl: number
   dragPosition = [{ x: 0, y: 0 }]
   disabled: boolean = true
+  isReady = false
 
   constructor(
     private settingsTableService: SettingsTableService,
@@ -54,7 +56,6 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getSettingsTable()
     this.getOpened()
-    // this.dragPosition[0] = {x: this.dragPosition[0].x + 50, y: this.dragPosition[0].y + 50};
   }
 
   ngOnDestroy(): void {
@@ -63,29 +64,47 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   }
 
   getOpened() {
-    this.customerService
-      .openedCustomerData('esterno-ombrellone-')
+    this.dragPosition[0] = { x: 10, y: 20 }
+    this.settingsTableService
+      .getPositionTable('esterno_')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (res) => {
-          if (res && res.length > 0) {
-            res.forEach((el) => {
-              this.ids.push(el.nTable)
-            })
-          }
+          this.positionItem = res
         },
         (error) => {},
         () => {
           this.customerService
-            .openedCustomerData('esterno-pedana-')
+            .openedCustomerData('esterno-ombrellone-')
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((res) => {
-              if (res && res.length > 0) {
-                res.forEach((el) => {
-                  this.ids.push(el.nTable)
-                })
+            .subscribe(
+              (res) => {
+                if (res && res.length > 0) {
+                  res.forEach((el) => {
+                    this.ids.push(el.nTable)
+                  })
+                }
+              },
+              (error) => {},
+              () => {
+                this.customerService
+                  .openedCustomerData('esterno-pedana-')
+                  .pipe(takeUntil(this.unsubscribe$))
+                  .subscribe(
+                    (res) => {
+                      if (res && res.length > 0) {
+                        res.forEach((el) => {
+                          this.ids.push(el.nTable)
+                        })
+                      }
+                    },
+                    (error) => {},
+                    () => {
+                      this.isReady = true
+                    }
+                  )
               }
-            })
+            )
         }
       )
   }
@@ -96,5 +115,9 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
 
   enabled() {
     this.disabled = !this.disabled
+  }
+
+  getPosition(s: string) {
+    return this.positionItem.find((item) => item.id == s)
   }
 }

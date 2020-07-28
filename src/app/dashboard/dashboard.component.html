@@ -58,6 +58,7 @@
     <button mat-raised-button (click)="open()">Clienti attivi</button>
   </div>
 </mat-toolbar>
+<app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-nav-list>

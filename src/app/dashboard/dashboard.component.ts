@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { AuthService } from '../services/auth.service'
 import { version } from '../../../package.json'
 import { map, startWith, takeUntil } from 'rxjs/operators'
-import { Observable, Subject } from 'rxjs'
+import { Observable, Subject, fromEvent, Subscription } from 'rxjs'
 import { FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { CreateCustomerComponent } from '../modal/create-customer/create-customer.component'
@@ -11,6 +11,7 @@ import { SlugifyPipe } from '../utility/slugify.pipe'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
 import { MatSidenav } from '@angular/material/sidenav'
+import { ConnectionService } from 'ngx-connection-service'
 
 @Component({
   selector: 'app-dashboard',
@@ -29,8 +30,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private customerService: CustomerService,
     private slugifyPipe: SlugifyPipe,
     private snackBar: MatSnackBar,
-    public router: Router
-  ) {}
+    public router: Router,
+    private connectionService: ConnectionService
+  ) {
+    this.connectionService
+      .monitor()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((currentState) => {
+        this.hasNetworkConnection = currentState.hasNetworkConnection
+        this.hasInternetAccess = currentState.hasInternetAccess
+        if (this.hasNetworkConnection && this.hasInternetAccess) {
+          this.status = 'ONLINE'
+        } else {
+          this.status = 'OFFLINE'
+        }
+      })
+
+    this.connectionService.updateOptions({
+      heartbeatExecutor: (options) =>
+        new Observable<any>((subscriber) => {
+          // if (Math.random() > 0.5) {
+          subscriber.next()
+          subscriber.complete()
+          //   } else {
+          // throw new Error('Connection error')
+          // }
+        }),
+    })
+  }
 
   userName: string
   versionApp: string
@@ -39,6 +66,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   options: string[] = []
   filteredOptions: Observable<string[]>
   private unsubscribe$ = new Subject<void>()
+
+  hasNetworkConnection: boolean
+  hasInternetAccess: boolean
+  status: string
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase()

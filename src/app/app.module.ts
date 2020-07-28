@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSliderModule } from '@angular/material/slider'
 import { LoginService } from './services/login.service'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ProcessHttpmsgService } from './services/process-httpmsg.service'
 import { baseURL } from './shared/baseUrl'
 import { DashboardComponent } from './dashboard/dashboard.component'
@@ -85,6 +85,10 @@ import { NgxLoadingModule } from 'ngx-loading'
 import { HistoryClientsComponent } from './pages/history-clients/history-clients.component'
 import { DeleteCustomerComponent } from './modal/delete-customer/delete-customer.component'
 import { MyHammerConfig } from './Hammer/HammerConfig'
+import { DraggableItemComponent } from './components/draggable-item/draggable-item.component'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { OnlineStatusComponent } from './components/online-status/online-status.component'
+import { ConnectionServiceModule } from 'ngx-connection-service'
 
 @NgModule({
   declarations: [
@@ -122,6 +126,8 @@ import { MyHammerConfig } from './Hammer/HammerConfig'
     DoubleClickDirective,
     HistoryClientsComponent,
     DeleteCustomerComponent,
+    DraggableItemComponent,
+    OnlineStatusComponent,
   ],
   imports: [
     BrowserModule,
@@ -160,6 +166,8 @@ import { MyHammerConfig } from './Hammer/HammerConfig'
     DragDropModule,
     NgxLoadingModule.forRoot({}),
     HammerModule,
+    FlexLayoutModule,
+    ConnectionServiceModule,
   ],
   entryComponents: [
     LoginComponent,
@@ -171,7 +179,11 @@ import { MyHammerConfig } from './Hammer/HammerConfig'
   providers: [
     LoginService,
     ProcessHttpmsgService,
-    { provide: AuthInterceptor, useValue: undefined },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     { provide: 'BaseURL', useValue: baseURL },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,

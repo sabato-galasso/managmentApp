@@ -1,5 +1,6 @@
 const express = require('express')
 const setTable = require('../models/SettingsTable')
+const posTable = require('../models/PositionTable')
 const auth = require('../middleware/auth')
 const router = express.Router()
 
@@ -12,6 +13,31 @@ router.post('/api/settings-table', auth, async (req, res) => {
     })
     await settings.save()
     res.status(201).send()
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+router.post('/api/settings-table-position', auth, async (req, res) => {
+  try {
+    let obj = req.body
+    posTable.update(
+      { id: req.body.id }, // find a document with that filter
+      obj, // document to insert when nothing was found
+      { upsert: true, setDefaultsOnInsert: true },
+      function (err) {}
+    )
+    res.status(201).send()
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+router.get('/api/settings-table-position', auth, async (req, res) => {
+  try {
+    const filter = { id: { $regex: req.query.id } }
+    let items = await posTable.find(filter)
+    res.status(200).send(items)
   } catch (error) {
     res.status(400).send(error)
   }

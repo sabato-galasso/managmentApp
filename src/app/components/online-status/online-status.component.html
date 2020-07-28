@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="onlineStatus === 'ONLINE'" class="online">
+      <span>{{ onlineStatus }}</span>
+    </div>
+    <div *ngIf="onlineStatus === 'OFFLINE'" class="offline">
+      <span>{{ onlineStatus }}</span>
+    </div>
+  </div>
+</div>

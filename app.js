@@ -8,7 +8,7 @@ const categoryRouter = require('./routers/category')
 const menuRouter = require('./routers/menu')
 const customerLIst = require('./routers/customerList')
 const path = require('path')
-//require('dotenv').config({ path: __dirname + '/.env' })
+require('dotenv').config({ path: __dirname + '/.env' })
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = undefined
 process.env.NODE_TLS_REJECT_UNAUTHORIZED || 0

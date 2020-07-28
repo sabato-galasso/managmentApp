@@ -43,7 +43,6 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {}
 
   valueChanged(event: any, dataItem: any) {
-    debugger
     event.preventDefault()
     dataItem.quantity = 1
     const array = [

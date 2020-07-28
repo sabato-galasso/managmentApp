@@ -1,25 +1,38 @@
 <div class="row justify-content-center full-overlay">
-  <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
-    <div
-      cdkDrag
-      [cdkDragDisabled]="disabled"
-      [class.bg-active]="getActived('esterno-pedana-' + (idx + 1))"
-      class="col-3 example-box m-3"
+  <div
+    class="col-6 justify-content-start d-flex mt-5 flex-wrap position-relative example-boundary"
+    *ngIf="isReady"
+  >
+    <app-draggable-item
       *ngFor="let item of copertiStruttura; let idx = index"
+      [idx]="idx"
+      [disabled]="disabled"
+      [active]="getActived('esterno-pedana-' + (idx + 1))"
+      [position]="getPosition('esterno_' + (idx + 1))"
+      class="position-relative"
       [routerLink]="['/home', 'esterno-pedana-' + (idx + 1)]"
-    >
-      <div>
-        Esterno Pedana {{ idx + 1 }}
-        <div class="example-handle" *ngIf="!disabled">
-          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
-            ></path>
-            <path d="M0 0h24v24H0z" fill="none"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
+    ></app-draggable-item>
+    <!--    <div-->
+    <!--      cdkDrag-->
+    <!--      [cdkDragDisabled]="disabled"-->
+    <!--      (cdkDragEnded)="dragEnd($event)"-->
+    <!--      [class.bg-active]="getActived('esterno-pedana-' + (idx + 1))"-->
+    <!--      class="col-3 example-box m-3"-->
+    <!--      *ngFor="let item of copertiStruttura; let idx = index"-->
+    <!--      [routerLink]="['/home', 'esterno-pedana-' + (idx + 1)]"-->
+    <!--    >-->
+    <!--      <div>-->
+    <!--        Esterno Pedana {{ idx + 1 }}-->
+    <!--        <div class="example-handle" *ngIf="!disabled">-->
+    <!--          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">-->
+    <!--            <path-->
+    <!--              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"-->
+    <!--            ></path>-->
+    <!--            <path d="M0 0h24v24H0z" fill="none"></path>-->
+    <!--          </svg>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
   <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
     <div
