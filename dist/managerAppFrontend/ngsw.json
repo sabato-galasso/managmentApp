@@ -1,0 +1,96 @@
+{
+  "configVersion": 1,
+  "timestamp": 1596010563968,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.2494d5151e7e2a9fc573.js",
+        "/manifest.webmanifest",
+        "/polyfills-es5.4de2519e02b383b07f21.js",
+        "/polyfills.9079f9d399e22fffc0bf.js",
+        "/runtime.e227d1a0e31cbccbf8ec.js",
+        "/styles.6739fc149a7de8b48ed8.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/img/svg/alcholicicon.svg",
+        "/assets/img/svg/beericon.svg",
+        "/assets/img/svg/beverageicon.svg",
+        "/assets/img/svg/cocktailicon.svg",
+        "/assets/img/svg/toasticon.svg",
+        "/assets/img/table.jpg",
+        "/table.61f18e982314e8a89655.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/img/svg/alcholicicon.svg": "85e013f3783316353e0dbbe03ff8466f2e637b43",
+    "/assets/img/svg/beericon.svg": "7ecce1dd07c1254ad3605e3c8b3491535b85e774",
+    "/assets/img/svg/beverageicon.svg": "4634fc26d1cddb74b6f06ddfab44f9cd3a785873",
+    "/assets/img/svg/cocktailicon.svg": "1ffc75e895d236ea258e880f47c7847e9ea8f93d",
+    "/assets/img/svg/toasticon.svg": "08bd43e1f0b79b8e63482fbae4a112c77581c986",
+    "/assets/img/table.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "583bc77ef7fd056f66f20186bffb9b184ac8ea81",
+    "/main.2494d5151e7e2a9fc573.js": "dec0ce3d8a71449a3db61bca86eb6d0f1ea4a471",
+    "/manifest.webmanifest": "bfb922073ffae0694e1735b7e5c6865f15a58f28",
+    "/polyfills-es5.4de2519e02b383b07f21.js": "39d02d783786ffa9cf9c9bbbdb62e32e9c380df3",
+    "/polyfills.9079f9d399e22fffc0bf.js": "cb4680358fe8ded019b020a3f6479303092166be",
+    "/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.6739fc149a7de8b48ed8.css": "cfffc35b191a4949a06c4d2736f7e55d0e63f838",
+    "/table.61f18e982314e8a89655.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
