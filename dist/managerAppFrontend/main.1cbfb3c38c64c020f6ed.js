@@ -34898,7 +34898,7 @@
             t
           )
         })(),
-        sb = 'http://164.90.224.187/',
+        sb = 'http://167.71.69.191/',
         ub = (function () {
           function t(t, e) {
             ;(this.http = t), (this.processHTTPMsgService = e)
