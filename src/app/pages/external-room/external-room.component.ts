@@ -4,6 +4,7 @@ import { SettingsTable } from '../../models/SettingsTable'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { CustomerService } from '../../services/customer.service'
+import { CdkDragEnd } from '@angular/cdk/drag-drop'
 
 @Component({
   selector: 'app-external-room',
@@ -120,4 +121,6 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   getPosition(s: string) {
     return this.positionItem.find((item) => item.id == s)
   }
+
+  dragEnd($event: CdkDragEnd) {}
 }

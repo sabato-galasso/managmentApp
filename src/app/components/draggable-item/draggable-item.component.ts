@@ -42,19 +42,19 @@ export class DraggableItemComponent
   }
 
   ngAfterViewInit() {
-    if (this.position) {
+    /* if (this.position) {
       this.dragPosition = {
         x: this.position.positionX,
         y: this.position.positionY,
       }
-    }
+    }*/
   }
 
   dragEnd($event: CdkDragEnd, number: number) {
     const { offsetLeft, offsetTop } = $event.source.element.nativeElement
     const { x, y } = $event.distance
-    let positionX = offsetLeft - x
-    let positionY = offsetTop - y
+    let positionX = this.getOffset($event.source.element.nativeElement).left
+    let positionY = this.getOffset($event.source.element.nativeElement).top
     console.log({ positionX, positionY, id: number })
     console.log(number)
     this.settingsTableService
@@ -67,6 +67,14 @@ export class DraggableItemComponent
       .subscribe((res) => {
         this.openSnackBar('Posizione aggiornata', 1000, 'bottom')
       })
+  }
+
+  getOffset(el) {
+    const rect = el.getBoundingClientRect()
+    return {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+    }
   }
 
   ngOnDestroy(): void {
