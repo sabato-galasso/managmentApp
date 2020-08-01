@@ -149,12 +149,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.myControl.patchValue('')
   }
 
-  redirectTo(uri: string) {
-    this.drawer1.close().then(() => {
+  redirectTo(uri: string, action?: string) {
+    if (action === 'find') {
       this.router
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => this.router.navigate([uri]))
-    })
+    } else {
+      this.drawer1.close().then(() => {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => this.router.navigate([uri]))
+      })
+    }
   }
 
   open() {

@@ -38,7 +38,7 @@
         <mat-option
           *ngFor="let option of filteredOptions | async"
           [value]="option"
-          (click)="redirectTo('/home/' + option)"
+          (click)="redirectTo('/home/' + option, 'find')"
         >
           {{ option }}
         </mat-option>
@@ -59,8 +59,8 @@
   </div>
 </mat-toolbar>
 <app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer class="sidenav" mode="over" position="start">
     <mat-nav-list>
       <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/']"
         >Sala
