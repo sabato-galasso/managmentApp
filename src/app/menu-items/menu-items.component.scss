@@ -1,3 +1,9 @@
-.ripple-container{
-  height: 140px;
+.item-container {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .name-item {
+    font-size: 1.2rem;
+  }
 }

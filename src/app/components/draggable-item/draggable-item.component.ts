@@ -65,7 +65,7 @@ export class DraggableItemComponent
       })
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res) => {
-        this.openSnackBar('Posizione aggiornata', 1000, 'bottom')
+        this.openSnackBar('Posizione aggiornata', 1000, 'top')
       })
   }
 
@@ -91,7 +91,7 @@ export class DraggableItemComponent
       duration: duration,
       horizontalPosition: 'end',
       verticalPosition: verticalPosition,
-      panelClass: '',
+      panelClass: 'panelClass',
     })
   }
 }

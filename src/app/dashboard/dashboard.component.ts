@@ -150,9 +150,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   redirectTo(uri: string) {
-    this.router
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() => this.router.navigate([uri]))
+    this.drawer1.close().then(() => {
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate([uri]))
+    })
   }
 
   open() {

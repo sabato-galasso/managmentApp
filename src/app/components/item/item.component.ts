@@ -89,7 +89,7 @@ export class ItemComponent implements OnInit {
               },
               (error) => {},
               () => {
-                this.openSnackBar('Ordine Aggiunto', 1000, 'bottom')
+                this.openSnackBar('Ordine Aggiunto', 1000, 'top')
               }
             )
         } else {
@@ -123,7 +123,7 @@ export class ItemComponent implements OnInit {
       duration: duration,
       horizontalPosition: 'end',
       verticalPosition: verticalPosition,
-      panelClass: '',
+      panelClass: 'notify-success',
     })
   }
 }

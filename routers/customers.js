@@ -227,7 +227,10 @@ router.get('/api/all-customer', auth, async (req, res) => {
 router.get('/api/customer-open', auth, async (req, res) => {
   try {
     const filter = { statusTable: 1, category: 'customer' }
-    let items = await customerModel.find(filter)
+    let items = await customerModel
+      .find(filter)
+      .collation({ locale: 'en' })
+      .sort({ nTable: 'asc' })
     res.status(200).send(items)
   } catch (error) {
     res.status(400).send(error)

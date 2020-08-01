@@ -136,7 +136,7 @@ export class BillUserComponent implements OnInit, OnDestroy {
               },
               (error) => {},
               () => {
-                this.openSnackBar('Ordine rimosso', 1000, 'bottom')
+                this.openSnackBar('Ordine rimosso', 1000, 'top')
               }
             )
         }
@@ -173,7 +173,10 @@ export class BillUserComponent implements OnInit, OnDestroy {
                 this.messageService.updateTavoloAttivo(this.tavoloAttivo)
                 this.messageService.updateConsumazioni(res)
               },
-              (error) => {}
+              (error) => {},
+              () => {
+                this.openSnackBar('Ordine aggiunto', 1000, 'top')
+              }
             )
         }
       })
@@ -188,7 +191,7 @@ export class BillUserComponent implements OnInit, OnDestroy {
       duration: duration,
       horizontalPosition: 'end',
       verticalPosition: verticalPosition,
-      panelClass: '',
+      panelClass: 'notify-success',
     })
   }
 }

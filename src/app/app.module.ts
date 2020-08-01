@@ -40,7 +40,6 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
 } from '@angular/material/snack-bar'
-import { AuthInterceptor } from './services/auth-interceptor.service'
 import { InputSpinnerComponent } from './input-spinner/input-spinner.component'
 import { DialogBoxSettingsComponent } from './dialog-box-settings/dialog-box-settings.component'
 import { MatButtonModule } from '@angular/material/button'
@@ -89,6 +88,7 @@ import { DraggableItemComponent } from './components/draggable-item/draggable-it
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { OnlineStatusComponent } from './components/online-status/online-status.component'
 import { ConnectionServiceModule } from 'ngx-connection-service'
+import { interceptorProviders } from './interceptors'
 
 @NgModule({
   declarations: [
@@ -179,11 +179,7 @@ import { ConnectionServiceModule } from 'ngx-connection-service'
   providers: [
     LoginService,
     ProcessHttpmsgService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
+    interceptorProviders,
     { provide: 'BaseURL', useValue: baseURL },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,

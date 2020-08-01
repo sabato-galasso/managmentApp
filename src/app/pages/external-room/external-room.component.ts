@@ -24,11 +24,16 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   dragPosition = [{ x: 0, y: 0 }]
   disabled: boolean = true
   isReady = false
+  showOverlay = false
 
   constructor(
     private settingsTableService: SettingsTableService,
     private customerService: CustomerService
-  ) {}
+  ) {
+    if (!this.isReady) {
+      this.showOverlay = true
+    }
+  }
 
   getSettingsTable() {
     this.settingsTableService
@@ -101,6 +106,7 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
                     },
                     (error) => {},
                     () => {
+                      this.showOverlay = false
                       this.isReady = true
                     }
                   )
