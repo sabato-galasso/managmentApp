@@ -28,6 +28,9 @@ export class CustomersListComponent implements OnInit {
       this.router
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => this.router.navigate([uri]))
+        .finally(() => {
+          this.dialogRef.close()
+        })
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { WebsocketService } from '../../services/socket.service'
 import { CustomerTableModel } from '../../models/CustomerTableModel'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
@@ -24,7 +24,8 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private socketService: WebsocketService,
     private menuService: MenuManagerServiceService,
-    private _location: Location
+    private _location: Location,
+    public router: Router
   ) {
     this.paramId = this.route.snapshot.params.id
 
@@ -62,7 +63,17 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   }
 
   locationBack() {
-    this._location.back()
+    if (window.location.href.indexOf('interno') > -1) {
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['internal-room']))
+    } else if (window.location.href.indexOf('esterno-pedana') > -1) {
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['external-room']))
+    } else {
+      this._location.back()
+    }
   }
 
   ngOnDestroy(): void {

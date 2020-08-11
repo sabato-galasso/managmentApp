@@ -130,6 +130,7 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
   }
 
   back() {
+    debugger
     this._location.back()
   }
 }
