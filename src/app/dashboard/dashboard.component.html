@@ -71,7 +71,7 @@
     </div>
   </mat-toolbar>
   <app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
-  <mat-sidenav-container class="example-container">
+  <mat-sidenav-container class="example-container" style="overflow: hidden;">
     <mat-sidenav #drawer class="sidenav" mode="over" position="start">
       <mat-nav-list>
         <a
@@ -163,7 +163,7 @@
         </ul>
       </div>
     </mat-sidenav>
-    <section>
+    <section style="overflow: hidden;">
       <router-outlet></router-outlet>
     </section>
   </mat-sidenav-container>
