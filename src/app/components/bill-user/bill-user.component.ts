@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators'
 import { MenuManagerServiceService } from '../../services/menu-manager-service.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatSnackBarVerticalPosition } from '@angular/material/snack-bar/snack-bar-config'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-user-items',
@@ -29,7 +30,8 @@ export class BillUserComponent implements OnInit, OnDestroy {
     private customerService: CustomerService,
     private messageService: MessageSharingService,
     private menuService: MenuManagerServiceService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public router: Router
   ) {
     this.subscription = this.messageService
       .getConsumazioni()
@@ -105,6 +107,24 @@ export class BillUserComponent implements OnInit, OnDestroy {
         (error) => {},
         () => {
           this.openSnackBar('Tavolo Chiuso')
+          if (window.location.href.indexOf('interno') > -1) {
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['internal-room']))
+          } else if (window.location.href.indexOf('esterno-pedana') > -1) {
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['external-room']))
+          } else if (window.location.href.indexOf('biliardi') > -1) {
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['home']))
+          } else {
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['/']))
+            // this._location.back()
+          }
         }
       )
   }

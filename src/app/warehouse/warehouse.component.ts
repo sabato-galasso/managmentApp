@@ -107,7 +107,6 @@ export class WarehouseComponent implements OnInit, OnDestroy {
         this.openSnackBar(this.errMessFeed, 'Undo')
       },
       () => {
-        console.log('Observable finished', this.dataSource)
         this.showSpinner = false
       }
     )
@@ -166,7 +165,6 @@ export class WarehouseComponent implements OnInit, OnDestroy {
           this.openSnackBar(this.errMessFeed, 'Undo')
         },
         () => {
-          console.log('Observable finished', this.dataSource)
           this.refresh()
           this.showSpinner = false
         }

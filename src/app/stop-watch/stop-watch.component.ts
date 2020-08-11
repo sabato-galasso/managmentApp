@@ -140,7 +140,6 @@ this.customerService.addNewCustomerData(data).subscribe(res => {
           this.errMessFeed = errmess as any
         },
         () => {
-          console.log('Observable finished', this.gettedSetting)
           this.showSpinner = false
         }
       )

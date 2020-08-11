@@ -23,6 +23,7 @@ import { CustomersListComponent } from '../modal/customers-list/customers-list.c
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('drawer1') drawer1: MatSidenav
+  @ViewChild('drawer') drawer: MatSidenav
 
   private name: any
   userActived: any
@@ -68,6 +69,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // throw new Error('Connection error')
           // }
         }),
+    })
+
+    this.router.events.subscribe((event) => {
+      // close sidenav on routing
+      this.drawer.close()
     })
   }
 

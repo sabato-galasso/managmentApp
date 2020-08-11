@@ -101,7 +101,6 @@ export class MenuManagerComponent implements OnInit {
           this.openSnackBar(this.errMessFeed, 'Undo')
         },
         () => {
-          console.log('Observable finished', this.dataSource)
           this.showSpinner = false
         }
       )
@@ -123,7 +122,6 @@ export class MenuManagerComponent implements OnInit {
        if (!globalMatch) {
          return;
        }*/
-      console.log('sdsds', data.quantity, filter)
       const searchString = JSON.parse(filter)
       if (data && data.category && data.name && data.quantity) {
         return (
@@ -165,7 +163,6 @@ export class MenuManagerComponent implements OnInit {
         this.openSnackBar(this.errMessFeed, 'Undo')
       },
       () => {
-        console.log('Observable finished', this.dataSource)
         this.refresh()
         this.showSpinner = false
       }
