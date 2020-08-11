@@ -112,6 +112,7 @@
           <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
         </a>-->
         <a
+          (click)="drawer.toggle()"
           mat-list-item
           [routerLink]="['/history']"
           routerLinkActive="list-item-active"

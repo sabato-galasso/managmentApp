@@ -70,11 +70,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           // }
         }),
     })
-
-    this.router.events.subscribe((event) => {
-      // close sidenav on routing
-      this.drawer.close()
-    })
   }
 
   userName: string
@@ -136,7 +131,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         let data = {
-          name: result,
+          name: result.replace(/\s*$/, ''),
           slug: this.slugifyPipe.transform(result),
         }
         this.customerService
