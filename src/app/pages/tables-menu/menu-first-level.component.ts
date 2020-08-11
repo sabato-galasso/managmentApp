@@ -72,7 +72,10 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => this.router.navigate(['external-room']))
     } else {
-      this._location.back()
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['home']))
+      // this._location.back()
     }
   }
 
