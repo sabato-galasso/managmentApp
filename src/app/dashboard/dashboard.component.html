@@ -1,166 +1,173 @@
-<mat-toolbar color="primary">
-  <button mat-button (click)="drawer.toggle()">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
-  </button>
-  <span>Billiards 1.0</span>
-  <div class="example-fill-remaining-space">
-    <button mat-raised-button [routerLink]="['/home']" class="mr-3">
-      Biliardi
-    </button>
-    <button mat-raised-button [routerLink]="['/internal-room']" class="mr-3">
-      Interni
-    </button>
-    <button mat-raised-button [routerLink]="['/external-room']">
-      Esterni
-    </button>
-  </div>
-  <!-- This fills the remaining space of the current row -->
-  <form class="example-fill-remaining-space">
-    <mat-form-field class="example-full-width">
-      <input
-        type="text"
-        placeholder="Cerca clienti"
-        aria-label="Number"
-        matInput
-        [formControl]="myControl"
-        [matAutocomplete]="auto"
-      />
-      <button
-        mat-button
-        mat-icon-button
-        matSuffix
-        (click)="clearSearchField()"
-        *ngIf="myControl.value"
+<div #targetElement>
+  <mat-toolbar color="primary">
+    <button mat-button (click)="drawer.toggle()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"
+        >menu</mat-icon
       >
-        <mat-icon>close</mat-icon>
+    </button>
+    <span>Billiards 1.0</span>
+    <div class="example-fill-remaining-space">
+      <button mat-raised-button [routerLink]="['/home']" class="mr-3">
+        Biliardi
       </button>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-          (click)="redirectTo('/home/' + option, 'find')"
+      <button mat-raised-button [routerLink]="['/internal-room']" class="mr-3">
+        Interni
+      </button>
+      <button mat-raised-button [routerLink]="['/external-room']">
+        Esterni
+      </button>
+    </div>
+    <!-- This fills the remaining space of the current row -->
+    <form class="example-fill-remaining-space">
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          placeholder="Cerca clienti"
+          aria-label="Number"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <button
+          mat-button
+          mat-icon-button
+          matSuffix
+          (click)="clearSearchField()"
+          *ngIf="myControl.value"
         >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button
-      mat-mini-fab
-      class="ml-3"
-      color="secondary"
-      aria-label="clienti"
-      (click)="openDialog()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-    <button
-      mat-mini-fab
-      class="ml-3"
-      color="secondary"
-      aria-label="clienti"
-      (click)="openListCustomerDialog()"
-    >
-      <mat-icon>person_search</mat-icon>
-    </button>
-  </form>
-  <div class="example-fill-remaining-space">
-    <button mat-raised-button (click)="open()">Clienti attivi</button>
-  </div>
-</mat-toolbar>
-<app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #drawer class="sidenav" mode="over" position="start">
-    <mat-nav-list>
-      <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/']"
-        >Sala
-        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
-      </a>
-      <a
-        mat-list-item
-        routerLinkActive="list-item-active"
-        [routerLink]="['/home']"
-        >Biliardi
-        <mat-icon
-          matListIcon
-          class="nav-list-icon"
-          svgIcon="pool-table"
-        ></mat-icon>
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="['/settings']"
-        routerLinkActive="list-item-active"
-        >Impostazioni
-        <mat-icon matListIcon class="nav-list-icon"
-          >settings_applications</mat-icon
-        >
-      </a>
-      <!--      <a
-        mat-list-item
-        [routerLink]="['/customer-list']"
-        routerLinkActive="list-item-active"
-        >Lista clienti
-        <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
-      </a>-->
-      <a
-        mat-list-item
-        [routerLink]="['/history']"
-        routerLinkActive="list-item-active"
-        >Storico consumazioni
-        <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="['/warehouse']"
-        routerLinkActive="list-item-active"
-        >Magazzino
-        <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="['/menu-manager']"
-        routerLinkActive="list-item-active"
-        >Menù cassa
-        <mat-icon matListIcon class="nav-list-icon">point_of_sale</mat-icon>
-      </a>
-      <a
-        mat-list-item
-        [routerLink]="['/menu-category']"
-        routerLinkActive="list-item-active"
-        >Categorie
-        <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
-      </a>
-      <div style="position: absolute; bottom: 0;">
-        <button mat-button (click)="logout()" label="logout">
-          Esci
-          <mat-icon aria-hidden="false" aria-label="Logout"
-            >exit_to_app</mat-icon
-          >
+          <mat-icon>close</mat-icon>
         </button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+            (click)="redirectTo('/home/' + option, 'find')"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button
+        mat-mini-fab
+        class="ml-3"
+        color="secondary"
+        aria-label="clienti"
+        (click)="openDialog()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        class="ml-3"
+        color="secondary"
+        aria-label="clienti"
+        (click)="openListCustomerDialog()"
+      >
+        <mat-icon>person_search</mat-icon>
+      </button>
+    </form>
+    <div class="example-fill-remaining-space">
+      <button mat-raised-button (click)="open()">Clienti attivi</button>
+    </div>
+  </mat-toolbar>
+  <app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #drawer class="sidenav" mode="over" position="start">
+      <mat-nav-list>
+        <a
+          mat-list-item
+          routerLinkActive="list-item-active"
+          [routerLink]="['/']"
+          >Sala
+          <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
+        </a>
+        <a
+          mat-list-item
+          routerLinkActive="list-item-active"
+          [routerLink]="['/home']"
+          >Biliardi
+          <mat-icon
+            matListIcon
+            class="nav-list-icon"
+            svgIcon="pool-table"
+          ></mat-icon>
+        </a>
+        <a
+          mat-list-item
+          [routerLink]="['/settings']"
+          routerLinkActive="list-item-active"
+          >Impostazioni
+          <mat-icon matListIcon class="nav-list-icon"
+            >settings_applications</mat-icon
+          >
+        </a>
+        <!--      <a
+          mat-list-item
+          [routerLink]="['/customer-list']"
+          routerLinkActive="list-item-active"
+          >Lista clienti
+          <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
+        </a>-->
+        <a
+          mat-list-item
+          [routerLink]="['/history']"
+          routerLinkActive="list-item-active"
+          >Storico consumazioni
+          <mat-icon matListIcon class="nav-list-icon">list</mat-icon>
+        </a>
+        <a
+          mat-list-item
+          [routerLink]="['/warehouse']"
+          routerLinkActive="list-item-active"
+          >Magazzino
+          <mat-icon matListIcon class="nav-list-icon">store</mat-icon>
+        </a>
+        <a
+          mat-list-item
+          [routerLink]="['/menu-manager']"
+          routerLinkActive="list-item-active"
+          >Menù cassa
+          <mat-icon matListIcon class="nav-list-icon">point_of_sale</mat-icon>
+        </a>
+        <a
+          mat-list-item
+          [routerLink]="['/menu-category']"
+          routerLinkActive="list-item-active"
+          >Categorie
+          <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
+        </a>
+        <div style="position: absolute; bottom: 0;">
+          <button mat-button (click)="logout()" label="logout">
+            Esci
+            <mat-icon aria-hidden="false" aria-label="Logout"
+              >exit_to_app</mat-icon
+            >
+          </button>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav #drawer1 class="sidenav" mode="over" position="end">
+      <div class="px-5">
+        <h2>
+          Clienti attivi
+        </h2>
       </div>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav #drawer1 class="sidenav" mode="over" position="end">
-    <div class="px-5">
-      <h2>
-        Clienti attivi
-      </h2>
-    </div>
-    <div *ngIf="userActived">
-      <ul *ngFor="let user of userActived" class="px-5">
-        <li
-          style="cursor: pointer;"
-          (click)="redirectTo('/home/' + user.nTable)"
-        >
-          <h3>Tavolo: {{ user.nTable }}</h3>
-        </li>
-      </ul>
-    </div>
-  </mat-sidenav>
-  <section>
-    <router-outlet></router-outlet>
-  </section>
-</mat-sidenav-container>
-<mat-toolbar class="app-version"
-  ><p>Ver. {{ versionApp }}</p>
-</mat-toolbar>
+      <div *ngIf="userActived">
+        <ul *ngFor="let user of userActived" class="px-5">
+          <li
+            style="cursor: pointer;"
+            (click)="redirectTo('/home/' + user.nTable)"
+          >
+            <h3>Tavolo: {{ user.nTable }}</h3>
+          </li>
+        </ul>
+      </div>
+    </mat-sidenav>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-container>
+  <mat-toolbar class="app-version"
+    ><p>Ver. {{ versionApp }}</p>
+  </mat-toolbar>
+</div>

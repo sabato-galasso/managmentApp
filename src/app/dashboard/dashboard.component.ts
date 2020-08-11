@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { AuthService } from '../services/auth.service'
 import { version } from '../../../package.json'
 import { map, startWith, takeUntil } from 'rxjs/operators'
@@ -23,6 +29,7 @@ import { CustomersListComponent } from '../modal/customers-list/customers-list.c
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('drawer1') drawer1: MatSidenav
+  @ViewChild('targetElement') targetElement: GlobalEventHandlers
 
   private name: any
   userActived: any
@@ -91,6 +98,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.targetElement.ontouchend = (e) => {
+      e.preventDefault()
+    }
     this.userName = localStorage.getItem('user')
     this.versionApp = version
     this.customerService
