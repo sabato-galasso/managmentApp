@@ -89,6 +89,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { OnlineStatusComponent } from './components/online-status/online-status.component'
 import { ConnectionServiceModule } from 'ngx-connection-service'
 import { interceptorProviders } from './interceptors'
+import { CustomersListComponent } from './modal/customers-list/customers-list.component'
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { interceptorProviders } from './interceptors'
     DeleteCustomerComponent,
     DraggableItemComponent,
     OnlineStatusComponent,
+    CustomersListComponent,
   ],
   imports: [
     BrowserModule,

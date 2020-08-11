@@ -53,14 +53,23 @@
     >
       <mat-icon>add</mat-icon>
     </button>
+    <button
+      mat-mini-fab
+      class="ml-3"
+      color="secondary"
+      aria-label="clienti"
+      (click)="openListCustomerDialog()"
+    >
+      <mat-icon>person_search</mat-icon>
+    </button>
   </form>
   <div class="example-fill-remaining-space">
     <button mat-raised-button (click)="open()">Clienti attivi</button>
   </div>
 </mat-toolbar>
 <app-online-status class="my-5" [onlineStatus]="status"> </app-online-status>
-<mat-drawer-container class="example-container">
-  <mat-drawer #drawer class="sidenav" mode="over" position="start">
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer class="sidenav" mode="over" position="start">
     <mat-nav-list>
       <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/']"
         >Sala
@@ -71,7 +80,11 @@
         routerLinkActive="list-item-active"
         [routerLink]="['/home']"
         >Biliardi
-        <mat-icon matListIcon class="nav-list-icon">home</mat-icon>
+        <mat-icon
+          matListIcon
+          class="nav-list-icon"
+          svgIcon="pool-table"
+        ></mat-icon>
       </a>
       <a
         mat-list-item
@@ -117,17 +130,20 @@
         >Categorie
         <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
       </a>
-      <button mat-button (click)="logout()" label="logout">
-        Esci
-        <mat-icon aria-hidden="false" aria-label="Logout">exit_to_app</mat-icon>
-      </button>
+      <div style="position: absolute; bottom: 0;">
+        <button mat-button (click)="logout()" label="logout">
+          Esci
+          <mat-icon aria-hidden="false" aria-label="Logout"
+            >exit_to_app</mat-icon
+          >
+        </button>
+      </div>
     </mat-nav-list>
-  </mat-drawer>
-  <router-outlet></router-outlet>
-  <mat-sidenav #drawer1 mode="side" position="end">
+  </mat-sidenav>
+  <mat-sidenav #drawer1 class="sidenav" mode="over" position="end">
     <div class="px-5">
       <h2>
-        Lista
+        Clienti attivi
       </h2>
     </div>
     <div *ngIf="userActived">
@@ -141,7 +157,10 @@
       </ul>
     </div>
   </mat-sidenav>
-</mat-drawer-container>
+  <section>
+    <router-outlet></router-outlet>
+  </section>
+</mat-sidenav-container>
 <mat-toolbar class="app-version"
-  ><p>Package Ver. {{ versionApp }}</p>
+  ><p>Ver. {{ versionApp }}</p>
 </mat-toolbar>

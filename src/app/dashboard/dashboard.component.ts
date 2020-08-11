@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { AuthService } from '../services/auth.service'
 import { version } from '../../../package.json'
 import { map, startWith, takeUntil } from 'rxjs/operators'
-import { Observable, Subject, fromEvent, Subscription } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { CreateCustomerComponent } from '../modal/create-customer/create-customer.component'
@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
 import { MatSidenav } from '@angular/material/sidenav'
 import { ConnectionService } from 'ngx-connection-service'
+import { MatIconRegistry } from '@angular/material/icon'
+import { DomSanitizer } from '@angular/platform-browser'
+import { CustomersListComponent } from '../modal/customers-list/customers-list.component'
 
 @Component({
   selector: 'app-dashboard',
@@ -31,8 +34,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private slugifyPipe: SlugifyPipe,
     private snackBar: MatSnackBar,
     public router: Router,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
+    this.matIconRegistry.addSvgIcon(
+      `pool-table`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        './assets/icons/pool-table.svg'
+      )
+    )
+
     this.connectionService
       .monitor()
       .pipe(takeUntil(this.unsubscribe$))
@@ -137,6 +149,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  openListCustomerDialog(): void {
+    const dialogRef = this.dialog.open(CustomersListComponent, {
+      width: '800px',
+      data: { listCustomer: this.options },
+    })
+    dialogRef.afterClosed().subscribe((result) => {})
+  }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,
@@ -174,7 +194,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           })
       })
     } else {
-      this.drawer1.close()
+      this.drawer1.close().then((r) => {})
     }
   }
 
