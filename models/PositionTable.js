@@ -13,6 +13,9 @@ const positionTableSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  style: {
+    type: String,
+  },
 })
 
 positionTableSchema.static('findLastOne', function () {

@@ -40,7 +40,8 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private settingsTableService: SettingsTableService,
-    private customerService: CustomerService // private socketService: WebsocketService
+    private customerService: CustomerService,
+    private socketService: WebsocketService
   ) {
     //Init model
     this.customerTable = {
@@ -51,24 +52,24 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   }
 
   startTable() {
-    /*if (this.running){
-  return
-}    this.socketService.onNewMessage(this.keyEl.toString()).subscribe(msg => {
+    /* if (this.running) {
+      return
+    }
+    this.socketService.onNewMessage(this.keyEl.toString()).subscribe((msg) => {
       this.customerTable = msg
-      console.log('msg',msg)
-      this.running = true;
+      console.log('msg', msg)
+      this.running = true
+    })
 
-    });
-
-let data = {
-  priceTable: this.customerTable.price,
-  category: 'game',
-  statusTable: 1,
-  nTable: this.keyEl
-}
-this.customerService.addNewCustomerData(data).subscribe(res => {
-  console.log(res)
-})*/
+    let data = {
+      priceTable: this.customerTable.price,
+      category: 'game',
+      statusTable: 1,
+      nTable: this.keyEl,
+    }
+    this.customerService.addNewCustomerData(data).subscribe((res) => {
+      console.log(res)
+    })*/
   }
 
   startTimer() {
@@ -148,10 +149,10 @@ this.customerService.addNewCustomerData(data).subscribe(res => {
   ngOnInit(): void {
     this.getSettingsTable()
     this.getOpened()
-    /*this.socketService.getSocket(this.keyEl.toString()).subscribe(msg => {
+    /*  this.socketService.getSocket(this.keyEl.toString()).subscribe((msg) => {
       this.customerTable = msg
-      console.log('dddddd',msg)
-    });*/
+      console.log('dddddd', msg)
+    })*/
   }
 
   getOpened() {

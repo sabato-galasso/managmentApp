@@ -1,18 +1,17 @@
-<div class="row justify-content-center full-overlay">
+<div class="row justify-content-center full-overlay" *ngIf="isReady">
   <div
     class="col-6 justify-content-start d-flex mt-5 flex-wrap position-relative example-boundary"
-    *ngIf="isReady"
   >
-    <!--<app-draggable-item
+    <app-draggable-item
       *ngFor="let item of copertiStruttura; let idx = index"
       [idx]="idx"
       [disabled]="disabled"
       [active]="getActived('esterno-pedana-' + (idx + 1))"
       [position]="getPosition('esterno_' + (idx + 1))"
-      class="position-relative"
       [routerLink]="['/home', 'esterno-pedana-' + (idx + 1)]"
-    ></app-draggable-item>-->
-    <div
+      [name]="'esterno_' + (idx + 1)"
+    ></app-draggable-item>
+    <!--<div
       cdkDrag
       [cdkDragDisabled]="disabled"
       (cdkDragEnded)="dragEnd($event)"
@@ -32,15 +31,15 @@
           </svg>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="col-6 justify-content-start d-flex mt-5 flex-wrap">
-    <div
+    <!--<div
       cdkDrag
       [cdkDragDisabled]="disabled"
       class="col-3 example-box m-3"
       [class.bg-active]="getActived('esterno-ombrellone-' + (idx + 1))"
-      *ngFor="let item of copertiObrelloni; let idx = index"
+      *ngFor="let item of copertiOmbrelloni; let idx = index"
       [routerLink]="['/home', 'esterno-ombrellone-' + (idx + 1)]"
     >
       Esterno Ombrelloni {{ idx + 1 }}
@@ -52,13 +51,29 @@
           <path d="M0 0h24v24H0z" fill="none"></path>
         </svg>
       </div>
-    </div>
+    </div>-->
+    <app-draggable-item
+      *ngFor="let item of copertiOmbrelloni; let idx = index"
+      [idx]="idx"
+      [disabled]="disabled"
+      [active]="getActived('esterno-ombrellone-' + (idx + 1))"
+      [position]="getPosition('esterno_ombrellone_' + (idx + 1))"
+      [routerLink]="['/home', 'esterno-ombrellone-' + (idx + 1)]"
+      [name]="'esterno_ombrellone_' + (idx + 1)"
+    ></app-draggable-item>
   </div>
 </div>
 
-<div class="row justify-content-center full-overlay d-none">
+<div class="row justify-content-center full-overlay">
   <div class="col-3">
-    <button mat-raised-button (click)="enabled()">Abilita trascinamento</button>
+    <button
+      mat-raised-button
+      (click)="enabled()"
+      [color]="disabled ? 'primary' : 'accent'"
+    >
+      <span *ngIf="disabled">Abilita trascinamento</span>
+      <span *ngIf="!disabled">Disabilita trascinamento</span>
+    </button>
   </div>
 </div>
 <div class="my-overlay" *ngIf="showOverlay">

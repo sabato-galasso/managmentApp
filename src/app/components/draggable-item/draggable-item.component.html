@@ -1,10 +1,10 @@
 <div
   cdkDrag
   class="example-box m-3"
-  [cdkDragFreeDragPosition]="dragPosition"
   [cdkDragDisabled]="disabled"
-  (cdkDragEnded)="dragEnd($event, idx + 1)"
+  (cdkDragEnded)="dragEnd($event)"
   [class.bg-active]="active"
+  [style]="dragPosition"
 >
   Esterno Pedana {{ idx + 1 }}
   <div class="example-handle" *ngIf="!disabled">

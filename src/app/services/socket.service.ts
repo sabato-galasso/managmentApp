@@ -1,49 +1,47 @@
 import { Injectable } from '@angular/core'
-//import * as io from 'socket.io-client';
-//import {Observable} from "rxjs";
+import * as io from 'socket.io-client'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class WebsocketService {
-  // private socket: SocketIOClient.Socket;
+  private socket: any
 
   constructor() {
-    //  this.socket = io('http://localhost:1234');
+    //  this.socket = io('http://localhost:1234')
   }
   //TODO add socket
   // EMITTER
-  /* sendMessage(msg: string) {
-    this.socket.emit('sendMessage', { message: msg });
+  sendMessage(msg: string) {
+    this.socket.emit('sendMessage', { message: msg })
   }
 
   // HANDLER
   onNewMessage(id: string) {
-    this.socket.emit('counter'+id)
+    this.socket.emit('counter' + id)
 
-    return Observable.create(observer => {
-      this.socket.on('result'+id, msg => {
-     //   console.log('result',msg)
-        observer.next(msg);
-      });
-    });
+    return Observable.create((observer) => {
+      this.socket.on('result' + id, (msg) => {
+        //   console.log('result',msg)
+        observer.next(msg)
+      })
+    })
   }
 
-  getSocket(id: string){
-   return Observable.create(observer => {
-    this.socket.on('result'+id, msg => {
-     // console.log('ge',msg)
-      observer.next(msg);
-    });
-    });
+  getSocket(id: string) {
+    return Observable.create((observer) => {
+      this.socket.on('result' + id, (msg) => {
+        console.log('ge', msg)
+        observer.next(msg)
+      })
+    })
   }
 
   emitCloseTable(id: string) {
-    return Observable.create(observer => {
-      this.socket.emit('else'+id, msg => {
+    return Observable.create((observer) => {
+      this.socket.emit('else' + id, (msg) => {
         console.log(msg)
-        observer.next(msg);
-      });
-    });
+        observer.next(msg)
+      })
+    })
   }
-
-*/
 }

@@ -16,12 +16,11 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   private errMessFeed: any
   showSpinner: boolean
   copertiStruttura: number[]
-  copertiObrelloni: number[]
+  copertiOmbrelloni: number[]
   private unsubscribe$ = new Subject<void>()
   ids: string[] = []
   positionItem: any[] = []
   @Input() keyEl: number
-  dragPosition = [{ x: 0, y: 0 }]
   disabled: boolean = true
   isReady = false
   showOverlay = false
@@ -45,7 +44,7 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
           this.copertiStruttura = Array.from(
             Array(this.gettedSetting.external_c).keys()
           )
-          this.copertiObrelloni = Array.from(
+          this.copertiOmbrelloni = Array.from(
             Array(this.gettedSetting.external_s).keys()
           )
         },
@@ -70,7 +69,6 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   }
 
   getOpened() {
-    this.dragPosition[0] = { x: 10, y: 20 }
     this.settingsTableService
       .getPositionTable('esterno_')
       .pipe(takeUntil(this.unsubscribe$))
@@ -127,6 +125,4 @@ export class ExternalRoomComponent implements OnInit, OnDestroy {
   getPosition(s: string) {
     return this.positionItem.find((item) => item.id == s)
   }
-
-  dragEnd($event: CdkDragEnd) {}
 }

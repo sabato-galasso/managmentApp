@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { CdkDragEnd } from '@angular/cdk/drag-drop'
 import { SettingsTableService } from '../../services/settings-table.service'
 import { Subject } from 'rxjs'
@@ -17,13 +11,13 @@ import { MatSnackBar } from '@angular/material/snack-bar'
   templateUrl: './draggable-item.component.html',
   styleUrls: ['./draggable-item.component.scss'],
 })
-export class DraggableItemComponent
-  implements OnInit, OnDestroy, AfterViewInit {
+export class DraggableItemComponent implements OnInit, OnDestroy {
   @Input() disabled: boolean
   @Input() idx: number
   @Input() active: boolean
   @Input() position: any
-  dragPosition: { x: 0; y: 0 }
+  @Input() name: string
+  dragPosition: string
   ids: string[] = []
   private unsubscribe$ = new Subject<void>()
 
@@ -34,47 +28,31 @@ export class DraggableItemComponent
 
   ngOnInit(): void {
     if (this.position) {
-      this.dragPosition = {
-        x: this.position.positionX,
-        y: this.position.positionY,
-      }
+      this.dragPosition = this.position.style
     }
   }
 
-  ngAfterViewInit() {
-    /* if (this.position) {
-      this.dragPosition = {
-        x: this.position.positionX,
-        y: this.position.positionY,
-      }
-    }*/
-  }
-
-  dragEnd($event: CdkDragEnd, number: number) {
-    const { offsetLeft, offsetTop } = $event.source.element.nativeElement
-    const { x, y } = $event.distance
-    let positionX = this.getOffset($event.source.element.nativeElement).left
-    let positionY = this.getOffset($event.source.element.nativeElement).top
-    console.log({ positionX, positionY, id: number })
-    console.log(number)
+  dragEnd($event: CdkDragEnd) {
+    let style = window.getComputedStyle($event.source.element.nativeElement)
+    let matrix = new WebKitCSSMatrix(style.webkitTransform)
+    let positionX = 0
+    let positionY = 0
     this.settingsTableService
       .updatePositionTable({
         positionX,
         positionY,
-        id: 'esterno_' + number,
+        id: this.name,
+        style:
+          'transform: translate3d(' +
+          matrix.m41 +
+          'px,' +
+          matrix.m42 +
+          'px,0px)',
       })
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
+      .subscribe(() => {
         this.openSnackBar('Posizione aggiornata', 1000, 'top')
       })
-  }
-
-  getOffset(el) {
-    const rect = el.getBoundingClientRect()
-    return {
-      left: rect.left + window.scrollX,
-      top: rect.top + window.scrollY,
-    }
   }
 
   ngOnDestroy(): void {

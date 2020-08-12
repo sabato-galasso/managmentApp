@@ -13,7 +13,7 @@ require('dotenv').config({ path: __dirname + '/.env' })
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = undefined
 process.env.NODE_TLS_REJECT_UNAUTHORIZED || 0
 
-//const socketRouter = require("./routers/socket");
+const socketRouter = require('./routers/socket')
 const port = process.env.PORT || 8080
 const app = express()
 
@@ -38,6 +38,7 @@ app.use(customersRouter)
 app.use(categoryRouter)
 app.use(menuRouter)
 app.use(customerLIst)
+app.use(socketRouter)
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/managerAppFrontend'))
