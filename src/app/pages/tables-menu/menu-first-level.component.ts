@@ -67,7 +67,10 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
       this.router
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => this.router.navigate(['internal-room']))
-    } else if (window.location.href.indexOf('esterno-pedana') > -1) {
+    } else if (
+      window.location.href.indexOf('esterno-pedana') ||
+      window.location.href.indexOf('esterno-ombrellone') > -1
+    ) {
       this.router
         .navigateByUrl('/', { skipLocationChange: true })
         .then(() => this.router.navigate(['external-room']))
