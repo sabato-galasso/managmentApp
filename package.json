@@ -1,6 +1,6 @@
 {
   "name": "manager-app-frontend",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "app.js",
   "scripts": {
     "ng": "ng",

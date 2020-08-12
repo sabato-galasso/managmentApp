@@ -14,7 +14,23 @@ export class CustomersListComponent implements OnInit {
     public router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.listCustomer = data.listCustomer.sort((a, b) => a.localeCompare(b))
+    const grouped = data.listCustomer
+      .sort((a, b) => a.localeCompare(b))
+      .reduce((groups, contact) => {
+        const letter = contact.charAt(0).toUpperCase()
+
+        groups[letter] = groups[letter] || []
+        groups[letter].push(contact)
+
+        return groups
+      }, {})
+
+    const result = Object.keys(grouped).map((key) => ({
+      key,
+      contacts: grouped[key],
+    }))
+    this.listCustomer = result
+    console.log(result)
   }
 
   onNoClick(): void {

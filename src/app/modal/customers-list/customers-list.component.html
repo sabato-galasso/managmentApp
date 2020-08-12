@@ -1,14 +1,22 @@
 <h1 mat-dialog-title>Lista clienti</h1>
 <div mat-dialog-content>
   <mat-list>
-    <mat-list-item
-      style="cursor: pointer; pointer-events: auto;"
-      (click)="redirectTo('/home/' + item, 'find')"
-      *ngFor="let item of listCustomer; last as last"
-    >
-      {{ item }}
-      <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
-    </mat-list-item>
+    <div *ngFor="let item of listCustomer; last as last">
+      <span style="font-size: 20px;"
+        ><b>{{ item.key }}</b></span
+      >
+      <mat-divider></mat-divider>
+      <mat-list-item
+        style="cursor: pointer; pointer-events: auto;"
+        (click)="redirectTo('/home/' + customers, 'find')"
+        *ngFor="let customers of item.contacts; last as last"
+      >
+        <span
+          ><b>{{ customers }}</b></span
+        >
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </div>
   </mat-list>
 </div>
 <div mat-dialog-actions>
