@@ -38,7 +38,7 @@ app.use(customersRouter)
 app.use(categoryRouter)
 app.use(menuRouter)
 app.use(customerLIst)
-app.use(socketRouter)
+//app.use(socketRouter)
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/managerAppFrontend'))
