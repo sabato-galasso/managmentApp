@@ -6,7 +6,7 @@
   [class.bg-active]="active"
   [style]="dragPosition"
 >
-  Esterno Pedana {{ idx + 1 }}
+  {{ labelName | uppercase }}
   <div class="example-handle" *ngIf="!disabled">
     <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
       <path

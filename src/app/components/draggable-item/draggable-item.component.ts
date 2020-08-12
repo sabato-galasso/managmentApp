@@ -20,6 +20,7 @@ export class DraggableItemComponent implements OnInit, OnDestroy {
   dragPosition: string
   ids: string[] = []
   private unsubscribe$ = new Subject<void>()
+  labelName = ''
 
   constructor(
     private settingsTableService: SettingsTableService,
@@ -29,6 +30,7 @@ export class DraggableItemComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.position) {
       this.dragPosition = this.position.style
+      this.labelName = this.name.replace(/_/g, ' ')
     }
   }
 
