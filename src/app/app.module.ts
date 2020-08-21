@@ -90,6 +90,7 @@ import { OnlineStatusComponent } from './components/online-status/online-status.
 import { ConnectionServiceModule } from 'ngx-connection-service'
 import { interceptorProviders } from './interceptors'
 import { CustomersListComponent } from './modal/customers-list/customers-list.component'
+import { DragulaModule } from 'ng2-dragula'
 
 @NgModule({
   declarations: [
@@ -170,6 +171,7 @@ import { CustomersListComponent } from './modal/customers-list/customers-list.co
     HammerModule,
     FlexLayoutModule,
     ConnectionServiceModule,
+    DragulaModule.forRoot(),
   ],
   entryComponents: [
     LoginComponent,

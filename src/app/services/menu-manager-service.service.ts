@@ -166,6 +166,19 @@ export class MenuManagerServiceService {
       .pipe(catchError(this.processHTTPMsgService.handleError))
   }
 
+  updateAllCategories(newValues): Observable<MenuResponse[]> {
+    const token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      }),
+    }
+    return this.http
+      .put<MenuResponse[]>(baseURL + 'api/all-category', newValues, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError))
+  }
+
   /* getSubCategories(subcategory : string): Observable<MenuResponse[]> {
     const token = localStorage.getItem('token');
     const httpOptions = {

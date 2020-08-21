@@ -1,94 +1,102 @@
-const express = require("express");
-const menuCategory = require("../models/Category");
-const auth = require("../middleware/auth");
-const router = express.Router();
+const express = require('express')
+const menuCategory = require('../models/Category')
+const auth = require('../middleware/auth')
+const router = express.Router()
 
-
-
-router.get("/api/category", auth, async (req, res) => {
+router.get('/api/category', auth, async (req, res) => {
   // Get settings
   try {
-    const doc = await menuCategory.findAll();
-    res.status(200).send(doc);
+    const doc = await menuCategory.findAll()
+    res.status(200).send(doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-
-router.get("/api/category/:category", auth, async (req, res) => {
+router.get('/api/category/:category', auth, async (req, res) => {
   // Get warehouse category
   try {
-
-    const filter = {slugCategory: req.params.category };
-    const doc = await menuCategory.findByCategory(filter);
-    res.status(200).send(doc);
+    const filter = { slugCategory: req.params.category }
+    const doc = await menuCategory.findByCategory(filter)
+    res.status(200).send(doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-
-router.get("/api/category/subcategory/:category", auth, async (req, res) => {
+router.get('/api/category/subcategory/:category', auth, async (req, res) => {
   // Get warehouse category
   try {
-
-    const filter = {slugCategoryFirst: req.params.category };
-    const doc = await menuCategory.findByCategory(filter);
-    res.status(200).send(doc);
+    const filter = { slugCategoryFirst: req.params.category }
+    const doc = await menuCategory.findByCategory(filter)
+    res.status(200).send(doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-router.get("/api/subcategory/:category", auth, async (req, res) => {
+router.get('/api/subcategory/:category', auth, async (req, res) => {
   // Get warehouse category
   try {
-    const filter = {slugCategoryFirst: req.params.category };
-    const doc = await menuCategory.findByCategory(filter);
-    res.status(200).send(doc);
+    const filter = { slugCategoryFirst: req.params.category }
+    const doc = await menuCategory.findByCategory(filter)
+    res.status(200).send(doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-router.put("/api/category", auth, async (req, res) => {
+router.put('/api/category', auth, async (req, res) => {
   // Create a new settings
   try {
-    const settings = new menuCategory(req.body);
-    const filter = { _id: req.body._id };
+    const settings = new menuCategory(req.body)
+    const filter = { _id: req.body._id }
     //const update = settings.quantity
-    const doc = await menuCategory.findOneAndUpdate(filter,settings);
-    res.status(201).send(doc._doc);
+    const doc = await menuCategory.findOneAndUpdate(filter, settings)
+    res.status(201).send(doc._doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-router.post("/api/category", auth, async (req, res) => {
+router.put('/api/all-category', auth, async (req, res) => {
+  try {
+    await menuCategory.bulkWrite(
+      req.body.map((data) => ({
+        updateOne: {
+          filter: { _id: data._id },
+          update: { $set: data },
+        },
+      }))
+    )
+    res.status(201).send()
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+router.post('/api/category', auth, async (req, res) => {
   // Create a new category
   try {
-    const item = new menuCategory(req.body);
-    await item.save();
-    res.status(201).send(item);
+    const item = new menuCategory(req.body)
+    await item.save()
+    res.status(201).send(item)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-router.delete("/api/category/", auth, async (req, res) => {
+router.delete('/api/category/', auth, async (req, res) => {
   // Delete row settings
   try {
     //const queryStuff = JSON.stringify(req.query);
-    const filter = { _id: req.query._id };
+    const filter = { _id: req.query._id }
     //const update = settings.quantity
-    const doc = await menuCategory.findOneAndDelete(filter);
-    res.status(201).send(doc._doc);
+    const doc = await menuCategory.findOneAndDelete(filter)
+    res.status(201).send(doc._doc)
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error)
   }
-});
+})
 
-
-
-module.exports = router;
+module.exports = router

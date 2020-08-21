@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const categorySchema = mongoose.Schema(
   {
@@ -16,19 +16,19 @@ const categorySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    seq: { type: Number, default: 0 },
   },
-{ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
+)
 
+categorySchema.static('findAll', function () {
+  return this.find({}).sort({ seq: 1 })
+})
 
-categorySchema.static('findAll', function() {
-  return this.find({}).sort({created_at: -1});
-});
+categorySchema.static('findByCategory', function (res) {
+  return this.find(res).sort({ seq: 1 })
+})
 
-categorySchema.static('findByCategory',function (res) {
+const Category = mongoose.model('Category', categorySchema)
 
-  return this.find(res).sort({created_at: -1});
-});
-
-const Category = mongoose.model("Category", categorySchema);
-
-module.exports = Category;
+module.exports = Category

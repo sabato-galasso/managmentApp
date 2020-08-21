@@ -8,6 +8,8 @@ import _ from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { Location } from '@angular/common'
+import { DragulaService, dragula } from 'ng2-dragula'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-tables-menu',
@@ -25,7 +27,9 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
     private socketService: WebsocketService,
     private menuService: MenuManagerServiceService,
     private _location: Location,
-    public router: Router
+    public router: Router,
+    private dragulaService: DragulaService,
+    private snackBar: MatSnackBar
   ) {
     this.paramId = this.route.snapshot.params.id
 
@@ -34,6 +38,9 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
       timer: '0',
       status: 0,
     }
+    dragulaService.createGroup('element', {
+      removeOnSpill: true,
+    })
   }
 
   ngOnInit(): void {
@@ -89,5 +96,35 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
+    this.dragulaService.destroy('element')
+  }
+
+  get($event: any[]) {
+    if ($event && $event.length > 0) {
+      $event.forEach((el, idx) => {
+        el.seq = idx + 1
+      })
+    }
+
+    this.menuService
+      .updateAllCategories($event)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (res) => {},
+        (error) => {},
+        () => {
+          this.openSnackBar('Posizione categoria aggiornata', 'Chiudi')
+        }
+      )
+
+    return $event
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    })
   }
 }
