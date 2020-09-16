@@ -24,7 +24,6 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   timerRef: any
   running = false
   paused = false
-  startText = 'Start'
 
   name: string
 
@@ -40,66 +39,31 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private settingsTableService: SettingsTableService,
-    private customerService: CustomerService,
-    private socketService: WebsocketService
+    private customerService: CustomerService
   ) {
     //Init model
     this.customerTable = {
       price: '0',
       timer: '0',
       status: 0,
+      counter: 0,
     }
   }
 
   startTable() {
-    /* if (this.running) {
-      return
+    if (!this.running) {
+      this.startTimer()
     }
-    this.socketService.onNewMessage(this.keyEl.toString()).subscribe((msg) => {
-      this.customerTable = msg
-      console.log('msg', msg)
-      this.running = true
-    })
-
-    let data = {
-      priceTable: this.customerTable.price,
-      category: 'game',
-      statusTable: 1,
-      nTable: this.keyEl,
-    }
-    this.customerService.addNewCustomerData(data).subscribe((res) => {
-      console.log(res)
-    })*/
-  }
-
-  startTimer() {
     this.running = !this.running
-    this.paused = false
-    if (this.running) {
-      this.startText = 'Stop'
-      const startTime = Date.now() - (this.counter || 0)
-      this.timerRef = setInterval(() => {
-        this.counter = Date.now() - startTime
-        this.seconds = `0${Math.floor(this.counter / 1000) % 60}`.slice(-2)
-        this.minutes = `0${Math.floor(this.counter / 60000) % 60}`.slice(-2)
-        this.hours = `0${Math.floor(this.counter / 3600000)}`.slice(-2)
-        this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
-      })
-    } else {
-      this.startText = 'Resume'
-      this.paused = true
-      clearInterval(this.timerRef)
-    }
   }
 
-  clearTimer() {
+  pauseTable() {
+    this.paused = true
     this.running = false
-    this.startText = 'Start'
-    this.counter = 0
-    this.price = '0.00'
-    this.seconds = '00'
-    this.minutes = '00'
-    this.hours = '00'
+    this.customerTable.isActive = false
+    let tmp = JSON.parse(localStorage.getItem('ws' + this.keyEl.toString()))
+    tmp.paused = true
+    localStorage.setItem('ws' + this.keyEl.toString(), JSON.stringify(tmp))
     clearInterval(this.timerRef)
   }
 
@@ -107,24 +71,6 @@ export class StopWatchComponent implements OnInit, OnDestroy {
     clearInterval(this.timerRef)
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
-  }
-
-  stopwatchCalc(sec) {
-    const pph = this.getFieldFloatValue()
-    return this.round((pph * sec) / 3600, 2)
-  }
-
-  round(n, dec) {
-    let x = n * Math.pow(10, dec)
-    x = Math.round(x)
-    return (x / Math.pow(10, dec)).toFixed(dec)
-  }
-
-  getFieldFloatValue() {
-    if (this.pphValue) {
-      const copyPriceToString = this.pphValue.toString()
-      return parseFloat(copyPriceToString.replace(',', '.'))
-    }
   }
 
   getSettingsTable() {
@@ -149,10 +95,18 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getSettingsTable()
     this.getOpened()
-    /*  this.socketService.getSocket(this.keyEl.toString()).subscribe((msg) => {
-      this.customerTable = msg
-      console.log('dddddd', msg)
-    })*/
+    if (localStorage.getItem('ws' + this.keyEl.toString())) {
+      this.customerTable = JSON.parse(
+        localStorage.getItem('ws' + this.keyEl.toString())
+      )
+      if (this.customerTable.isActive) {
+        this.forceStartTimer(this.customerTable.startTime)
+      }
+
+      if (this.customerTable.paused) {
+        this.paused = true
+      }
+    }
   }
 
   getOpened() {
@@ -170,5 +124,86 @@ export class StopWatchComponent implements OnInit, OnDestroy {
 
   getActived(s: string) {
     return this.ids.includes(s)
+  }
+
+  forceStartTimer(startTime) {
+    this.timerRef = setInterval(() => {
+      this.counter = Date.now() - startTime
+      this.seconds = `0${Math.floor(this.counter / 1000) % 60}`.slice(-2)
+      this.minutes = `0${Math.floor(this.counter / 60000) % 60}`.slice(-2)
+      this.hours = `0${Math.floor(this.counter / 3600000)}`.slice(-2)
+      this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
+      this.customerTable.isActive = true
+      this.customerTable.price = this.price
+      this.customerTable.timer =
+        this.hours + ':' + this.minutes + ':' + this.seconds
+      this.customerTable.paused = false
+      localStorage.setItem(
+        'ws' + this.keyEl.toString(),
+        JSON.stringify(this.customerTable)
+      )
+    })
+  }
+
+  startTimer() {
+    this.running = !this.running
+    this.paused = false
+    if (this.running) {
+      const startTime = Date.now() - (this.counter || 0)
+      this.customerTable.startTime = startTime
+      this.timerRef = setInterval(() => {
+        this.counter = Date.now() - startTime
+        this.seconds = `0${Math.floor(this.counter / 1000) % 60}`.slice(-2)
+        this.minutes = `0${Math.floor(this.counter / 60000) % 60}`.slice(-2)
+        this.hours = `0${Math.floor(this.counter / 3600000)}`.slice(-2)
+        this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
+        this.customerTable.isActive = true
+        this.customerTable.price = this.price
+        this.customerTable.timer =
+          this.hours + ':' + this.minutes + ':' + this.seconds
+        localStorage.setItem(
+          'ws' + this.keyEl.toString(),
+          JSON.stringify(this.customerTable)
+        )
+      })
+    } else {
+      this.paused = true
+      let tmp = JSON.parse(localStorage.getItem('ws' + this.keyEl.toString()))
+      tmp.paused = true
+      localStorage.setItem('ws' + this.keyEl.toString(), JSON.stringify(tmp))
+      clearInterval(this.timerRef)
+    }
+  }
+
+  clearTimer() {
+    this.running = false
+    this.customerTable.isActive = false
+    this.customerTable.price = '0'
+    this.customerTable.timer = '0:0:0'
+    this.counter = 0
+    this.price = '0.00'
+    this.seconds = '00'
+    this.minutes = '00'
+    this.hours = '00'
+    localStorage.removeItem('ws' + this.keyEl.toString())
+    clearInterval(this.timerRef)
+  }
+
+  stopwatchCalc(sec) {
+    const pph = this.getFieldFloatValue()
+    return this.round((pph * sec) / 3600, 2)
+  }
+
+  round(n, dec) {
+    let x = n * Math.pow(10, dec)
+    x = Math.round(x)
+    return (x / Math.pow(10, dec)).toFixed(dec)
+  }
+
+  getFieldFloatValue() {
+    if (this.pphValue) {
+      const copyPriceToString = this.pphValue.toString()
+      return parseFloat(copyPriceToString.replace(',', '.'))
+    }
   }
 }

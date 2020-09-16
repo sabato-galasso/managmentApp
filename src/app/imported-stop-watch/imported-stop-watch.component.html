@@ -1,0 +1,109 @@
+<div class="Cell">
+  <p>Tavolo {{ keyEl + 1 }}</p>
+</div>
+<div class="Cell">
+  <input
+    name="price"
+    [(ngModel)]="pphValue"
+    value="10.00"
+    min="0"
+    type="text"
+  />
+</div>
+<div class="Cell">
+  <button
+    mat-flat-button
+    color="primary"
+    class="mr-2"
+    mat-icon-button
+    *ngIf="running === false"
+    (click)="startTimer()"
+  >
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+  <button
+    mat-flat-button
+    color="accent"
+    class="mr-2"
+    mat-icon-button
+    *ngIf="running === true"
+    (click)="startTimer()"
+  >
+    <mat-icon>pause</mat-icon>
+  </button>
+  <button
+    mat-flat-button
+    color="warn"
+    class="mr-2"
+    mat-icon-button
+    *ngIf="running === true"
+    (click)="clearTimer()"
+  >
+    <mat-icon>stop</mat-icon>
+  </button>
+</div>
+<div class="Cell">
+  <p>{{ hours }} : {{ minutes }} : {{ seconds }}</p>
+</div>
+<div class="Cell">
+  <h3>{{ price }} €</h3>
+</div>
+
+<!--
+<tr>
+  <td>Tavolo {{keyEl + 1}}</td>
+  <td>
+    <input
+      name="price"
+      ref={this.pph}
+      value="10.00"
+      min="0"
+      type="text"
+    />
+  </td>
+  <td>
+    {{hours}} : {{minutes}} : {{seconds}}
+  </td>
+  <td class="w-150">
+    &lt;!&ndash;    {this.state.timerOn === false && this.state.timerTime === 0 && (
+            <button
+              type="button"
+              className="btn btn-outline-success btn-lg btn-60 mr-3"
+              onClick={this.startTimer}
+        >
+          <i className="fa fa-play"></i>
+        </button>
+      )}
+        {this.state.timerOn === true && (
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-lg btn-60 mr-3"
+              onClick={this.stopTimer}
+        >
+          <i className="fa fa-stop"></i>
+        </button>
+      )}
+        {this.state.timerOn === false && this.state.timerTime > 0 && (
+            <button
+              type="button"
+              className="btn btn-outline-secondary btn-lg btn-60 mr-3"
+              onClick={this.startTimer}
+        >
+          <i className="fa fa-play" />
+        </button>
+      )}
+        {this.state.timerOn === false && this.state.timerTime > 0 && (
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-lg btn-60 mr-3"
+              onClick={this.resetTimer}
+        >
+          <i className="fa fa-fast-backward"></i>
+        </button>
+      )}&ndash;&gt;
+  </td>
+  <td>
+           <h3>{{price}} €</h3>
+  </td>
+</tr>
+-->

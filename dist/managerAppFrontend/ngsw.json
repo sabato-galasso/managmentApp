@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1598008882469,
+  "timestamp": 1600193438949,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,12 +13,12 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.4cf5208b6ab933cd4140.js",
+        "/main.e54f4bf15e37c933d7e2.js",
         "/manifest.webmanifest",
-        "/polyfills-es5.fd90107e97e5d08f848c.js",
-        "/polyfills.e0ea584d926d55b57c46.js",
-        "/runtime.e227d1a0e31cbccbf8ec.js",
-        "/styles.5a05b237feab19a24222.css"
+        "/polyfills-es5.78a9decf598c3615a587.js",
+        "/polyfills.81932ca9b29cfd66dc09.js",
+        "/runtime.acf0dec4155e77772545.js",
+        "/styles.c60813c88f319f42dc55.css"
       ],
       "patterns": []
     },
@@ -68,13 +68,13 @@
     "/assets/img/svg/toasticon.svg": "08bd43e1f0b79b8e63482fbae4a112c77581c986",
     "/assets/img/table.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "e79f683efdf6bc93b4bdf5d3352372100b589304",
-    "/main.4cf5208b6ab933cd4140.js": "49f56ccf1aa679331ea1f12b141951bb6731e35a",
+    "/index.html": "b0fceb44e93431ac66cc199d6b8eff8905e94a3e",
+    "/main.e54f4bf15e37c933d7e2.js": "a6d6083af09c697c6223203d51ee8fa8877aed8a",
     "/manifest.webmanifest": "34ba73e717880a8ab16601bba65a5d2f3bf3c30e",
-    "/polyfills-es5.fd90107e97e5d08f848c.js": "1a29bdfac5ac2d4a2782ecae0aa57c4c29f00efa",
-    "/polyfills.e0ea584d926d55b57c46.js": "7813885593f97442ea400b956815ea06d2e449a6",
-    "/runtime.e227d1a0e31cbccbf8ec.js": "2d4e434ba65e3bfa026c21481202c3ad0657f172",
-    "/styles.5a05b237feab19a24222.css": "42152ca1b849fbfd9853a826493ab8f75813417f",
+    "/polyfills-es5.78a9decf598c3615a587.js": "b3e3285f8cdcbc7f4c56056f1e60e1e2fac902e5",
+    "/polyfills.81932ca9b29cfd66dc09.js": "b87fd3d4762c910b53290c651ab2b76d1668cd37",
+    "/runtime.acf0dec4155e77772545.js": "c2f19a5c64c718ebecb901ee3f30667ccab567b6",
+    "/styles.c60813c88f319f42dc55.css": "bda2d49c5a069c0241e1b746de3164f84103e0cc",
     "/table.61f18e982314e8a89655.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94"
   },
   "navigationUrls": [

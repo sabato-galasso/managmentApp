@@ -1,0 +1,26 @@
+<div class="container my-5" style="overflow: auto; max-height: 500px">
+  <div class="Table">
+    <div class="Heading">
+      <div class="Cell">
+        <p>Tavoli</p>
+      </div>
+      <div class="Cell">
+        <p>Importo /1h</p>
+      </div>
+      <div class="Cell">
+        <p>Timer</p>
+      </div>
+      <div class="Cell">
+        <p>Avvia/Ferma</p>
+      </div>
+      <div class="Cell">
+        <p>Prezzo</p>
+      </div>
+    </div>
+    <app-imported-stop-watch
+      *ngFor="let t of tables"
+      [keyEl]="t"
+      class="Row"
+    ></app-imported-stop-watch>
+  </div>
+</div>

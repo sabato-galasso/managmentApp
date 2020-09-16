@@ -1,5 +1,9 @@
 export interface CustomerTableModel {
-  price: string;
-  timer: string;
-  status: number;
+  paused?: boolean
+  startTime?: number
+  isActive?: boolean
+  counter?: number
+  price: string
+  timer: string
+  status: number
 }

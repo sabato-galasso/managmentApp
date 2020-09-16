@@ -1,14 +1,41 @@
-.mat-card{
+.mat-card {
   width: 400px;
 }
 
-.menu-button{
+.menu-button {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
 }
 
-.custom-pos{
+.menu-button-play {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+.menu-button-pause {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+.menu-button-stop {
+  position: absolute;
+  bottom: 1rem;
+  left: 6rem;
+}
+
+.text-timer {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+.text-price {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.custom-pos {
   position: absolute;
   right: 10px;
   top: -90px;
@@ -16,13 +43,13 @@
   z-index: 1;
 }
 
-.display-4{
+.display-4 {
   font-size: 16px;
 }
 
-.price{
- // display: inline-block;
- // align-items: flex-end;
+.price {
+  // display: inline-block;
+  // align-items: flex-end;
 }
 
 .bounceIn {
@@ -30,27 +57,47 @@
   animation-duration: 0.75s;
   -webkit-animation-name: bounceIn;
   animation-name: bounceIn;
-  &.delay{
+  &.delay {
     animation-delay: 1s;
   }
 }
 
 @keyframes moveOne {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 6rem;}
+  from {
+    bottom: 2rem;
+    opacity: 0;
+  }
+  to {
+    bottom: 6rem;
+  }
 }
 @keyframes moveOneLabel {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 6.5rem;}
+  from {
+    bottom: 2rem;
+    opacity: 0;
+  }
+  to {
+    bottom: 6.5rem;
+  }
 }
 
 @keyframes moveTwo {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 9.5rem;}
+  from {
+    bottom: 2rem;
+    opacity: 0;
+  }
+  to {
+    bottom: 9.5rem;
+  }
 }
 @keyframes moveTwoLabel {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 10rem;}
+  from {
+    bottom: 2rem;
+    opacity: 0;
+  }
+  to {
+    bottom: 10rem;
+  }
 }
 
 @-webkit-keyframes bounceIn {
@@ -143,14 +190,12 @@
   }
 }
 
-
-
-.action-button{
+.action-button {
   position: relative;
   right: 2rem;
   transition-property: opacity;
 }
-.label{
+.label {
   position: relative;
   right: 5rem;
   left: auto;
@@ -164,20 +209,20 @@
   margin: 0;
 }
 
-.one{
+.one {
   bottom: 6rem;
   animation: moveOne 0.2s;
 }
-.labelone{
+.labelone {
   bottom: 6.5rem;
   animation: moveOneLabel 0.2s;
 }
 
-.two{
+.two {
   bottom: 9.5rem;
   animation: moveTwo 0.25s;
 }
-.labeltwo{
+.labeltwo {
   bottom: 10rem;
   animation: moveTwoLabel 0.25s;
 }
@@ -195,14 +240,13 @@
   height: 100%;
 }
 
-
-@mixin dark-overlay{
-  &:after{
-    content: "";
+@mixin dark-overlay {
+  &:after {
+    content: '';
     width: 100%;
     height: auto;
     position: absolute;
-    z-index: -1;  // Take note of this negative z-index and compare to each article's positive z-index. This helps your content to show up over the overlay.
+    z-index: -1; // Take note of this negative z-index and compare to each article's positive z-index. This helps your content to show up over the overlay.
     top: 0;
     right: 0;
     left: 0;
@@ -210,23 +254,23 @@
   }
 }
 
-.full-overlay{
+.full-overlay {
   position: relative;
   z-index: 1;
-  height:200px;
+  height: 200px;
   text-align: center;
-  background:url("../../assets/img/table.jpg") no-repeat;
+  background: url('../../assets/img/table.jpg') no-repeat;
   background-size: cover;
   margin: 0 -16px;
   @include dark-overlay;
-  &.active-overlay{
-    &:after{
-      background:rgba(0, 0, 0, 0.50);
+  &.active-overlay {
+    &:after {
+      background: rgba(0, 0, 0, 0.5);
     }
   }
 }
 
-.card{
+.card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -235,32 +279,32 @@
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid #e3e6f0;
-  border-radius: .35rem;
-  width: 250px;height: 200px;
+  border-radius: 0.35rem;
+  width: 250px;
+  height: 200px;
   &.bg-primary {
     background-color: #4e73df;
- //background-image: url("http://placehold.it/350x150");
-   // background-position: center center;
+    //background-image: url("http://placehold.it/350x150");
+    // background-position: center center;
   }
-  &.bg-active{
+  &.bg-active {
     background-color: #e74a3b;
-
   }
-& .center{
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-} }
+  & .center {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+}
 .border-left-primary {
-  border-left: .25rem solid #4e73df;
+  border-left: 0.25rem solid #4e73df;
 }
-.active-card{
-  border-left: .25rem solid #e74a3b!important;
+.active-card {
+  border-left: 0.25rem solid #e74a3b !important;
 }
-.pause-card{
-  border-left: .25rem solid #f6c23e!important;
+.pause-card {
+  background-color: #f6c23e !important;
+  border-left: 0.25rem solid #f6c23e !important;
 }
-
-

@@ -2,12 +2,49 @@
   class="card bg-primary shadow m-4"
   matRipple
   [class.bg-active]="getActived('biliardi-' + keyEl)"
-  [ngClass]="{ 'bg-active': customerTable.status === 1, 'pause-card': paused }"
+  [ngClass]="{
+    'bg-active': customerTable.isActive === true,
+    'pause-card': paused
+  }"
   [matRippleDisabled]="running"
-  (click)="startTable()"
 >
   <div class="card-body center text-white">
+    <h3 class="text-timer" *ngIf="running || customerTable.isActive || paused">
+      {{ customerTable.timer }}
+    </h3>
+    <h2 class="text-price" *ngIf="running || customerTable.isActive || paused">
+      {{ customerTable.price }}€
+    </h2>
     <h1>B{{ keyEl }}</h1>
+    <button
+      mat-fab
+      color="primary"
+      (tap)="startTable()"
+      class="menu-button-play"
+      *ngIf="!running || !customerTable.isActive"
+    >
+      <mat-icon aria-hidden="false" aria-label="play_arrow"
+        >play_arrow</mat-icon
+      >
+    </button>
+    <button
+      mat-fab
+      color="secondary"
+      (tap)="pauseTable()"
+      class="menu-button-pause"
+      *ngIf="running || customerTable.isActive"
+    >
+      <mat-icon aria-hidden="false" aria-label="pause">pause</mat-icon>
+    </button>
+    <button
+      mat-fab
+      color="warn"
+      (tap)="clearTimer()"
+      class="menu-button-stop"
+      *ngIf="running || customerTable.isActive"
+    >
+      <mat-icon aria-hidden="false" aria-label="stop">stop</mat-icon>
+    </button>
     <button
       mat-fab
       color="primary"
@@ -17,6 +54,4 @@
       <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
     </button>
   </div>
-  <!--  <div>{{customerTable.timer}}</div>-->
 </div>
-<!--<div>{{customerTable.price}}</div>-->

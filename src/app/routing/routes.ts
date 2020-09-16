@@ -15,6 +15,7 @@ import { RoomsComponent } from '../pages/rooms/rooms.component'
 import { InternalRoomComponent } from '../pages/internal-room/internal-room.component'
 import { ExternalRoomComponent } from '../pages/external-room/external-room.component'
 import { HistoryClientsComponent } from '../pages/history-clients/history-clients.component'
+import { ExtCounterComponent } from '../pages/ext-counter/ext-counter.component'
 
 export const routes: Routes = [
   {
@@ -30,6 +31,7 @@ export const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'warehouse', component: WarehouseComponent },
       { path: 'home/:id', component: MenuFirstLevelComponent },
+      { path: 'counter', component: ExtCounterComponent },
       {
         path: 'home/:id/items/category/:category',
         component: ItemLevelComponent,

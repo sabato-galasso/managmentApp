@@ -91,6 +91,8 @@ import { ConnectionServiceModule } from 'ngx-connection-service'
 import { interceptorProviders } from './interceptors'
 import { CustomersListComponent } from './modal/customers-list/customers-list.component'
 import { DragulaModule } from 'ng2-dragula'
+import { ExtCounterComponent } from './pages/ext-counter/ext-counter.component'
+import { ImportedStopWatchComponent } from './imported-stop-watch/imported-stop-watch.component'
 
 @NgModule({
   declarations: [
@@ -131,6 +133,8 @@ import { DragulaModule } from 'ng2-dragula'
     DraggableItemComponent,
     OnlineStatusComponent,
     CustomersListComponent,
+    ExtCounterComponent,
+    ImportedStopWatchComponent,
   ],
   imports: [
     BrowserModule,
