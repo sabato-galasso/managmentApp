@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   formErrors = {
     quantity: 1,
-    price: 1,
+    price: 10,
   }
 
   validationMessages = {
@@ -61,7 +61,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
       internal: [1, [Validators.required, Validators.minLength(1)]],
       external_s: [1, [Validators.required, Validators.minLength(1)]],
       external_c: [1, [Validators.required, Validators.minLength(1)]],
-      price: [1, [Validators.required]],
+      price: [10, [Validators.required]],
     })
 
     this.tablesForm.valueChanges.subscribe((data) => this.onValueChanged(data))
@@ -89,6 +89,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.tablesForm.controls.external_c.setValue(
             this.gettedSetting.external_c
           )
+          this.tablesForm.controls.price.setValue(this.gettedSetting.price)
         },
         (errmess) => {
           this.gettedSetting = null

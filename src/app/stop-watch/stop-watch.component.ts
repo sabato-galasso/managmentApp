@@ -20,7 +20,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   price = '0.00'
   pphValue = 10.0
 
-  counter: number
+  counter: number = 0
   timerRef: any
   running = false
   paused = false
@@ -51,8 +51,10 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   }
 
   startTable() {
-    if (!this.running) {
+    if (!this.running && !this.paused) {
       this.startTimer()
+    } else {
+      this.startTimerByPaused()
     }
     this.running = !this.running
   }
@@ -99,12 +101,15 @@ export class StopWatchComponent implements OnInit, OnDestroy {
       this.customerTable = JSON.parse(
         localStorage.getItem('ws' + this.keyEl.toString())
       )
-      if (this.customerTable.isActive) {
-        this.forceStartTimer(this.customerTable.startTime)
-      }
 
-      if (this.customerTable.paused) {
-        this.paused = true
+      if (this.customerTable.isActive && !this.customerTable.paused) {
+        this.forceStartTimer(this.customerTable.startTime)
+      } else {
+        if (this.customerTable.paused) {
+          this.paused = true
+          this.running = false
+          this.customerTable.isActive = false
+        }
       }
     }
   }
@@ -127,6 +132,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
   }
 
   forceStartTimer(startTime) {
+    this.running = true
     this.timerRef = setInterval(() => {
       this.counter = Date.now() - startTime
       this.seconds = `0${Math.floor(this.counter / 1000) % 60}`.slice(-2)
@@ -135,6 +141,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
       this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
       this.customerTable.isActive = true
       this.customerTable.price = this.price
+      this.customerTable.counter = this.counter
       this.customerTable.timer =
         this.hours + ':' + this.minutes + ':' + this.seconds
       this.customerTable.paused = false
@@ -159,6 +166,7 @@ export class StopWatchComponent implements OnInit, OnDestroy {
         this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
         this.customerTable.isActive = true
         this.customerTable.price = this.price
+        this.customerTable.counter = this.counter
         this.customerTable.timer =
           this.hours + ':' + this.minutes + ':' + this.seconds
         localStorage.setItem(
@@ -172,6 +180,30 @@ export class StopWatchComponent implements OnInit, OnDestroy {
       tmp.paused = true
       localStorage.setItem('ws' + this.keyEl.toString(), JSON.stringify(tmp))
       clearInterval(this.timerRef)
+    }
+  }
+
+  startTimerByPaused() {
+    this.running = !this.running
+    this.paused = false
+    if (this.running) {
+      let startTime = Date.now() - (this.customerTable.counter || 0)
+      this.timerRef = setInterval(() => {
+        this.counter = Date.now() - startTime
+        this.seconds = `0${Math.floor(this.counter / 1000) % 60}`.slice(-2)
+        this.minutes = `0${Math.floor(this.counter / 60000) % 60}`.slice(-2)
+        this.hours = `0${Math.floor(this.counter / 3600000)}`.slice(-2)
+        this.price = this.stopwatchCalc(Math.floor(this.counter / 1000))
+        this.customerTable.isActive = true
+        this.customerTable.price = this.price
+        this.customerTable.counter = this.counter
+        this.customerTable.timer =
+          this.hours + ':' + this.minutes + ':' + this.seconds
+        localStorage.setItem(
+          'ws' + this.keyEl.toString(),
+          JSON.stringify(this.customerTable)
+        )
+      })
     }
   }
 

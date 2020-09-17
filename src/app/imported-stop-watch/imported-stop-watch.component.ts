@@ -30,6 +30,7 @@ export class ImportedStopWatchComponent implements OnInit {
   ngOnInit(): void {}
 
   startTimer() {
+    debugger
     this.running = !this.running
     this.paused = false
     if (this.running) {
