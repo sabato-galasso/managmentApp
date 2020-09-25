@@ -1,4 +1,5 @@
 export interface CustomerTableModel {
+  pricePaused?: string
   paused?: boolean
   startTime?: number
   isActive?: boolean
@@ -6,4 +7,5 @@ export interface CustomerTableModel {
   price: string
   timer: string
   status: number
+  timerPaused?: number
 }

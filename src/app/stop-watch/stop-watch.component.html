@@ -21,7 +21,7 @@
       color="primary"
       (tap)="startTable()"
       class="menu-button-play"
-      *ngIf="!running || !customerTable.isActive"
+      *ngIf="!running && !customerTable.isActive && !customerTable.paused"
     >
       <mat-icon aria-hidden="false" aria-label="play_arrow"
         >play_arrow</mat-icon
@@ -35,6 +35,15 @@
       *ngIf="running || customerTable.isActive"
     >
       <mat-icon aria-hidden="false" aria-label="pause">pause</mat-icon>
+    </button>
+    <button
+      mat-fab
+      color="secondary"
+      (tap)="startTable()"
+      class="menu-button-pause"
+      *ngIf="customerTable.paused"
+    >
+      <mat-icon aria-hidden="false" aria-label="pause">skip_next</mat-icon>
     </button>
     <button
       mat-fab
