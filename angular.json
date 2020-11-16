@@ -29,7 +29,9 @@
               "src/manifest.webmanifest"
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [],
+            "scripts": [
+              "node_modules/@mongodb-js/charts-embed-dom/dist/charts-embed-dom.umd.min.js"
+            ],
             "allowedCommonJsDependencies": [
               "lodash",
               "hammerjs",
@@ -49,7 +51,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
+              "extractCss": false,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,

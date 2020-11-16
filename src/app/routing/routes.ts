@@ -16,6 +16,7 @@ import { InternalRoomComponent } from '../pages/internal-room/internal-room.comp
 import { ExternalRoomComponent } from '../pages/external-room/external-room.component'
 import { HistoryClientsComponent } from '../pages/history-clients/history-clients.component'
 import { ExtCounterComponent } from '../pages/ext-counter/ext-counter.component'
+import { ChartsComponent } from '../pages/charts/charts.component'
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'internal-room', component: InternalRoomComponent },
       { path: 'history', component: HistoryClientsComponent },
+      { path: 'charts', component: ChartsComponent },
       { path: 'external-room', component: ExternalRoomComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'warehouse', component: WarehouseComponent },

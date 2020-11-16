@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1601017895497,
+  "timestamp": 1605542609482,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,12 +13,13 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.c5517392e2402407198d.js",
+        "/main.9753dcaddec7abe8b8d3.js",
         "/manifest.webmanifest",
-        "/polyfills-es5.ef78c5b841f9b248fcad.js",
-        "/polyfills.412150663a3a0333d7c7.js",
-        "/runtime.acf0dec4155e77772545.js",
-        "/styles.c60813c88f319f42dc55.css"
+        "/polyfills-es5.7ca2e540f375f5069616.js",
+        "/polyfills.8884f4807318f1f0ead8.js",
+        "/runtime.359d5ee4682f20e936e9.js",
+        "/scripts.445c435d9f1240fb91d8.js",
+        "/styles.8e10c35992a0bd39d847.css"
       ],
       "patterns": []
     },
@@ -68,13 +69,14 @@
     "/assets/img/svg/toasticon.svg": "08bd43e1f0b79b8e63482fbae4a112c77581c986",
     "/assets/img/table.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "79f74055e67cbe6dd110cc3d8c8140293fff0b59",
-    "/main.c5517392e2402407198d.js": "81d0866a6034b5b1e8cfd145fbaddb746d662e8a",
+    "/index.html": "4bafd9b8d0f607a109a1f6a1ed708dcb6e3be843",
+    "/main.9753dcaddec7abe8b8d3.js": "749fe09411d0847458fd9cb0eed28d33f3f49849",
     "/manifest.webmanifest": "34ba73e717880a8ab16601bba65a5d2f3bf3c30e",
-    "/polyfills-es5.ef78c5b841f9b248fcad.js": "ba6312b8a2e60fad263ea61d6aa67c36c919feff",
-    "/polyfills.412150663a3a0333d7c7.js": "27b9010e40dfb1b933494809e0ae14ea2646dc4d",
-    "/runtime.acf0dec4155e77772545.js": "c2f19a5c64c718ebecb901ee3f30667ccab567b6",
-    "/styles.c60813c88f319f42dc55.css": "bda2d49c5a069c0241e1b746de3164f84103e0cc",
+    "/polyfills-es5.7ca2e540f375f5069616.js": "cbfa91901981af289fe82ae381f4368de1a522ad",
+    "/polyfills.8884f4807318f1f0ead8.js": "4054b81754220328fd94e395fe2efa0bb5a014ad",
+    "/runtime.359d5ee4682f20e936e9.js": "40efb6339dacedbddd81e9f4dfc65cd1ca02d0d2",
+    "/scripts.445c435d9f1240fb91d8.js": "a5189073a69684c8f8029b483f12424c6bd0be00",
+    "/styles.8e10c35992a0bd39d847.css": "b8ac4f63afd3c618bc94dcf097ac2cf63c2db899",
     "/table.61f18e982314e8a89655.jpg": "4f428ce4bd446e9105d756b3e143b71e8db95e94"
   },
   "navigationUrls": [
@@ -94,5 +96,6 @@
       "positive": false,
       "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
     }
-  ]
+  ],
+  "navigationRequestStrategy": "performance"
 }

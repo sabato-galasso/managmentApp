@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { SwUpdate } from '@angular/service-worker'
-import { Observable, timer } from 'rxjs'
 
 @Component({
   selector: 'app-root',

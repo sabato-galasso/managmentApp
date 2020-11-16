@@ -93,6 +93,7 @@ import { CustomersListComponent } from './modal/customers-list/customers-list.co
 import { DragulaModule } from 'ng2-dragula'
 import { ExtCounterComponent } from './pages/ext-counter/ext-counter.component'
 import { ImportedStopWatchComponent } from './imported-stop-watch/imported-stop-watch.component'
+import { ChartsComponent } from './pages/charts/charts.component'
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { ImportedStopWatchComponent } from './imported-stop-watch/imported-stop-
     CustomersListComponent,
     ExtCounterComponent,
     ImportedStopWatchComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,

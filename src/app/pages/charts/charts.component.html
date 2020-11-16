@@ -1,0 +1,27 @@
+<div class="container">
+  <div
+    id="chart"
+    style="width: 500px; margin: 0 auto; border: 1px solid #ccc"
+  ></div>
+  <iframe
+    style="
+      background: #ffffff;
+      border: none;
+      border-radius: 2px;
+      box-shadow: 0 2px 10px 0 rgba(70, 76, 79, 0.2);
+    "
+    width="640"
+    height="480"
+    src="https://charts.mongodb.com/charts-project-0-jbsvn/embed/charts?id=6fc741af-1421-413c-a01b-2642a12d5418&theme=light"
+  ></iframe>
+  <script>
+    const sdk = new ChartsEmbedSDK({
+      baseUrl: 'https://charts.mongodb.com/charts-project-0-jbsvn',
+    })
+
+    const chart = sdk.createChart({
+      chartId: '6fc741af-1421-413c-a01b-2642a12d5418',
+    })
+    chart.render(document.getElementById('chart'))
+  </script>
+</div>
