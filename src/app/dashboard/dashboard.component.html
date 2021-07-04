@@ -144,6 +144,14 @@
           <mat-icon matListIcon class="nav-list-icon">category</mat-icon>
         </a>
         <a
+          (click)="drawer.toggle()"
+          mat-list-item
+          [routerLink]="['/charts']"
+          routerLinkActive="list-item-active"
+        >Statistiche
+          <mat-icon matListIcon class="nav-list-icon">bar_chart</mat-icon>
+        </a>
+        <a
           style="display: none"
           target="_blank"
           (click)="drawer.toggle()"

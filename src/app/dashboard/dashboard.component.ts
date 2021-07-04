@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { AuthService } from '../services/auth.service'
-import { version } from '../../../package.json'
+import packageInfo from '../../../package.json'
 import { map, startWith, takeUntil } from 'rxjs/operators'
 import { Observable, Subject } from 'rxjs'
 import { FormControl } from '@angular/forms'
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userName = localStorage.getItem('user')
-    this.versionApp = version
+    this.versionApp = packageInfo.version
     this.customerService
       .getCustomer()
       .pipe(takeUntil(this.unsubscribe$))

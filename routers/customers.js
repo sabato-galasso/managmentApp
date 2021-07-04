@@ -189,35 +189,6 @@ router.get('/api/customer', auth, async (req, res) => {
 router.get('/api/all-customer', auth, async (req, res) => {
   try {
     let items = await customerModel.findAllWithStatus()
-    /* if(items && items.length > 0){
-      items.forEach( el=> {
-
-      })
-    }*/
-    /*  if (
-      items &&
-      items._doc.consumazioni &&
-      items._doc.consumazioni.length > 0
-    ) {
-      res.status(200).send({
-        summed: _(items._doc.consumazioni)
-          .groupBy('nameArticle')
-          .map((objs, key) => {
-            return {
-              store: key,
-              quantity: _.sumBy(objs, 'quantity'),
-              price: _.round(_.sumBy(objs, 'price'), 2),
-              ids: objs[0]._id,
-            }
-          })
-          .value(),
-        _id: items._doc._id,
-        total: _.round(_.sumBy(items._doc.consumazioni, 'price'), 2),
-      })
-    } else {
-      res.status(200).send({ summed: [], _id: null, total: 0.0 })
-    }*/
-
     res.status(200).send(items)
   } catch (error) {
     res.status(400).send(error)

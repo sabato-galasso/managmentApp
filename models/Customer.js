@@ -37,7 +37,7 @@ customerSchema.static('findByTableOpened', function (res) {
 })
 
 customerSchema.static('findAllWithStatus', function () {
-  return this.find({}).sort({ created_at: -1 })
+  return this.find({}).sort({ created_at: -1 }).limit(1000)
 })
 
 const Customer = mongoose.model('Customer', customerSchema)
