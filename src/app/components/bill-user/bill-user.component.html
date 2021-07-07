@@ -21,7 +21,7 @@
     <div><b>{{customerTable.timer}}</b></div>
   </mat-list-item>
   <mat-divider></mat-divider>-->
-  <mat-list role="listitem" *ngIf="consumazioni && consumazioni.length > 0">
+  <mat-list role="listitem" *ngIf="consumazioni && consumazioni.length > 0" style="overflow-y: auto; width:450px;height: 500px">
     <h3 mat-line>Consumazioni</h3>
     <mat-list-item *ngFor="let item of consumazioni">
       <div class="d-flex justify-content-between w-100">
@@ -34,27 +34,50 @@
         <div class="d-flex align-items-center">
           <span>{{ item.price }}€</span>
         </div>
+        <div style="display: flex">
+          <button
+            mat-stroked-button
+            color="primary"
+            class="d-inline-block"
+            *ngIf="item.quantity > 0"
+            (tap)="removeItem(item, item.ids)"
+          >
+            -
+          </button>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="d-inline-block"
+            *ngIf="item.quantity > 0"
+            (tap)="addItem(item, item.ids)"
+          >
+            +
+          </button>
+        </div>
+<!--
+        <div style="position: absolute; right: -130px;">
+          <button
+            mat-stroked-button
+            color="primary"
+            class="d-inline-block"
+            *ngIf="item.quantity > 0"
+            (tap)="removeItem(item, item.ids)"
+          >
+            -
+          </button>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="d-inline-block"
+            *ngIf="item.quantity > 0"
+            (tap)="addItem(item, item.ids)"
+          >
+            +
+          </button>
+        </div>
+-->
       </div>
-      <div style="position: absolute; right: -130px;">
-        <button
-          mat-stroked-button
-          color="primary"
-          class="d-inline-block"
-          *ngIf="item.quantity > 0"
-          (tap)="removeItem(item, item.ids)"
-        >
-          -
-        </button>
-        <button
-          mat-stroked-button
-          color="primary"
-          class="d-inline-block"
-          *ngIf="item.quantity > 0"
-          (tap)="addItem(item, item.ids)"
-        >
-          +
-        </button>
-      </div>
+
     </mat-list-item>
   </mat-list>
   <mat-list-item role="listitem">
