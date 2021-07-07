@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgModule } from '@angular/core'
+import { LOCALE_ID, NgModule } from '@angular/core'
 import {
   BrowserModule,
   HAMMER_GESTURE_CONFIG,
@@ -94,6 +94,7 @@ import { DragulaModule } from 'ng2-dragula'
 import { ExtCounterComponent } from './pages/ext-counter/ext-counter.component'
 import { ImportedStopWatchComponent } from './imported-stop-watch/imported-stop-watch.component'
 import { ChartsComponent } from './pages/charts/charts.component'
+import { MatKeyboardModule } from 'angular-onscreen-material-keyboard'
 
 @NgModule({
   declarations: [
@@ -168,6 +169,8 @@ import { ChartsComponent } from './pages/charts/charts.component'
     MatSnackBarModule,
     MatPaginatorModule,
     MatMenuModule,
+    MatButtonModule,
+    MatKeyboardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -205,6 +208,7 @@ import { ChartsComponent } from './pages/charts/charts.component'
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    { provide: LOCALE_ID, useValue: 'it' },
   ],
   bootstrap: [AppComponent],
 })
