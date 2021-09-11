@@ -22,6 +22,7 @@
       <mat-form-field class="example-full-width">
         <input
           [matKeyboard]="'it-IT'"
+          (ngModelChange)="test($event)"
           darkTheme="true"
           duration="50000"
           type="text"

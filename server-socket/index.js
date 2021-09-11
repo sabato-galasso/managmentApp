@@ -136,7 +136,6 @@ function generateSocket(id, socket) {
     socket.emit(`result${id}`, '0')
     delete clients[socket.id]
     numUsers = Object.keys(clients).length
-    console.log('numUsers-clear', numUsers)
   })
 
   socket.on(`pause${id}`, () => {

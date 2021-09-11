@@ -32,7 +32,6 @@ export class WebsocketService {
 
     return Observable.create((observer) => {
       this.socket.on('result' + id, (msg) => {
-        //   console.log('result',msg)
         observer.next(msg)
       })
     })
@@ -41,7 +40,6 @@ export class WebsocketService {
   getSocket(id: string) {
     return Observable.create((observer) => {
       this.socket.on('result' + id, (msg) => {
-        console.log('ws', msg)
         observer.next(msg)
       })
     })
@@ -50,7 +48,6 @@ export class WebsocketService {
   emitPauseTable(id: string) {
     return Observable.create((observer) => {
       this.socket.emit('pause' + id, (msg) => {
-        console.log(msg)
         observer.next(msg)
       })
     })

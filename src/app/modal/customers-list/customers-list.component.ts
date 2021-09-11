@@ -30,7 +30,6 @@ export class CustomersListComponent implements OnInit {
       contacts: grouped[key],
     }))
     this.listCustomer = result
-    console.log(result)
   }
 
   onNoClick(): void {

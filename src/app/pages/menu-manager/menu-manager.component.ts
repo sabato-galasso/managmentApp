@@ -93,8 +93,6 @@ export class MenuManagerComponent implements OnInit {
           this.dataSource.sort = this.sort
           this.dataSource.paginator = this.paginator
           this.categories = items[1]
-
-          console.log(this.categories)
         },
         (errMess) => {
           this.errMessFeed = errMess as any

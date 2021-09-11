@@ -78,17 +78,11 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    /* this.socketService.getSocket(this.paramId).subscribe(msg => {
-      this.customerTable = msg
-      console.log('ttttttt',msg)
-    });*/
-
     if (this.subCategorySlug) {
       this.menuService
         .filterByCategoryAndSubcategory(this.categorySlug, this.subCategorySlug)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((res) => {
-          console.log(res)
           this.items = res
         })
     } else {
@@ -96,7 +90,6 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
         .getMenuCategoryItems(this.categorySlug)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe((res) => {
-          console.log(res)
           this.items = res
         })
     }
@@ -106,21 +99,17 @@ export class ItemLevelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (res) => {
-          console.log('dsdsd', res)
-
           this.isActiveTable = res && res.summed.length > 0
           this._id = res && res._id ? res._id : null
         },
-        (error) => {
-          console.log(error)
-        }
+        (error) => {}
       )
   }
 
   closeTable() {
     /* this.socketService.emitCloseTable(this.paramId).subscribe(msg => {
       this.customerTable = msg
-      console.log('ttttttt',msg)
+
     });*/
   }
 

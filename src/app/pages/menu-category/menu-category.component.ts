@@ -64,12 +64,11 @@ export class MenuCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData()
-    this.subscriptionFilterCategory = this.positionFilter.valueChanges.subscribe(
-      (categoryFilterValue) => {
+    this.subscriptionFilterCategory =
+      this.positionFilter.valueChanges.subscribe((categoryFilterValue) => {
         this.filteredValues.category = categoryFilterValue
         this.dataSource.filter = JSON.stringify(this.filteredValues)
-      }
-    )
+      })
 
     this.subscriptionFilterName = this.nameFilter.valueChanges.subscribe(
       (nameFilterValue) => {
@@ -78,12 +77,11 @@ export class MenuCategoryComponent implements OnInit {
       }
     )
 
-    this.subscriptionFilterQuantity = this.quantityFilter.valueChanges.subscribe(
-      (quantityFilterValue) => {
+    this.subscriptionFilterQuantity =
+      this.quantityFilter.valueChanges.subscribe((quantityFilterValue) => {
         this.filteredValues.quantity = quantityFilterValue
         this.dataSource.filter = JSON.stringify(this.filteredValues)
-      }
-    )
+      })
     this.dataSource.filterPredicate = this.customFilterPredicate()
   }
 
@@ -101,7 +99,6 @@ export class MenuCategoryComponent implements OnInit {
         this.openSnackBar(this.errMessFeed, 'Undo')
       },
       () => {
-        console.log('Observable finished', this.dataSource)
         this.showSpinner = false
       }
     )
@@ -113,17 +110,6 @@ export class MenuCategoryComponent implements OnInit {
 
   customFilterPredicate() {
     return (data: WareHouse, filter: string): boolean => {
-      /* let globalMatch = !this.globalFilter;
-
-       if (this.globalFilter) {
-         // search all text fields
-         globalMatch = data.name.toString().trim().toLowerCase().indexOf(this.globalFilter.toLowerCase()) !== -1;
-       }
-
-       if (!globalMatch) {
-         return;
-       }*/
-      console.log('sdsds', data.quantity, filter)
       const searchString = JSON.parse(filter)
       if (data && data.category && data.name && data.quantity) {
         return (
@@ -166,7 +152,6 @@ export class MenuCategoryComponent implements OnInit {
           this.openSnackBar(this.errMessFeed, 'Undo')
         },
         () => {
-          console.log('Observable finished', this.dataSource)
           this.refresh()
           this.showSpinner = false
         }

@@ -26,8 +26,10 @@
       <div>
         <h1>Tavolo: {{ paramId }}</h1>
       </div>
-      <div class="row">
-        <div class="col-md-3 col-6 my-3" *ngFor="let item of items">
+      <div class="row" style="    display: inline-flex;
+    max-height: 500px;
+    overflow-y: auto;">
+        <div class="col col-auto my-3" *ngFor="let item of items">
           <app-item
             [item]="item"
             [isActiveTable]="isActiveTable"

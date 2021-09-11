@@ -35,12 +35,10 @@ export class SecondLevelComponent implements OnInit {
   ngOnInit(): void {
     /* this.socketService.getSocket(this.paramId).subscribe(msg => {
       this.customerTable = msg
-      console.log('ttttttt',msg)
+
     });*/
 
     this.menuServices.filterByCategory(this.category).subscribe((res) => {
-      console.log(res)
-
       this.firstLevel = res
     })
   }
@@ -48,7 +46,7 @@ export class SecondLevelComponent implements OnInit {
   closeTable() {
     /*this.socketService.emitCloseTable(this.paramId).subscribe(msg => {
       this.customerTable = msg
-      console.log('ttttttt',msg)
+
     }); */
   }
 

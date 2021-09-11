@@ -46,7 +46,7 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     /* this.socketService.getSocket(this.paramId).subscribe(msg => {
       this.customerTable = msg
-      console.log('ttttttt',msg)
+
     });*/
 
     /*   this.menuService.getMenu().subscribe(res => {
@@ -62,12 +62,7 @@ export class MenuFirstLevelComponent implements OnInit, OnDestroy {
       })
   }
 
-  closeTable() {
-    /*this.socketService.emitCloseTable(this.paramId).subscribe(msg => {
-      this.customerTable = msg
-      console.log('ttttttt',msg)
-    });  */
-  }
+  closeTable() {}
 
   locationBack() {
     if (window.location.href.indexOf('interno') > -1) {

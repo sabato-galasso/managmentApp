@@ -77,15 +77,12 @@ export class BillUserComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (res) => {
-          console.log(res)
           this._id = res._id || null
           this.consumazioni = res && res.summed.length > 0 ? res.summed : null
           this.tavoloAttivo = res && res.summed.length > 0
           this.total = res.total.toFixed(2) || 0.0
         },
-        (error) => {
-          console.log(error)
-        }
+        (error) => {}
       )
   }
 
@@ -187,7 +184,6 @@ export class BillUserComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(
               (res) => {
-                console.log(res)
                 this.tavoloAttivo = true
                 this.messageService.updateId(res._id)
                 this.messageService.updateTavoloAttivo(this.tavoloAttivo)

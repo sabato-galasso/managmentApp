@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
           this.errMessFeed = errmess as any
         },
         () => {
-          console.log('Observable finished', this.gettedSetting)
           this.showSpinner = false
         }
       )

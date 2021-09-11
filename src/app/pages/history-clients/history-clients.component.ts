@@ -114,7 +114,6 @@ export class HistoryClientsComponent implements OnInit, OnDestroy {
           this.openSnackBar(this.errMessFeed, 'Undo')
         },
         () => {
-          console.log('Observable finished', this.dataSource)
           this.refresh()
           this.showSpinner = false
         }

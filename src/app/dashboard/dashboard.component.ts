@@ -15,6 +15,7 @@ import { ConnectionService } from 'ngx-connection-service'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { CustomersListComponent } from '../modal/customers-list/customers-list.component'
+import { MatKeyboardRef } from 'angular-onscreen-material-keyboard'
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,6 @@ import { CustomersListComponent } from '../modal/customers-list/customers-list.c
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('drawer1') drawer1: MatSidenav
   @ViewChild('drawer') drawer: MatSidenav
-
   private name: any
   userActived: any
 
@@ -203,4 +203,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next()
     this.unsubscribe$.complete()
   }
+  test(e) {}
 }
