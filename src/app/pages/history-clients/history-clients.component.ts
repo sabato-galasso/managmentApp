@@ -23,8 +23,6 @@ export class HistoryClientsComponent implements OnInit, OnDestroy {
     'nTable',
     'statusTable',
     'consumazioni',
-    'price',
-    'updated_at',
     'actions',
   ]
   errMessFeed: string

@@ -26,7 +26,6 @@ export class MenuManagerComponent implements OnInit {
     'category',
     'categoryFirstLevel',
     'price',
-    'updated_at',
     'actions',
   ]
   errMessFeed: string

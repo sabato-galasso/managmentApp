@@ -29,10 +29,10 @@
           </ng-container>
 
           <!-- Price Column -->
-          <ng-container matColumnDef="price">
+  <!--        <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Totale</th>
             <td mat-cell *matCellDef="let row"></td>
-          </ng-container>
+          </ng-container>-->
 
           <!-- Category Column -->
           <ng-container matColumnDef="statusTable">
@@ -65,14 +65,14 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="updated_at">
+       <!--   <ng-container matColumnDef="updated_at">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
               Ultima modifica
             </th>
             <td mat-cell *matCellDef="let row">
-              {{ row.updated_at | date: 'dd/MM/yyyy HH:mm:ss' }}
+              <span *ngIf="row.updated_at">&lt;!&ndash;{{ row.updated_at | date: 'dd/MM/yyyy HH:mm' }}&ndash;&gt;</span>
             </td>
-          </ng-container>
+          </ng-container>-->
 
           <ng-container matColumnDef="actions" stickyEnd>
             <th mat-header-cell *matHeaderCellDef>

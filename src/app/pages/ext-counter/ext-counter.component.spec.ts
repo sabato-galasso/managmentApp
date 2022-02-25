@@ -8,8 +8,9 @@ describe('ExtCounterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExtCounterComponent],
-    }).compileComponents()
+    declarations: [ExtCounterComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   })
 
   beforeEach(() => {

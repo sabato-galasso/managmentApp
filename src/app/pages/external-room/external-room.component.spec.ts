@@ -8,8 +8,9 @@ describe('ExternalRoomComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ExternalRoomComponent],
-    }).compileComponents()
+    declarations: [ExternalRoomComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   }))
 
   beforeEach(() => {

@@ -8,8 +8,9 @@ describe('DraggableItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DraggableItemComponent],
-    }).compileComponents()
+    declarations: [DraggableItemComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   }))
 
   beforeEach(() => {

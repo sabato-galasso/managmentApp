@@ -8,8 +8,9 @@ describe('DialogBoxSettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogBoxSettingsComponent ]
-    })
+    declarations: [DialogBoxSettingsComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

@@ -8,8 +8,9 @@ describe('DeleteCustomerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DeleteCustomerComponent],
-    }).compileComponents()
+    declarations: [DeleteCustomerComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   }))
 
   beforeEach(() => {

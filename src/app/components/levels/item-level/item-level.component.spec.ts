@@ -8,8 +8,9 @@ describe('ItemLevelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemLevelComponent ]
-    })
+    declarations: [ItemLevelComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

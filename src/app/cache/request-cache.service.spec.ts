@@ -6,7 +6,7 @@ describe('RequestCacheService', () => {
   let service: RequestCacheService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({ teardown: { destroyAfterEach: false } })
     service = TestBed.inject(RequestCacheService)
   })
 

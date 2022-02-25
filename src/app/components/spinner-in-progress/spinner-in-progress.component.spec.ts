@@ -8,8 +8,9 @@ describe('SpinnerInProgressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpinnerInProgressComponent ]
-    })
+    declarations: [SpinnerInProgressComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

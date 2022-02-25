@@ -8,8 +8,9 @@ describe('SecondLevelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecondLevelComponent ]
-    })
+    declarations: [SecondLevelComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

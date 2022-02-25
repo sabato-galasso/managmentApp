@@ -8,8 +8,9 @@ describe('WarehouseComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WarehouseComponent ]
-    })
+    declarations: [WarehouseComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

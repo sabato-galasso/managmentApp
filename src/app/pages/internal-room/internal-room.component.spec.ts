@@ -8,8 +8,9 @@ describe('InternalRoomComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [InternalRoomComponent],
-    }).compileComponents()
+    declarations: [InternalRoomComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   }))
 
   beforeEach(() => {

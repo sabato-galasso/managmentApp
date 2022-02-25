@@ -8,8 +8,9 @@ describe('ImportedStopWatchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ImportedStopWatchComponent],
-    }).compileComponents()
+    declarations: [ImportedStopWatchComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents()
   })
 
   beforeEach(() => {

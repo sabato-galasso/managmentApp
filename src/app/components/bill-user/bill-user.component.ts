@@ -79,7 +79,7 @@ export class BillUserComponent implements OnInit, OnDestroy {
         (res) => {
           this._id = res._id || null
           this.consumazioni = res && res.summed.length > 0 ? res.summed : null
-          this.tavoloAttivo = res && res.summed.length > 0
+          this.tavoloAttivo = res
           this.total = res.total.toFixed(2) || 0.0
         },
         (error) => {}
